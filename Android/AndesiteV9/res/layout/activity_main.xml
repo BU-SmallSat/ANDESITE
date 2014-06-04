@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+     <Button
+        android:id="@+id/network_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Network Test" />
+
+    <Button
+        android:id="@+id/view_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Data" />
+
+    <Button
+        android:id="@+id/xbee_query"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Query Using AT Commands" />
+    
+    <Button
+        android:id="@+id/process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Process Data" />
+    
+    <Button
+        android:id="@+id/tester"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TX Tester" />
+
+</LinearLayout>
