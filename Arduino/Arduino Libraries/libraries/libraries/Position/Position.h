@@ -7,7 +7,7 @@
 class Position //using GLL type of NMEA strings
 {
 public:
-	//void sortInfo(string GPS);
+	void sortInfo(String GPS);
 
 private:
 	double latitude; //exact latitude
