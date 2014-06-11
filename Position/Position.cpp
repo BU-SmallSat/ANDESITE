@@ -2,7 +2,25 @@
 #include "Position.h"
 #include <String.h>
 
-void Position::sortInfo(String GPS)
+//How to call and print in good format
+
+//String GPS = "$GPGLL,4916.45,N,12311.12,W,225444,A,*1D";
+//String latitude = Position().sortInfo(GPS, LATITUDE);
+//String NS = Position().sortInfo(GPS, NORTHSOUTH);
+//String longitude = Position().sortInfo(GPS, LONGITUDE);
+//String EW = Position().sortInfo(GPS, EASTWEST);
+//String time = Position().sortInfo(GPS, TIME);
+//String active = Position().sortInfo(GPS, ACTIVE);
+//String checksum = Position().sortInfo(GPS, CHECKSUM);
+//Serial.println("Exact Latitude: " + latitude + " " + NS);
+//Serial.println("Exact Longitude: " + longitude + " " + EW);
+//Serial.println("Date and Time: " + time + " UTC");
+//Serial.println("Data Active? " + active);
+//Serial.println("Checksum: " + checksum);
+//while (true);
+
+
+String Position::sortInfo(String GPS, int value)
 {
 	int firstcomma = GPS.indexOf(',');
 	String type = GPS.substring(0, firstcomma);
@@ -28,22 +46,23 @@ void Position::sortInfo(String GPS)
 	int eigthcomma = GPS.indexOf(',', seventhcomma + 1);
 	String checksum = GPS.substring(seventhcomma + 1, eigthcomma);
 
-
-	Serial.print(type);
-	Serial.print(":");
-	Serial.print(latitude);
-	Serial.print(":");
-	Serial.print(NS);
-	Serial.print(":");
-	Serial.print(longitude);
-	Serial.print(":");
-	Serial.print(EW);
-	Serial.print(":");
-	Serial.print(time);
-	Serial.print(":");
-	Serial.print(active);
-	Serial.print(":");
-	Serial.println(checksum);
-	while (true);
+	switch (value)
+	{
+	case TYPE:
+		return type;
+	case LATITUDE:
+		return latitude;
+	case NORTHSOUTH:
+		return NS;
+	case LONGITUDE:
+		return longitude;
+	case EASTWEST:
+		return EW;
+	case TIME:
+		return time;
+	case ACTIVE:
+		return active;
+	case CHECKSUM:
+		return checksum;
+	}
 }
-
