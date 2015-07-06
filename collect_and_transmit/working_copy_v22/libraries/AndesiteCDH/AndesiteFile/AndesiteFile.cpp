@@ -20,8 +20,8 @@
 #include "AndesiteData.h"
 #include "AndesiteOrbit.h"
 #include "AndesiteRadio.h"
-#include <bitset>
-#include <string>
+//#include <bitset>
+//#include <string>
 
 
 
@@ -109,7 +109,11 @@ boolean AndesiteFile::init() {
 // Read a file on the SD card and send it to the Mule
 boolean AndesiteFile::send() {
     bool exists = FALSE;
-    uint8_t message[RF22_MESH_MAX_MESSAGE_LEN];
+    const unsigned int line_buffer_size = 50;
+	char message[line_buffer_size];
+	int line_number = 0;
+	int _position = 0;
+    //uint8_t message[RF22_MESH_MAX_MESSAGE_LEN];
     unsigned int size;
 
     // Open SD card file for reading
@@ -127,7 +131,7 @@ boolean AndesiteFile::send() {
     //     update some global variable to true/false, print data on orbit 
     //     to file regarding where file reading ended)
 
-    while (sdin.getline(message, RF22_MESH_MAX_MESSAGE_LEN, '\n') || sdin.gcount()) {
+    while (sdin.getline(message, line_buffer_size) || sdin.gcount()) {
         exists = TRUE;
         size = sdin.gcount();
         if (sdin.fail()) {
@@ -140,28 +144,48 @@ boolean AndesiteFile::send() {
         
         //IMPLEMENT PARITY CHECK OF DATA RETRIEVED FROM FILE
         int parity = 0;
-    	string strParity; 
-		//convert each ascii letter into 8-bit binary version
-		for (int ii = 0; ii < (size - 3); ++ii) 
-		{
-			bitset<8> letter(message.c_str()[ii]);
-			parity += letter.count();
-		}
-		//pad parity with zeros so that the size of data written is const. (Max parity value ~= 400)
-		if (parity < 10)
-			strParity = "00" + to_string(parity);
-		else if (parity < 100) 
-			strParity = "0" + to_string(parity);
-		else 
-			strParity = to_string(parity);
+    	String strParity;
+    	String strMessage;
+   
+    	strMessage = (String)message;
+    	Serial.println(strMessage);
+    	int letter; 
 
-		if (strParity.compare(message.substring(size - 3)) != 0) {
+      	//convert each ascii letter into 8-bit binary version
+      	for (int ii = 0; ii < strMessage.length(); ++ii) 
+      	{
+      	  	letter = (int)strMessage[ii];
+      	  	while(letter > 1){
+      	    	if(letter%2 != 0){
+      	    		parity++;
+      	    	}
+      	    	letter = letter/2;
+      	  	}
+  	    }
+  	    
+  	  	//pad parity with zeros so that the size of data written is const. (Max parity value ~= 400)
+   		if (parity < 10)
+			strParity = "00" + (String)parity;
+	   	else if (parity < 100) 
+  			strParity = "0" + (String)parity;
+    	else 
+  			strParity = (String)parity;
+
+  		parity = 0;
+  		Serial.println(strMessage.substring(strMessage.length() - 3));
+
+   		if (strParity == strMessage.substring(strMessage.length() - 3)) {
 			Serial.println("Error, parity bit does not match");
-		}
-		else {
-			Serial.println(message.substring(size - 3));
+    	    strMessage = strMessage.substring(0,strMessage.length()-3);
+    	    strMessage += 0;
+    	}
+    	else {
+			Serial.println(strMessage.substring(strMessage.length() - 3));
 			Serial.println("-- Message is clean");
-		}
+        	strMessage = strMessage.substring(0,strMessage.length()-3);
+        	strMessage += 1;
+    	}
+    	Serial.println(strMessage);
     
 
 
@@ -271,8 +295,13 @@ void AndesiteFile::write(bool done) {
 	   //convert each ascii letter into 8-bit binary version
 	   for (int ii = 0; ii < _write.size(); ++ii) 
 	   {
-		  bitset<8> letter(_write.c_str()[ii]);
-		  _int_parity += letter.count();
+		    letter = (int)dummy[ii];
+        	while(letter > 0){
+       			if(letter%2 != 0){
+            		parity++;
+          		}
+          		letter = letter/2;
+        	}
 	   }
 
 	   //pad parity with zeros so that the size of data written is const. (Max parity value ~= 400)
