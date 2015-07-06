@@ -2,7 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "serialib.h"
-#include <signal.h>
+
+#include <linux/watchdog.h>
+
+
+#define WATCHDOGDEV "/dev/watchdog"
 
 #ifdef __linux__
 #define         DEVICE_PORT             "/dev/ttyO4"                         // ttyS0 for linux
@@ -47,6 +51,9 @@ int main()
         return Ret;                                                         // ... quit the application
     }
     printf ("Serial port opened successfully !\n");
+
+    int fd;         /* File handler for watchdog */
+    int interval;      /* Watchdog timeout interval (in secs) */
 
     // Write the AT command on the serial port
 
