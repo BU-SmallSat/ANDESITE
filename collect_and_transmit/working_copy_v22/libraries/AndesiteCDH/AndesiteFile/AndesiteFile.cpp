@@ -31,23 +31,30 @@
 
 // Initialize file class
 AndesiteFile::AndesiteFile() {
-    _file            = "001.txt";
-    _data            = "";
-    _write           = "";
-    _num_files       = 0;
-    _num_unfinished  = 0;
-    _last_orbit      = 0;
-    _failure         = 0;
-    _data_limit      = 500;
-    _header_size     = 20;
-    _unfinished_size = 5; // If you change this, change array size in header too
+    _handle;
+    _file                   = "001.txt";
+    _collected_data         = "";
+    _writing_data           = "";
+    _transmit_message       = "";
+    _str_parity             = "";
+    _int_parity             = 0;
+    _file_open_bool         = 0;
+    _ready_write_bool       = 0;
+    _num_files              = 0;
+    _num_unfinished_files   = 0;
+    _last_orbit             = 0;
+    _start_orbit            = 0;
+    _failure                = 0;
+    _data_limit             = 500;
+    _header_size            = 20;
+    _unfinished_files_size  = 5; // If you change this, change array size in header too
     
     // C++ has issues with arrays in constructor, this should make things better
-    _unfinished_arr[0] = 1;
-    _unfinished_arr[1] = 0;
-    _unfinished_arr[2] = 0;
-    _unfinished_arr[3] = 0;
-    _unfinished_arr[4] = 0;
+    _unfinished_files_arr[0]= 1;
+    _unfinished_files_arr[1]= 0;
+    _unfinished_files_arr[2]= 0;
+    _unfinished_files_arr[3]= 0;
+    _unfinished_files_arr[4]= 0;
 }
 
 
@@ -61,41 +68,41 @@ boolean AndesiteFile::init() {
     setUnfinishedFiles();
     
     // Put last orbit in first element
-    unsigned int start_orbit = _unfinished_arr[0];
+    _start_orbit = _unfinished_arr[0];
     
     Serial.print("Number of Files: ");
     Serial.println(_num_files);
     Serial.print("Start Orbit: ");
-    Serial.println(start_orbit);
+    Serial.println(_start_orbit);
     Serial.print("Last Orbit: ");
     Serial.println(_last_orbit);
-    Serial.println("IF ( start_orbit < last_orbit )");
+    Serial.println("IF ( _start_orbit < last_orbit )");
     Serial.println("\tSetting Last_Orbit + 1");
     Serial.println("ELSE");
-    Serial.println("\tSetting Start_Orbit");
+    Serial.println("\tSetting _start_orbit");
     
-    if ( start_orbit < _last_orbit )
+    if ( _start_orbit < _last_orbit )
         _Orbit.setOrbit( _last_orbit + 1 );
     else
-        _Orbit.setOrbit( start_orbit );
+        _Orbit.setOrbit( _start_orbit );
     
     AndesiteFile::set();
     
     // Open up orbit info file
-    File handle = SD.open(_file.c_str(), O_CREAT | O_WRITE);
+    _handle = SD.open(_file.c_str(), O_CREAT | O_WRITE);
     
 	Serial.print("Setting starting orbit value...");
-	if ( !handle ) { 
+	if ( !_handle ) { 
 		Serial.println("Fail.");
         ++_failure;
-        handle.close();
+        _handle.close();
 		return false;
 	}
 	Serial.println("Done.");
 	
 	// Set the initial orbit number 
-    _Orbit.writeHeader(handle);
-	handle.close(); 
+    _Orbit.writeHeader(_handle);
+	_handle.close(); 
     
     return true;
 }
@@ -108,47 +115,41 @@ boolean AndesiteFile::init() {
 
 // Read a file on the SD card and send it to the Mule
 boolean AndesiteFile::send() {
-    bool exists = FALSE;
-    const unsigned int line_buffer_size = 50;
-	char message[line_buffer_size];
-	int line_number = 0;
-	int _position = 0;
-    //uint8_t message[RF22_MESH_MAX_MESSAGE_LEN];
-    unsigned int size;
+    _file_open_bool = 0;
+    _message_size = 0;
 
     // Open SD card file for reading
     ifstream sdin(_file.cstr());
-    ifstream::pos_type pos = _Orbit.getPosition();
+    _file_position = _Orbit.getPosition();
     //Serial.print(":: File size = ");
-    //Serial.println(handle.size());
+    //Serial.println(_handle.size());
     Serial.println(":: Reading and sending file...");
     Serial.print(":: Seeking to position '");
-    Serial.print(pos);
+    Serial.print(_file_position);
     Serial.print("'...");
-    Serial.println(sdin.seekg(pos));
+    Serial.println(sdin.seekg(_file_position));
 
         // Loop through every char in the file (check if reached end of file, 
     //     update some global variable to true/false, print data on orbit 
     //     to file regarding where file reading ended)
 
-    while (sdin.getline(message, line_buffer_size) || sdin.gcount()) {
-        exists = TRUE;
-        size = sdin.gcount();
+    while (sdin.getline(_transmit_message, RF22_MESH_MAX_MESSAGE_LEN-1) || sdin.gcount()) {
+        _file_open_bool = 1;
+        _message_size = sdin.gcount();
         if (sdin.fail()) {
-        sdin.clear(sdin.rdstate() & ~ios_base::failbit);
+            sdin.clear(sdin.rdstate() & ~ios_base::failbit);
+            Serial.println("extracted partial message!")
         } 
         Serial.print(" (");
-        Serial.print(size);
+        Serial.print(_message_size);
         Serial.print(" chars): ");
-        Serial.println(message);
+        Serial.println(_transmit_message);
         
         //IMPLEMENT PARITY CHECK OF DATA RETRIEVED FROM FILE
-        int parity = 0;
-    	String strParity;
-    	String strMessage;
-   
-    	strMessage = (String)message;
-    	Serial.println(strMessage);
+        _int_parity = 0;
+    	_str_parity = "";
+    	String strMessage = (String)message;
+    	Serial.println((String)_transmit_message);
     	int letter; 
 
       	//convert each ascii letter into 8-bit binary version
@@ -157,33 +158,33 @@ boolean AndesiteFile::send() {
       	  	letter = (int)strMessage[ii];
       	  	while(letter > 1){
       	    	if(letter%2 != 0){
-      	    		parity++;
+      	    		_int_parity++;
       	    	}
       	    	letter = letter/2;
       	  	}
   	    }
   	    
   	  	//pad parity with zeros so that the size of data written is const. (Max parity value ~= 400)
-   		if (parity < 10)
-			strParity = "00" + (String)parity;
-	   	else if (parity < 100) 
-  			strParity = "0" + (String)parity;
+   		if (_int_parity < 10)
+			_str_parity = "00" + (String)_int_parity;
+	   	else if (_int_parity < 100) 
+  			_str_parity = "0" + (String)_int_parity;
     	else 
-  			strParity = (String)parity;
+  			_str_parity = (String)_int_parity;
 
-  		parity = 0;
+  		_int_parity = 0;
   		Serial.println(strMessage.substring(strMessage.length() - 3));
 
    		if (strParity == strMessage.substring(strMessage.length() - 3)) {
 			Serial.println("Error, parity bit does not match");
-    	    strMessage = strMessage.substring(0,strMessage.length()-3);
-    	    strMessage += 0;
+    	   // strMessage = strMessage.substring(0,strMessage.length()-3);
+    	    _transmit_message[RF22_MESH_MAX_MESSAGE_LEN-1] = 0;
     	}
     	else {
 			Serial.println(strMessage.substring(strMessage.length() - 3));
 			Serial.println("-- Message is clean");
-        	strMessage = strMessage.substring(0,strMessage.length()-3);
-        	strMessage += 1;
+        	//strMessage = strMessage.substring(0,strMessage.length()-3);
+        	_transmit_message[RF22_MESH_MAX_MESSAGE_LEN-1] = 1;
     	}
     	Serial.println(strMessage);
     
@@ -191,38 +192,38 @@ boolean AndesiteFile::send() {
 
         // Send file line to server 
         Serial.print(F("Sending data -- "));
-        Serial.print(message.c_str());
+        Serial.print(_transmit_message;
         Serial.print(" ");
-        Serial.print(size);
+        Serial.print(_message_size+1);
         Serial.print(" | ");
         Serial.println(_Orbit.getLatitude());
-        _Radio.send(message, size, ACDH_MULE_ADDR);
+        _Radio.send(_transmit_message, (_message_size+1), ACDH_MULE_ADDR);
 
         //update file position
-        pos = sdin.tellg();
-        _Orbit.setPosition(pos);
-        _Orbit.writeHeader(handle);
-        sdin.seekg(pos);
+        _file_position = sdin.tellg();
+        _Orbit.setPosition(_file_position);
+        _Orbit.writeHeader(_handle);
+        sdin.seekg(_file_position);
             
         // Update orbit values
         _Orbit.setLatitude();
         if ( _Orbit.getLatitude() >= _Orbit.getModeSwitchLatitude() ) {
             Serial.println(":: NOT done sending file.");
-            handle.close();
+            _handle.close();
             AndesiteFile::done();
             return false;
         }
     } 
 
     // Make sure SD card file was opened correctly
-    if ( !exists ) {
+    if ( !_file_open_bool ) {
         Serial.print("ERROR: File '");
         Serial.print(_file);
         Serial.println("' was not found");
         ++_failure;
         
         // Done sending file to Mule (b/c couldn't be found)
-        handle.close();
+        _handle.close();
         AndesiteFile::done();
         
         return false;
@@ -230,7 +231,7 @@ boolean AndesiteFile::send() {
    
     // Done sending file to Mule
     Serial.println(":: Done sending file.");
-    handle.close();
+    _handle.close();
     AndesiteFile::done();
     
     return true;
@@ -242,7 +243,7 @@ boolean AndesiteFile::send() {
 void AndesiteFile::done() {
     _Radio.sendCommand(&_Radio._cmd_done, sizeof(uint8_t), ACDH_MULE_ADDR);
     // Write header in here?
-    // _Orbit.writeHeader(handle)?
+    // _Orbit.writeHeader(_handle)?
 }
 
 
@@ -277,12 +278,12 @@ void AndesiteFile::write(bool done) {
         }   
     }
     
-    File handle = SD.open(_file.c_str(), O_CREAT | O_APPEND | O_WRITE);
+    _handle = SD.open(_file.c_str(), O_CREAT | O_APPEND | O_WRITE);
     
-    if ( !handle ) {
+    if ( !_handle ) {
         ++_failure;
         Serial.println(":: File wr failed.");
-        handle.close();
+        _handle.close();
         return;
     }
     
@@ -313,11 +314,11 @@ void AndesiteFile::write(bool done) {
 		  _str_parity = to_string(_parity);
 
 	   //write to SD card
-        handle.println((_write + _str_parity));
+        _handle.println((_write + _str_parity));
         _ready_write--;
     }
 
-    handle.close();
+    _handle.close();
 
     //reset values
     _write = "";
@@ -382,16 +383,16 @@ void AndesiteFile::set() {
 
 // Return the size of the data file
 unsigned long AndesiteFile::size() {
-    File handle        = SD.open(_file.c_str(), O_READ);
+    _handle = SD.open(_file.c_str(), O_READ);
     
-    if ( !handle ) {
+    if ( !_handle ) {
         ++_failure;
-        handle.close();
+        _handle.close();
         return -1;
     }
     
-    unsigned long size = handle.size();
-    handle.close();
+    unsigned long size = _handle.size();
+    _handle.close();
     
     return size;
 }

@@ -79,21 +79,26 @@ private:
     void setUnfinishedFiles();
     
     // Variables
-    String          _file;
-    String          _data;
-    Stirng          _write;
-    string          _message
-    string          _str_parity
-    unsigned int    _int_parity
-    unsigned int    _ready_write;
-    unsigned int    _num_files;
-    unsigned int    _num_unfinished;
-    unsigned int    _last_orbit;
-    unsigned int    _failure;
-    unsigned int    _data_limit;
-    unsigned int    _header_size;
-    unsigned int    _unfinished_size;
-    unsigned int    _unfinished_arr[5];
+    File                _handle;
+    char                _transmit_message[RF22_MESH_MAX_MESSAGE_LEN];
+    ifstream::pos_type  _file_position;
+    String              _file;
+    String              _collected_data;
+    String              _writing_data;
+    String              _str_parity;
+    unsigned int        _int_parity;
+    unsigned int        _file_open_bool;
+    unsigned int        _ready_write_bool;
+    unsigned int        _message_size;
+    unsigned int        _num_files;
+    unsigned int        _num_unfinished_files;
+    unsigned int        _last_orbit;
+    unsigned int        _start_orbit;
+    unsigned int        _failure;
+    unsigned int        _data_limit;
+    unsigned int        _header_size;
+    unsigned int        _unfinished_files_size;
+    unsigned int        _unfinished_files_arr[5];
 };
 
 

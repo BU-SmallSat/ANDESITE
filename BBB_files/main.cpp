@@ -28,12 +28,12 @@ void HealthBeacon(int sig)
   alarm(5);
 }
 
-bool adc_check(){
-	return TRUE;
+int adc_check(){
+	return 1;
 }
 
-bool eps_check()){
-	return TRUE;
+int eps_check()){
+	return 0;
 }
 
 
@@ -47,30 +47,55 @@ int main()
 
     Ret=LS.Open(DEVICE_PORT,115200);                                        // Open serial link at 115200 bauds
     if (Ret!=1) {                                                           // If an error occured...
-        printf ("Error while opening port. Permission problem ?\n");        // ... display a message ...
-        return Ret;                                                         // ... quit the application
+      printf ("Error while opening port. Permission problem ?\n");        // ... display a message ...
+      return Ret;                                                         // ... quit the application
     }
     printf ("Serial port opened successfully !\n");
 
     int fd;         /* File handler for watchdog */
-    int interval;      /* Watchdog timeout interval (in secs) */
+    int interval = 8;      /* Watchdog timeout interval (in secs) */
+    fd = open(dev, O_RDWR);
 
-    // Write the AT command on the serial port
+    if (-1 == fd) {
+      fprintf(stderr, "Error: %s\n", strerror(errno));
+      exit(EXIT_FAILURE);
+    }
 
+    if (ioctl(fd, WDIOC_SETTIMEOUT, &interval) != 0) {
+      fprintf(stderr,
+      "Error: Set watchdog interval failed\n");
+      exit(EXIT_FAILURE);
+    }
+
+    /* Check if last boot is caused by watchdog */
+    if (ioctl(fd, WDIOC_GETBOOTSTATUS, &bootstatus) == 0) {
+      fprintf(stdout, "Last boot is caused by : %s\n",
+      (bootstatus != 0) ? "Watchdog" : "Power-On-Reset");
+    } else {
+      fprintf(stderr, "Error: Cannot read watchdog status\n");
+      exit(EXIT_FAILURE);
+    }
+
+    /*  //write to serial  
     Ret=LS.WriteString("AT\n");                                             // Send the command on the serial port
     if (Ret!=1) {                                                           // If the writting operation failed ...
         printf ("Error while writing data\n");                              // ... display a message ...
         return Ret;                                                         // ... quit the application.
     }
     printf ("Write operation is successful \n");
+    */
 
-    // Read a string from the serial device 								// Read a maximum of 128 characters with a timeout of 5 seconds
-    Ret=LS.ReadString(Buffer,'\n',128,5000);                 				// The final character of the string must be a line feed ('\n')            
+    while(1) {
+      ioctl(fd, WDIOC_KEEPALIVE, NULL);
+      fprintf(stdout, "Kick watchdog through IOCTL\n");
+
+      // Read a string from the serial device 								// Read a maximum of 128 characters with a timeout of 5 seconds
+      Ret=LS.ReadString(Buffer,'\n',128,5000);                 				// The final character of the string must be a line feed ('\n')            
                                                                       
-    if (Ret>0)                                                              // If a string has been read from, print the string
+      if (Ret>0)                                                              // If a string has been read from, print the string
         printf ("String read from serial port : %s",Buffer);
-    else
-        printf ("TimeOut reached. No data received !\n");                   // If not, print a message.
+
+    }
 
     // Close the connection with the device
 
