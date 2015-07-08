@@ -36,7 +36,7 @@ AndesiteFile::AndesiteFile() {
     _file                   = "001.txt";
     _collected_data         = "";
     _writing_data           = "";
-    _transmit_message       = "";
+    //_transmit_message       = "";
     _str_parity             = "";
     _int_parity             = 0;
     _file_open_bool         = 0;
@@ -69,7 +69,7 @@ boolean AndesiteFile::init() {
     setUnfinishedFiles();
     
     // Put last orbit in first element
-    _start_orbit = _unfinished_arr[0];
+    _start_orbit = _unfinished_files_arr[0];
     
     Serial.print("Number of Files: ");
     Serial.println(_num_files);
@@ -120,15 +120,15 @@ boolean AndesiteFile::send() {
     _message_size = 0;
 
     // Open SD card file for reading
-    ifstream sdin(_file.cstr());
+    ifstream sdin(_file.c_str());
     _file_position = _Orbit.getPosition();
     //Serial.print(":: File size = ");
     //Serial.println(_handle.size());
     Serial.println(":: Reading and sending file...");
     Serial.print(":: Seeking to position '");
-    Serial.print(_file_position);
-    Serial.print("'...");
-    Serial.println(sdin.seekg(_file_position));
+    Serial.println(_file_position);
+
+    sdin.seekg(_file_position);
 
         // Loop through every char in the file (check if reached end of file, 
     //     update some global variable to true/false, print data on orbit 
@@ -139,7 +139,7 @@ boolean AndesiteFile::send() {
         _message_size = sdin.gcount();
         if (sdin.fail()) {
             sdin.clear(sdin.rdstate() & ~ios_base::failbit);
-            Serial.println("extracted partial message!")
+            Serial.println("extracted partial message!");
         } 
         Serial.print(" (");
         Serial.print(_message_size);
@@ -149,7 +149,7 @@ boolean AndesiteFile::send() {
         //IMPLEMENT PARITY CHECK OF DATA RETRIEVED FROM FILE
         _int_parity = 0;
     	_str_parity = "";
-    	String strMessage = (String)message;
+    	String strMessage = (String)_transmit_message;
     	Serial.println((String)_transmit_message);
     	int letter; 
 
@@ -176,7 +176,7 @@ boolean AndesiteFile::send() {
   		_int_parity = 0;
   		Serial.println(strMessage.substring(strMessage.length() - 3));
 
-   		if (strParity == strMessage.substring(strMessage.length() - 3)) {
+   		if (_str_parity == strMessage.substring(strMessage.length() - 3)) {
 			Serial.println("Error, parity bit does not match");
     	   // strMessage = strMessage.substring(0,strMessage.length()-3);
     	    _transmit_message[RF22_MESH_MAX_MESSAGE_LEN-1] = 0;
@@ -193,12 +193,12 @@ boolean AndesiteFile::send() {
 
         // Send file line to server 
         Serial.print(F("Sending data -- "));
-        Serial.print(_transmit_message;
+        Serial.print(_transmit_message);
         Serial.print(" ");
         Serial.print(_message_size+1);
         Serial.print(" | ");
         Serial.println(_Orbit.getLatitude());
-        _Radio.send(_transmit_message, (_message_size+1), ACDH_MULE_ADDR);
+        _Radio.send((uint8_t*)_transmit_message, (_message_size+1), ACDH_MULE_ADDR);
 
         //update file position
         _file_position = sdin.tellg();
@@ -249,16 +249,13 @@ void AndesiteFile::done() {
 
 
  void AndesiteFile::store(String str) { 
-    _data += str; 
-    _ready_write = 0;
-    while(_data > RF22_MESH_MAX_MESSAGE_LEN){
-        _write += _data.substring(0,RF22_MESH_MAX_MESSAGE_LEN);
-        _data = _data.substring(RF22_MESH_MAX_MESSAGE_LEN);
-        _ready_write++;
+    _collected_data += str; 
+    _ready_write_bool = 0;
+    while(_collected_data.length() > RF22_MESH_MAX_MESSAGE_LEN){
+        _writing_data += _collected_data.substring(0,RF22_MESH_MAX_MESSAGE_LEN);
+        _collected_data = _collected_data.substring(RF22_MESH_MAX_MESSAGE_LEN);
+        _ready_write_bool++;
     }          
-    else{
-        _ready_write = 0;
-    }
     return;
 }
 
@@ -272,10 +269,10 @@ void AndesiteFile::done() {
 void AndesiteFile::write(bool done) {
 
     if(done){
-        while(_data > RF22_MESH_MAX_MESSAGE_LEN){
-            _write += _data.substring(0,RF22_MESH_MAX_MESSAGE_LEN);
-            _data = _data.substring(RF22_MESH_MAX_MESSAGE_LEN);
-            _ready_write++;
+        while(_collected_data.length() > RF22_MESH_MAX_MESSAGE_LEN){
+            _writing_data += _collected_data.substring(0,RF22_MESH_MAX_MESSAGE_LEN);
+            _collected_data = _collected_data.substring(RF22_MESH_MAX_MESSAGE_LEN);
+            _ready_write_bool++;
         }   
     }
     
@@ -288,19 +285,20 @@ void AndesiteFile::write(bool done) {
         return;
     }
     
+    int letter;
     
-    while(_ready_write > 0){
+    while(_ready_write_bool > 0){
         //even parity bit (count the 1's)
         _int_parity = 0;
         _str_parity = ""; 
 
 	   //convert each ascii letter into 8-bit binary version
-	   for (int ii = 0; ii < _write.size(); ++ii) 
+	   for (int ii = 0; ii < _writing_data.length(); ++ii) 
 	   {
-		    letter = (int)dummy[ii];
+		    letter = (int)_writing_data[ii];
         	while(letter > 0){
        			if(letter%2 != 0){
-            		parity++;
+            		_int_parity++;
           		}
           		letter = letter/2;
         	}
@@ -308,34 +306,35 @@ void AndesiteFile::write(bool done) {
 
 	   //pad parity with zeros so that the size of data written is const. (Max parity value ~= 400)
 	   if (_int_parity < 10)
-		  _str_parity = "00" + to_string(_parity);
-	   else if (_parity < 100) 
-		  _str_parity = "0" + to_string(_parity);
+		  _str_parity = "00" + (String)_int_parity;
+	   else if (_int_parity < 100) 
+		  _str_parity = "0" + (String)_int_parity;
 	   else 
-		  _str_parity = to_string(_parity);
+		  _str_parity = (String)_int_parity;
 
 	   //write to SD card
-        _handle.println((_write + _str_parity));
-        _ready_write--;
+        _handle.println((_writing_data + _str_parity));
+        _ready_write_bool--;
     }
 
     _handle.close();
 
     //reset values
-    _write = "";
-    _ready_write = 0;
+    _writing_data = "";
+    _ready_write_bool = 0;
 }
 
 
 
 // Check storage status to see if it has reached its max length
 boolean AndesiteFile::status() {
-    if ( _write.length() >= _data_limit ) 
+    if ( _writing_data.length() >= RF22_MESH_MAX_MESSAGE_LEN ) 
         return true;
     else
         return false;
 }
 
+/*
 
 void AndesiteFile::writeMagTest(String str){
     //digitalWrite(13, HIGH);
@@ -350,7 +349,7 @@ void AndesiteFile::writeMagTest(String str){
     }
 }
 
-
+*/
 // //////////////////////////
 // ///// DATA FILE NAME /////
 // //////////////////////////
@@ -432,12 +431,12 @@ String AndesiteFile::strOrbitFile(unsigned int orb) {
 //   (where files equates to orbits)
 void AndesiteFile::setUnfinishedFiles() {
     int orb = 1;
-    _num_unfinished  = 0;
+    _num_unfinished_files  = 0;
     while( SD.exists( strOrbitFile(orb).c_str() ) ) {
         if(_Orbit.readHeader( strOrbitFile(orb), 2) == 0) {
             Serial.print("GetNumberofUnfinishedFiles: ");
             Serial.println(strOrbitFile(orb));
-            ++_num_unfinished;
+            ++_num_unfinished_files;
         }        
         _last_orbit = orb;
         ++orb;
@@ -449,9 +448,9 @@ void AndesiteFile::setUnfinishedFiles() {
     while(i <= _num_files){
         if(_Orbit.readHeader( strOrbitFile(i), 2 ) ==0) {
             ++count;
-            index = _num_unfinished - count;
-            if(index < _unfinished_size) {
-                i = _unfinished_arr[index];
+            index = _num_unfinished_files - count;
+            if(index < _unfinished_files_size) {
+                i = _unfinished_files_arr[index];
                 Serial.println(i);
             }
         }
