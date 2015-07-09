@@ -1,5 +1,6 @@
 
- 
+#include "serialib.h"
+
 // Class constructor
  serialib::serialib()
  {}
@@ -329,7 +330,7 @@
      int Nbytes=0;
  #ifdef __linux__
      ioctl(fd, FIONREAD, &Nbytes);
-endif
+#endif
      return Nbytes;
  }
  

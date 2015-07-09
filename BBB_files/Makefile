@@ -1,6 +1,12 @@
-CC = gcc
-CFLAGS = -Wall -g -O2
-OBJECTS = main.o
+CXX=g++
+CXXFLAGS=-Wall -g
+SOURCES=main.cpp serialib.cpp
+EXECUTABLE=CDHmain
 
-all: $(OBJECTS)
-$(CC) $(CFLAGS) $(OBJECTS) -o main
+all:$(SOURCES) $(EXECUTABLE)
+
+$(EXECUTABLE):
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $@
+
+clean:
+	rm $(EXECUTABLE)

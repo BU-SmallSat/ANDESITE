@@ -46,6 +46,7 @@ void AndesiteCollect::mag() {
     data += temp;
     
     _File.store(data);
+    data = "";
 }
 
 
@@ -68,6 +69,7 @@ void AndesiteCollect::gyro() {
     data += temp;
     
     _File.store(data);
+    data = "";
 }
 
 
@@ -98,4 +100,6 @@ void AndesiteCollect::gps() {
     data += temp;
     
     _File.store(data);
+
+    data = "";
 }
