@@ -218,8 +218,8 @@ int AndesiteWSN::scienceMode() {
                 }
 
                 //check for file overfow 
-                if ( _File._ready_write_bool <0 ) {
-                    _File.write();
+                if ( _File._ready_write_bool > 0 ) {
+                    _File.write(done);
 
                 } 
 
@@ -239,8 +239,8 @@ int AndesiteWSN::scienceMode() {
     Serial.println(":: Done with Science Mode.");
     
     //_File.store();
-    if ( _File._ready_write_bool < 0 ){
-        _File.write();
+    if ( _File._ready_write_bool > 0 ){
+        _File.write(done);
     }
     
 

@@ -30,6 +30,7 @@
 // Collect and store magnetometer data
 void AndesiteCollect::mag() {
     DOF.readMag();
+    Serial.println("collecting mag");
     String data;    
     char temp[10] = {0};
     
@@ -54,6 +55,7 @@ void AndesiteCollect::mag() {
 // Collect and store gyroscope data
 void AndesiteCollect::gyro() {
     DOF.readGyro();
+    Serial.println("collecting gyro");
     String data;
     char temp[10] = {0};
     
@@ -77,6 +79,7 @@ void AndesiteCollect::gyro() {
 // Collect and store GPS data
 void AndesiteCollect::gps() {
     String data;
+    Serial.println("collecting gps");
     char temp[10] = {0};
     
     // Concatenate strings to write just one string to file

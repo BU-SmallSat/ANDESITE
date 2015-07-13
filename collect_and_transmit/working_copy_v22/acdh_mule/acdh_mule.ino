@@ -3,7 +3,7 @@
 // ========
 
 #include "AndesiteMule.h"
-#include "AndesiteComm.h"
+#include "AndesiteRadio.h"
 #include "libandesite.h"
 
 #include <SPI.h>
@@ -22,6 +22,9 @@
 RF22Mesh RF22(ACDH_MULE_ADDR, 9);
 SdFat SD;
 
+AndesiteRadio _Radio;
+AndesiteMule _Mule;
+
 
 
 // ////////////////////
@@ -30,17 +33,19 @@ SdFat SD;
 
 // Setup the Mule 
 void setup() {
-    acdh_init_mule();
+    if ( _Mule.init() != 0 ) {
+        Serial.println(":: Mule initialization failed, fix errors and try again");
+        while (1) {}
+    }
+    
+    Serial.println("Done with main setup.");
 }
 
 
 // Receive messages from the wireless sensore nodes (WSN)
 void loop() {
     
-    // Determine which WSN are available 
-    acdh_mule_avail_wsn();  // Has a return status
-    
-    // All WSN are done, receive data from them
-    if ( AVAIL_WSN_NUM > 0 ) 
-        acdh_mule_request_data(); // Has a return status
+    // Request data from available WSNs
+    if ( _Mule.listen() == 0 ) 
+        _Mule.request(); // Has a return status
 }

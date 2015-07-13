@@ -83,6 +83,7 @@ void setup() {
     TIMSK1 &= !(1 << OCIE1A);
     //TIMSK1 &= !(1 << TOIE1);
     
+    delay(500);
     //interrupts();
     // Setup the wireless sensor node
     if ( WSN.init() != 0 ) {

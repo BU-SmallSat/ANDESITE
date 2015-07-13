@@ -292,6 +292,9 @@ void AndesiteFile::write(bool done) {
         _int_parity = 0;
         _str_parity = ""; 
 
+        Serial.print("writing: ");
+        Serial.println(_writing_data);
+
 	   //convert each ascii letter into 8-bit binary version
 	   for (int ii = 0; ii < _writing_data.length(); ++ii) 
 	   {
