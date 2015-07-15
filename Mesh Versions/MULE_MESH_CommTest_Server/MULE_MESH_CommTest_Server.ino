@@ -52,7 +52,9 @@ void setup()
     pinMode(4, OUTPUT);    
     digitalWrite(4, LOW);
     delay(100);
-
+    
+    delay(500);
+  
   // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
   if (!rf22.init())
     Serial.println("rf22 init failed");
@@ -69,7 +71,8 @@ void setup()
 // Dont put this on the stack:
 uint8_t buf[RF22_MAX_MESSAGE_LEN];
 
-uint8_t state = 1; 
+uint8_t state = 1;
+
 uint8_t count = 0;
 void loop()
 {

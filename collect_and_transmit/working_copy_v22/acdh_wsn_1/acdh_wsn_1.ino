@@ -41,7 +41,7 @@ AndesiteWSN WSN;
 
 int check = 0;
 int count = 0;
-int Science_Mode_State = 0;
+int _science_mode_state = 0;
 
 
 // //////////////////////////////////////////////////
@@ -53,11 +53,11 @@ ISR(TIMER1_COMPA_vect) {
 //WDT_RESET to guarantee we are reaching the interrupts
 //Serial.println("here");
 if(count >= 2){
-  WSN.Science_Mode_State = 2;
+  WSN._science_mode_state = 2;
   count = 0;
 }
 else {
-  WSN.Science_Mode_State = 1;
+  WSN._science_mode_state = 1;
   count++;
 }
 };
@@ -83,6 +83,7 @@ void setup() {
     TIMSK1 &= !(1 << OCIE1A);
     //TIMSK1 &= !(1 << TOIE1);
     
+    delay(500);
     //interrupts();
     // Setup the wireless sensor node
     if ( WSN.init() != 0 ) {

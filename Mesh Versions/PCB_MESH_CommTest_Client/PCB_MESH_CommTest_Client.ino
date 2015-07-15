@@ -77,7 +77,7 @@ void setup()
     pinMode(ACDH_SS_PIN, OUTPUT);
     pinMode(4, OUTPUT);    
     digitalWrite(4, LOW);
-    delay(100);
+    delay(500);
 
 
   // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
