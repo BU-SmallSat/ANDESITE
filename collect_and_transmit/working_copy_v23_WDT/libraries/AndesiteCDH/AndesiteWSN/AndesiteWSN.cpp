@@ -31,8 +31,6 @@
 // ///// ANDESITE WSN CLASS /////
 // //////////////////////////////
 
-void(* resetFunc) (void) = 0;
-
 // Initialize the wireless sensor node class
 AndesiteWSN::AndesiteWSN() {
     _science   = (unsigned long) 20 * 60 * 1000; // [min]
@@ -52,48 +50,56 @@ int AndesiteWSN::init() {
 	//Three hardware resets -- store bool in EEPROM
 	//If does not initialize, simulate GPS & set simulation boolean
 
+    // Setup science instruments (temp libraries below)
+    // For GYRO, while loop of software resets, three hardware resets
+        //store boolean in EEPROM
+    if(GYRO_INIT){
+	   while(!DOF.begin()){
+            //scans for I2C devices connected to board
+            I2c.scan();
+            //add error checking for storing addresses and checking connection
+        }
+    }
+    wdt_reset();
 
-	// Setup science instruments (temp libraries below)
-	// For GYRO, while loop of software resets, three hardware resets
-		//store boolean in EEPROM
-	// For MAGNETOMETER, while loop of software resets, infinite 
-		//hardware resets. If reset bool in EEPROM is true, command
-		//EPS to restart MAG.
-    DOF.begin();
-    Wire.begin();
+    // For MAGNETOMETER, while loop of software resets, infinite 
+        //hardware resets. If reset bool in EEPROM is true, command
+        //EPS to restart MAG.
     
 
     // Initialize SD card
     // While loop of software resets, Five hardware resets.
     // Store boolean in EEPROM. If failed set noSD bool -- indicates
     // save to memory instead of SD card
-    if ( !SD.begin(ACDH_SD_PIN) ) {
-        Serial.println("ERROR: SD card initialization failed.");
-        SD.initErrorHalt();
-        delay(10000);
-        resetFunc();
-	}
-	// Set number of the previous orbit completed to zero
-	// LOOK AT NOTEBOOK FOR THIS
-    _File.init();
-	
-
-	// Turn on radios
-    pinMode(ACDH_SS_PIN, OUTPUT);
-    pinMode(4, OUTPUT);    
-    digitalWrite(4, LOW);
-    delay(100);
-
-    // Initialize radio
-    // While loop of software resets
-    // Five hardware resets (TELL EPS TO RESET RADIO)
-    // Store boolean in EEPROM. If radio fails, set bool and skip 
-    // message sends & receives.
-    if ( _Radio.init() != 0 ) {
-        Serial.println("ERROR: Radio setup failed.");
-        delay(10000);
-        resetFunc();
+    if(SD_INIT){
+        while ( !SD.begin(ACDH_SD_PIN) ) {
+            Serial.println("ERROR: SD card initialization failed.");
+            SD.initErrorHalt(); //used to print error messages but should be commented out in final day of the life test
+	   }   
+	   // Set number of the previous orbit completed to zero
+        _File.init()
     }
+    wdt_reset();
+	
+    if(RADIO_INIT){
+	   // Turn on radios
+        pinMode(ACDH_SS_PIN, OUTPUT);
+        pinMode(4, OUTPUT);    //LED stuff?
+        digitalWrite(4, LOW);
+        delay(100);
+
+        // Initialize radio
+        // While loop of software resets
+        // Five hardware resets (TELL EPS TO RESET RADIO)
+        // Store boolean in EEPROM. If radio fails, set bool and skip 
+        // message sends & receives.
+        while ( _Radio.init() != 0 ) {
+            Serial.println("ERROR: Radio setup failed.");
+            delay(10000);
+            resetFunc();
+        }
+    }
+    wdt_reset();
 
 
     // Setup ADC
