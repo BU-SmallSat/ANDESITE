@@ -77,7 +77,7 @@ void setup()
     pinMode(ACDH_SS_PIN, OUTPUT);
     pinMode(4, OUTPUT);    
     digitalWrite(4, LOW);
-    delay(500);
+    delay(100);
 
 
   // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
@@ -113,7 +113,7 @@ double count = 0;  // Number of time sendtoWait succeeds
 
 void loop()
 {
-  Serial.println("hello");
+ 
   //digitalWrite(ledPin, LOW);
   while (1)
   {
@@ -316,9 +316,11 @@ void loop()
         Serial.end();    // Ends the serial communication once all data is received
         Serial.begin(115200); 
         while (Serial.available() == 0) {/*Serial.println("No character");*/}
-        if (Serial.available() > 0) {
+        if (Serial.available() > 0) 
+        {
           char xx = Serial.read();
-          while (xx != 'c') {  
+          while (xx != 'c') 
+          {  
             //Serial.println("Really man? Press 'c': ");
             char xx = Serial.read();
           }
