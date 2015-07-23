@@ -63,16 +63,7 @@ private:
     // Zero-pad the information in the header of the data file
     String              zeroPadFields(); 
     
-    // Orbit latitude
-    double              _latitude;
-    
-    // Latitude at which modes switch from Science to Transfer (and vice versa)
-    int                 _lat_mode_switch;
-    
-    // Data file header information
-    unsigned int        _orbit;
-    ifstream::pos_type  _position;
-    unsigned int        _status;
+
     
     // Determine latitude increments in case of GPS fail
     double              _dl;      // [deg] (dv*dt/radius * 180/pi)

@@ -21,7 +21,13 @@
 #include "AndesiteData.h"
 #include "AndesiteFile.h"
 
+void AndesiteCollect::ADCsetup(){
+    return 1;
+}
 
+void AndesiteCollect::GPSsetup(){
+    return 1;
+}
 
 // //////////////////////////////////
 // ///// ANDESITE COLLECT CLASS /////

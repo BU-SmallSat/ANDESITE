@@ -65,13 +65,14 @@ int AndesiteWSN::init() {
 	}
 	
     // Initialize radio 
-    if ( _Radio.init() != 0 ) {
+    if ( !_Radio.init()) {
         Serial.println("ERROR: Radio setup failed.");
         delay(10000);
         resetFunc();
     }
 	
     // Setup science instruments
+    AndesiteCollect::ADCsetup();
     DOF.begin();
     Wire.begin();
     

@@ -26,6 +26,8 @@
 
 class AndesiteCollect {
 public:
+	int ADCsetup();
+	int GPSsetup();
     static void mag();
     static void gyro();
     static void gps();

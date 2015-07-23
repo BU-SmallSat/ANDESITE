@@ -22,7 +22,7 @@ class AndesiteRadio {
   public:
     AndesiteRadio();
     int init();
-    
+    int dummyDataTest();
     int send(uint8_t *message, uint8_t len, uint8_t addr);
     int sendCommand(uint8_t *message, uint8_t len, uint8_t addr);
     int listen();

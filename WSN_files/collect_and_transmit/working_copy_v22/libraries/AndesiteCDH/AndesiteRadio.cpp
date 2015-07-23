@@ -34,22 +34,30 @@ int AndesiteRadio::init() {
     delay(500);
     if ( !RF22.init() ) {
         Serial.println("ERROR: RF22 init failed.");
-        return 1;
+        return 0;
     } else 
 		Serial.println(F("RF22 succeeded!"));
     
     // Set transmission rate to 38.4 kbs   
     if ( !RF22.setModemConfig(RF22::FSK_Rb38_4Fd19_6) ) {
         Serial.println("ERROR: setModemConfig failed.");
-		return 2;
+		return 0;
 	}
 	
 	// Set transmission power
 	RF22.setTxPower(RF22_TXPOW_20DBM);
+
+    if(!dummyDataTest()){
+        return 0;
+    }
     
-	return 0;
+	return 1;
 }
 
+
+int AndesiteRadio::dummyDataTest(){
+    return 1;
+}
 
 
 // ////////////////////////////////

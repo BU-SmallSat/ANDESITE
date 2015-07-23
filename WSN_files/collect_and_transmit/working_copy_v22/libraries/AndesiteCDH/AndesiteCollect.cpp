@@ -22,6 +22,8 @@
 #include "AndesiteFile.h"
 
 
+void AndesiteCollect::ADCsetup(){
+}
 
 // //////////////////////////////////
 // ///// ANDESITE COLLECT CLASS /////

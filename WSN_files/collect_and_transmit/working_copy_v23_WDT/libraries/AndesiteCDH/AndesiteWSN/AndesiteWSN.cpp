@@ -49,6 +49,21 @@ int AndesiteWSN::init() {
 	//While loop of software resets
 	//Three hardware resets -- store bool in EEPROM
 	//If does not initialize, simulate GPS & set simulation boolean
+    if(GPS_INIT){
+        while(!AndesiteCollect::GPSsetup()){
+            Serial.println("GPS setup failed");
+        }
+        /*
+            // Check if GPS is avialable
+            if ( !_Orbit.setLatitude() && !_orb_start ) {
+                Serial.print(":: Waiting for GPS string from computer...");
+                while ( !_Orbit.setLatitude() ) {}
+                Serial.println("Done.");
+                _orb_start = true;
+            }
+        */
+    }
+    wdt_reset();
 
     // Setup science instruments (temp libraries below)
     // For GYRO, while loop of software resets, three hardware resets
@@ -65,7 +80,10 @@ int AndesiteWSN::init() {
     // For MAGNETOMETER, while loop of software resets, infinite 
         //hardware resets. If reset bool in EEPROM is true, command
         //EPS to restart MAG.
-    
+    while(!AndesiteCollect::ADCsetup()){
+        Serial.println("Mag failed.")
+    }
+    wdt_reset();
 
     // Initialize SD card
     // While loop of software resets, Five hardware resets.
@@ -100,12 +118,6 @@ int AndesiteWSN::init() {
         }
     }
     wdt_reset();
-
-
-    // Setup ADC
-    // IDK what to do for this!
-    // acdh_adc_setup();
-
 
     // Setup LEDs
     acdh_init_led();
