@@ -41,7 +41,9 @@ int failcheck=1;
 //Singleton instance of the radio
 RF22Mesh rf22(CLIENT_ADDRESS);
 
-double successRatio[22];
+int prefails[8]={0,0,0,0,0,0,0,0};
+int fails[8]={0,0,0,0,0,0,0,0};
+int sends[8]={0,0,0,0,0,0,0,0};
 File dataFile;
 
 void setup()
@@ -153,39 +155,90 @@ void loop()
         switch (trial)
         {
           case 1:
-          dataFile = SD.open("resultst1.txt", FILE_WRITE);
-          if(SD.exists("resultst1.txt"))
+          dataFile = SD.open("prefails1.txt", FILE_WRITE);
+          if(SD.exists("prefails1.txt"))
           {
-            for (int i=0;i<9;i++)
+            for (int i=0;i<8;i++)
             {
-               dataFile.println(incompletes[i]);
+               dataFile.println(prefails[i]);
+            }
+          }
+          dataFile.close();
+          dataFile = SD.open("fails1.txt", FILE_WRITE);
+          if(SD.exists("fails1.txt"))
+          {
+            for (int i=0;i<8;i++)
+            {
+               dataFile.println(fails[i]);
+            }
+          }
+          dataFile.close();
+          dataFile = SD.open("sends1.txt", FILE_WRITE);
+          if(SD.exists("sends1.txt"))
+          {
+            for (int i=0;i<8;i++)
+            {
+               dataFile.println(sends[i]);
             }
           }
           dataFile.close();
           break;
           case 2:
-          dataFile = SD.open("resultst2.txt", FILE_WRITE);
-          if(SD.exists("resultst2.txt"))
+          dataFile = SD.open("prefails2.txt", FILE_WRITE);
+          if(SD.exists("prefails2.txt"))
           {
-            for (int i=0;i<9;i++)
+            for (int i=0;i<8;i++)
             {
-               dataFile.println(incompletes[i]);
+               dataFile.println(prefails[i]);
             }
           }
           dataFile.close();
-          break;
+          dataFile = SD.open("fails2.txt", FILE_WRITE);
+          if(SD.exists("fails2.txt"))
+          {
+            for (int i=0;i<8;i++)
+            {
+               dataFile.println(fails[i]);
+            }
+          }
+          dataFile.close();
+          dataFile = SD.open("sends2.txt", FILE_WRITE);
+          if(SD.exists("sends2.txt"))
+          {
+            for (int i=0;i<8;i++)
+            {
+               dataFile.println(sends[i]);
+            }
+          }
+          dataFile.close();
           case 3:
-          dataFile = SD.open("resultst3.txt", FILE_WRITE);
-          if(SD.exists("resultst3.txt"))
+          dataFile = SD.open("prefails3.txt", FILE_WRITE);
+          if(SD.exists("prefails3.txt"))
           {
-            for (int i=0;i<9;i++)
+            for (int i=0;i<8;i++)
             {
-               dataFile.println(incompletes[i]);
+               dataFile.println(prefails[i]);
             }
           }
           dataFile.close();
-          break;
-          
+          dataFile = SD.open("fails3.txt", FILE_WRITE);
+          if(SD.exists("fails3.txt"))
+          {
+            for (int i=0;i<8;i++)
+            {
+               dataFile.println(fails[i]);
+            }
+          }
+          dataFile.close();
+          dataFile = SD.open("sends3.txt", FILE_WRITE);
+          if(SD.exists("sends3.txt"))
+          {
+            for (int i=0;i<8;i++)
+            {
+               dataFile.println(sends[i]);
+            }
+          }
+          dataFile.close();
         }
         
        
@@ -202,6 +255,13 @@ void loop()
           {
             state=1;
             trial++;
+            prefails[8]={0,0,0,0,0,0,0,0};
+            fails[8]={0,0,0,0,0,0,0,0};
+            sends[8]={0,0,0,0,0,0,0,0};
+            count=0;
+            failed=0
+            failed2=0;
+            
           }
           else 
           {
@@ -223,7 +283,7 @@ void loop()
         Serial.println("Waiting to connect");
         failed2++;
       }
-      if (failed2>=3)
+      if (failed2>=3)    // I need to tailor this so i know exactly how long between states
       {
         Failcheck=0;
       }
@@ -245,9 +305,15 @@ void loop()
       Failcheck=0;
       if (count>=10)
       {
-        Serial.println(count);
-        Serial.println(failed);
-        successRatio[state]=((count/(failed+count))*100);   //this math is not that great
+        Serial.print("State: ");
+        Serial.println(state);
+        Serial.print("Preconnection fails: ");
+        Serial.println(failed2);
+        Serial.print("Failed
+        prefails[state]=failed2;
+        fails[state]=failed;
+        sends[state]=count;
+        state++;   
       }
     }  
   }
