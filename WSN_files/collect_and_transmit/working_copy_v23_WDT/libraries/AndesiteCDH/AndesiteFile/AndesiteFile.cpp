@@ -289,6 +289,7 @@ void AndesiteFile::write(bool done) {
     
     
     while(_ready_write > 0){
+        WDT_reset()
         //even parity bit (count the 1's)
         _int_parity = 0;
         _str_parity = ""; 

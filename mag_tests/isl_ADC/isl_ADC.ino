@@ -153,8 +153,8 @@ void loop() {
   magVolts = ((double)sample/(double)MAX_INT)*VREF;
   // Select the SD device
   digitalWrite(SD_PIN, LOW);
-  _handle = SD.open("MAG_TEST.txt", FILE_WRITE);
-  if(SD.exists("MAG_TEST.txt")){
+  _handle = SD.open("isl_TEST.txt", FILE_WRITE);
+  if(SD.exists("isl_TEST.txt")){
     _handle.println(magVolts);
     _handle.close();
   }
