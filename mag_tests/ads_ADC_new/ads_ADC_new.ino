@@ -126,6 +126,10 @@ void setup(){
     if ( !SD.begin(SD_PIN) ) {
         Serial.println("ERROR: SD card initialization failed.");
     }
+    if(SD.exists("XoutByte.txt")){
+      SD.remove("XoutByte.txt");
+    }
+
     digitalWrite(SD_PIN, HIGH);
 
     //First set the correct pinmodes 

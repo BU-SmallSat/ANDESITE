@@ -92,18 +92,23 @@ void setup() {
   pinMode(PDWN_PIN, OUTPUT);
   digitalWrite(PDWN_PIN, LOW);
   delay(5);
-  digitalWrite(PDWN_PIN, HIGH);
-  delay(20);
   Serial.begin(SERIAL_BAUD);
-  pinMode(CS_PIN, OUTPUT);
-  pinMode(RDY_PIN, INPUT);
-  pinMode(SD_PIN, OUTPUT);
-  digitalWrite(CS_PIN, HIGH);  
   digitalWrite(SD_PIN, LOW);
   // Setup SD card
   if ( !SD.begin(SD_PIN) ) {
       Serial.println("ERROR: SD card initialization failed.");
+      while(1){
+        delay(1000);
+      }
   }
+  digitalWrite(PDWN_PIN, HIGH);
+  delay(20);
+
+  pinMode(CS_PIN, OUTPUT);
+  pinMode(RDY_PIN, INPUT);
+  pinMode(SD_PIN, OUTPUT);
+  digitalWrite(CS_PIN, HIGH);  
+
   digitalWrite(SD_PIN, HIGH);
   // start the SPI library:
   SPI.begin();
