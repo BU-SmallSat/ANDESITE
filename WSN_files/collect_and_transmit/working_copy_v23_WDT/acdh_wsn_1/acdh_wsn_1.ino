@@ -1,6 +1,7 @@
 // ========
 // Includes
 // ========
+#include <avr/interrupt.h>
 #include <avr/wdt.h>
 #include <RF22Mesh.h>
 #include <SdFat.h>
@@ -62,6 +63,26 @@ else {
 }
 };
 
+ISR(WDT_vect){
+   //interrupt code : do the job here
+}
+
+//setup the watchdog to timeout every 4 seconds and make an interrupt and a reset
+void setupWatchdog(){
+    //README : must set the fuse WDTON to 0 to enable the watchdog
+ 
+    //disable interrupts
+    cli();
+    
+    //make sure watchdod will be followed by a reset (must set this one to 0 because it resets the WDE bit)
+    MCUSR &= ~(1 << WDRF);
+    //set up WDT interrupt (from that point one have 4 cycle to modify WDTCSR)
+    WDTCSR = (1<<WDCE)|(1<<WDE);
+    //Start watchdog timer with 4s prescaller and interrupt then resest
+    WDTCSR = (1<<WDIE)|(1<<WDE)|(1<<WDP3);
+    //Enable global interrupts
+    sei();
+}
 
 // ////////////////////////////////////
 // ///// RUN WIRELESS SENSOR NODE /////
@@ -75,8 +96,8 @@ void setup() {
     Serial1.begin(ACDH_SERIAL_BAUD);
     
     //Setup WDT
-    wdt_enable(WDTO_2S);
-    wdt_reset();
+    setupWatchdog();
+    wdt_reset(); //COMMENT OUT TO TEST WDT
     
     //set up interrupts for data sampling
     //noInterrupts();
@@ -99,7 +120,7 @@ void setup() {
     }
     Serial.println("Done with main setup.");
     
-    wdt_reset();
+    wdt_reset();  //COMMENT OUT TO TEST WDT
 }
 
 
