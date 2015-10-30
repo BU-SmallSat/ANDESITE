@@ -51,26 +51,29 @@ int Science_Mode_State = 0;
 
 
 ISR(TIMER1_COMPA_vect) {
-//WDT_RESET to guarantee we are reaching the interrupts
-//Serial.println("here");
-if(count >= 2){
-  WSN.Science_Mode_State = 2;
-  count = 0;
-}
-else {
-  WSN.Science_Mode_State = 1;
-  count++;
-}
+    
+    //WDT_RESET to guarantee we are reaching the interrupts
+    //Serial.println("here");
+    if(count >= 2){
+      Science_Mode_State = 2;
+      count = 0;
+    }
+    else {
+      Science_Mode_State = 1;
+      count++;
+    }
 };
 
 ISR(WDT_vect){
    //interrupt code : do the job here
+   Serial.println("WDT");
+   MCUSR &= ~(1 << WDRF);
 }
 
 //setup the watchdog to timeout every 4 seconds and make an interrupt and a reset
 void setupWatchdog(){
     //README : must set the fuse WDTON to 0 to enable the watchdog
- 
+    Serial.println("Watchdog setup.");
     //disable interrupts
     cli();
     
@@ -79,7 +82,7 @@ void setupWatchdog(){
     //set up WDT interrupt (from that point one have 4 cycle to modify WDTCSR)
     WDTCSR = (1<<WDCE)|(1<<WDE);
     //Start watchdog timer with 4s prescaller and interrupt then resest
-    WDTCSR = (1<<WDIE)|(1<<WDE)|(1<<WDP3);
+    WDTCSR = (1<<WDIE)|(1<<WDE)|(1<<WDP3)|(1<<WDP0);
     //Enable global interrupts
     sei();
 }
@@ -95,6 +98,8 @@ void setup() {
     Serial.begin(ACDH_SERIAL_BAUD);
     Serial1.begin(ACDH_SERIAL_BAUD);
     
+    Serial.println("here");
+    Serial1.println("here1");
     //Setup WDT
     setupWatchdog();
     wdt_reset(); //COMMENT OUT TO TEST WDT
@@ -128,12 +133,18 @@ void setup() {
 void loop() {
     
     // Enter Science Mode
-    if ( WSN.isScienceMode() )
+    if ( WSN.isScienceMode() ) {
+        wdt_reset();
         WSN.scienceMode();
+        wdt_reset();
+    }
     
     // Enter Transfer Mode
-    if ( WSN.isTransferMode() ) 
+    if ( WSN.isTransferMode() ) {
+        wdt_reset();
         WSN.transferMode();
+        wdt_reset();
+    }
     
     WSN.wait();
 }
