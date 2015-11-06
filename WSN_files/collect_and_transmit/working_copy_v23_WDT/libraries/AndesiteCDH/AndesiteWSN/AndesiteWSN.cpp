@@ -90,10 +90,10 @@ int AndesiteWSN::init() {
     // Store boolean in EEPROM. If failed set noSD bool -- indicates
     // save to memory instead of SD card
     if(SD_INIT){
-        while ( !SD.begin(ACDH_SD_PIN) ) {
+        //while ( !SD.begin(ACDH_SD_PIN) ) {
             Serial.println("ERROR: SD card initialization failed.");
             SD.initErrorHalt(); //used to print error messages but should be commented out in final day of the life test
-	   }   
+	   //}   
 	   // Set number of the previous orbit completed to zero
         _File.init()
     }

@@ -7,6 +7,7 @@
 #include <SdFat.h>
 #include <TinyGPS.h>
 
+#include <EEPROM.h>
 #include <SPI.h>
 #include <Wire.h>
 #include <SFE_LSM9DS0.h> 
@@ -67,7 +68,7 @@ ISR(TIMER1_COMPA_vect) {
 ISR(WDT_vect){
    //interrupt code : do the job here
    Serial.println("WDT");
-   MCUSR &= ~(1 << WDRF);
+   //MCUSR &= ~(1 << WDRF);
 }
 
 //setup the watchdog to timeout every 4 seconds and make an interrupt and a reset
@@ -102,7 +103,7 @@ void setup() {
     Serial1.println("here1");
     //Setup WDT
     setupWatchdog();
-    wdt_reset(); //COMMENT OUT TO TEST WDT
+    //wdt_reset(); //COMMENT OUT TO TEST WDT
     
     //set up interrupts for data sampling
     //noInterrupts();
@@ -115,14 +116,14 @@ void setup() {
     
     //interrupts();
     // Setup the wireless sensor node
-    if ( WSN.init() != 0 ) {
-        Serial.println(":: WSN initialization failed, fix errors and try again");
-        while (1) {}
-    }
-    else {
-        Serial.println(":: WSN initialization succeeded");
-       // while (1) {}
-    }
+//    if ( WSN.init() != 0 ) {
+//        Serial.println(":: WSN initialization failed, fix errors and try again");
+//        //while (1) {}
+//    }
+//    else {
+//        Serial.println(":: WSN initialization succeeded");
+//       // while (1) {}
+//    }
     Serial.println("Done with main setup.");
     
     wdt_reset();  //COMMENT OUT TO TEST WDT
@@ -131,7 +132,22 @@ void setup() {
 
 // Collect and send data to the Mule
 void loop() {
-    
+  
+    for (int i = 0; i < 20; i++)
+    {
+        EEPROM.write(i,i+10);
+    }
+    int value;
+    for (int i = 0; i < 20; i++)
+    {
+      value = EEPROM.read(i);
+      Serial.print("Address: ");
+      Serial.print(i);
+      Serial.print(", Value: ");
+      Serial.println(value);
+    }
+    //Serial.println("loop");
+  
     // Enter Science Mode
     if ( WSN.isScienceMode() ) {
         wdt_reset();
