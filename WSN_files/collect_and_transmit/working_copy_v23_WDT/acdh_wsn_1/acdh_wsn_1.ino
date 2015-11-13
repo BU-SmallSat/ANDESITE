@@ -45,6 +45,8 @@ int check = 0;
 int count = 0;
 int Science_Mode_State = 0;
 
+unsigned long time;
+bool watchdogInitialized = false;
 
 // //////////////////////////////////////////////////
 // ///// INITIALIZE INTERRUPTS FOR DATA SAMPLING/////
@@ -66,23 +68,27 @@ ISR(TIMER1_COMPA_vect) {
 };
 
 ISR(WDT_vect){
+   //Serial.print("WDT: ");
+   //Serial.println(millis());
    //interrupt code : do the job here
-   Serial.println("WDT");
    //MCUSR &= ~(1 << WDRF);
 }
 
-//setup the watchdog to timeout every 4 seconds and make an interrupt and a reset
+//setup the watchdog to timeout every 8 seconds and make an interrupt and a reset
 void setupWatchdog(){
     //README : must set the fuse WDTON to 0 to enable the watchdog
-    Serial.println("Watchdog setup.");
+    if (!watchdogInitalized) {
+      Serial.println("Watchdog setup.");
+      watchdogInitialized = true;
+    }
     //disable interrupts
     cli();
     
-    //make sure watchdod will be followed by a reset (must set this one to 0 because it resets the WDE bit)
+    //make sure watchdog will be followed by a reset (must set this one to 0 because it resets the WDE bit)
     MCUSR &= ~(1 << WDRF);
     //set up WDT interrupt (from that point one have 4 cycle to modify WDTCSR)
     WDTCSR = (1<<WDCE)|(1<<WDE);
-    //Start watchdog timer with 4s prescaller and interrupt then resest
+    //Start watchdog timer with 8s prescaller and interrupt then resest
     WDTCSR = (1<<WDIE)|(1<<WDE)|(1<<WDP3)|(1<<WDP0);
     //Enable global interrupts
     sei();
@@ -94,7 +100,7 @@ void setupWatchdog(){
 
 // Setup the sensor node
 void setup() {
-    
+    //Serial.println(millis());
     // Set baud rate
     Serial.begin(ACDH_SERIAL_BAUD);
     Serial1.begin(ACDH_SERIAL_BAUD);
@@ -126,7 +132,7 @@ void setup() {
 //    }
     Serial.println("Done with main setup.");
     
-    wdt_reset();  //COMMENT OUT TO TEST WDT
+    setupWatchdog();  //COMMENT OUT TO TEST WDT
 }
 
 
@@ -150,16 +156,16 @@ void loop() {
   
     // Enter Science Mode
     if ( WSN.isScienceMode() ) {
-        wdt_reset();
+        setupWatchdog();
         WSN.scienceMode();
-        wdt_reset();
+        setupWatchdog();
     }
     
     // Enter Transfer Mode
     if ( WSN.isTransferMode() ) {
-        wdt_reset();
+        setupWatchdog();
         WSN.transferMode();
-        wdt_reset();
+        setupWatchdog();
     }
     
     WSN.wait();
