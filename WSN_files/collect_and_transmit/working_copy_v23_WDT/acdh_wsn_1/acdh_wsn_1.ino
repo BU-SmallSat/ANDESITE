@@ -1,7 +1,6 @@
 // ========
 // Includes
 // ========
-#include <avr/interrupt.h>
 #include <avr/wdt.h>
 #include <RF22Mesh.h>
 #include <SdFat.h>
@@ -46,7 +45,6 @@ int count = 0;
 int Science_Mode_State = 0;
 
 unsigned long time;
-bool watchdogInitialized = false;
 
 // //////////////////////////////////////////////////
 // ///// INITIALIZE INTERRUPTS FOR DATA SAMPLING/////
@@ -54,9 +52,7 @@ bool watchdogInitialized = false;
 
 
 ISR(TIMER1_COMPA_vect) {
-    
-    //WDT_RESET to guarantee we are reaching the interrupts
-    //Serial.println("here");
+  
     if(count >= 2){
       Science_Mode_State = 2;
       count = 0;
@@ -67,29 +63,18 @@ ISR(TIMER1_COMPA_vect) {
     }
 };
 
-ISR(WDT_vect){
-   //Serial.print("WDT: ");
-   //Serial.println(millis());
-   //interrupt code : do the job here
-   //MCUSR &= ~(1 << WDRF);
-}
 
-//setup the watchdog to timeout every 8 seconds and make an interrupt and a reset
+//setup the watchdog to timeout every 8 seconds and reset
 void setupWatchdog(){
+  
     //README : must set the fuse WDTON to 0 to enable the watchdog
-    if (!watchdogInitalized) {
-      Serial.println("Watchdog setup.");
-      watchdogInitialized = true;
-    }
+    Serial.println("Watchdog setup.");
+    
     //disable interrupts
     cli();
-    
-    //make sure watchdog will be followed by a reset (must set this one to 0 because it resets the WDE bit)
-    MCUSR &= ~(1 << WDRF);
-    //set up WDT interrupt (from that point one have 4 cycle to modify WDTCSR)
-    WDTCSR = (1<<WDCE)|(1<<WDE);
-    //Start watchdog timer with 8s prescaller and interrupt then resest
-    WDTCSR = (1<<WDIE)|(1<<WDE)|(1<<WDP3)|(1<<WDP0);
+    //MCUSR &= ~(1 << WDRF)
+    //WDTCSR = (1 << WDCE)|(1 << WDE);
+    wdt_enable(WDTO_8S);
     //Enable global interrupts
     sei();
 }
@@ -107,9 +92,9 @@ void setup() {
     
     Serial.println("here");
     Serial1.println("here1");
+    
     //Setup WDT
     setupWatchdog();
-    //wdt_reset(); //COMMENT OUT TO TEST WDT
     
     //set up interrupts for data sampling
     //noInterrupts();
@@ -120,54 +105,81 @@ void setup() {
     TIMSK1 &= !(1 << OCIE1A);
     //TIMSK1 &= !(1 << TOIE1);
     
+    //Setup EEPROM (Initialize all needed addresses to ZERO) 
+    //Addr 0 -- First Initialization or not
+    //Addr 1 -- GPS_fail
+    //Addr 2 -- Gyro_fail
+    if (EEPROM.read(0) == 0) {
+        for(int i = 1; i < 5; i++) {
+            EEPROM.write(i, 0);
+        }
+        EEPROM.write(0,1);
+    }    
+    wdt_reset();
+    
     //interrupts();
-    // Setup the wireless sensor node
-//    if ( WSN.init() != 0 ) {
-//        Serial.println(":: WSN initialization failed, fix errors and try again");
-//        //while (1) {}
-//    }
-//    else {
-//        Serial.println(":: WSN initialization succeeded");
-//       // while (1) {}
-//    }
+    int init_Fail;
+    int GPS_fail;
+    int Gyro_fail;
+    
+    /* Setup the wireless sensor node
+     * WSN.init returns : 0 -- Init successful
+     *                    1 -- GPS Error
+     *                    2 -- Gyro Error
+     */
+    if ( init_Fail = WSN.init() != 0 ) {
+        switch(init_Fail) {
+            case 1:
+                //GPS FAIL
+                GPS_fail = EEPROM.read(1);
+                if (GPS_fail == 3) {      //TO DO: If you start to simulate GPS, this means its probably failed. Dont keep retrying if another part fails later.
+                    Serial1.println("SIMULATE GPS HERE!");
+                }
+                else 
+                    EEPROM.write(1, GPS_fail + 1);
+                //while(1);
+            case 2:
+                //GYRO FAIL
+                Gyro_fail = EEPROM.read(2);
+                if (Gyro_fail == 3) {      
+                    Serial1.println("Three gyro failures -- we're in trouble");
+                }
+                else 
+                    EEPROM.write(2, Gyro_fail + 1);
+                //while(1);
+            default:
+                break;
+        }
+        //Serial.println(":: WSN initialization failed, fix errors and try again");
+        //while (1) {}
+    }
+    else {
+        Serial.println(":: WSN initialization succeeded");
+       // while (1) {}
+    }
+    
     Serial.println("Done with main setup.");
     
-    setupWatchdog();  //COMMENT OUT TO TEST WDT
+    wdt_reset();  //COMMENT OUT TO TEST WDT
 }
 
 
 // Collect and send data to the Mule
 void loop() {
   
-    for (int i = 0; i < 20; i++)
-    {
-        EEPROM.write(i,i+10);
-    }
-    int value;
-    for (int i = 0; i < 20; i++)
-    {
-      value = EEPROM.read(i);
-      Serial.print("Address: ");
-      Serial.print(i);
-      Serial.print(", Value: ");
-      Serial.println(value);
-    }
-    //Serial.println("loop");
-  
     // Enter Science Mode
     if ( WSN.isScienceMode() ) {
-        setupWatchdog();
-        WSN.scienceMode();
-        setupWatchdog();
+        wdt_reset();
+        WSN.scienceMode(Science_Mode_State);
+        wdt_reset();
     }
     
     // Enter Transfer Mode
     if ( WSN.isTransferMode() ) {
-        setupWatchdog();
+        wdt_reset();
         WSN.transferMode();
-        setupWatchdog();
+        wdt_reset();
     }
     
     WSN.wait();
 }
-
