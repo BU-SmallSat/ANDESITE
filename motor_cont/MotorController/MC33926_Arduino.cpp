@@ -55,7 +55,7 @@ void MC33926_Arduino::setSpeed(int speed)
 unsigned int MC33926_Arduino::getCurrent()
 {
   // 5V / 1024 ADC counts / 525 mV per A = 9 mA per count
-  return analogRead(_FB) * 9;
+  return analogRead(_FB);// * 9;
 }
 
 // Return error status

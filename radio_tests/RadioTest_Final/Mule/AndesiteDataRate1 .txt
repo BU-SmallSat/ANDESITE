@@ -1,0 +1,194 @@
+rf22 init success
+For modulation 1
+For node 1
+The total number of attempted transmissions: 36
+The number of failed transmissions without ack: 2
+The number of sucessful receptions and transmissions: 34
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 34
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 34
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 34
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 34
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 34
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 34
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 34
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 34
+The number of incorrectly recieved messages: 0
+For modulation 2
+For node 1
+The total number of attempted transmissions: 46
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 46
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 46
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 46
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 46
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 46
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 46
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 46
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 45
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 45
+The number of incorrectly recieved messages: 0
+For modulation 3
+For node 1
+The total number of attempted transmissions: 91
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 91
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 91
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 91
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 90
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 90
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 90
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 90
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 90
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 90
+The number of incorrectly recieved messages: 0
+For modulation 4
+For node 1
+The total number of attempted transmissions: 178
+The number of failed transmissions without ack: 1
+The number of sucessful receptions and transmissions: 177
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 177
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 177
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 176
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 176
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 176
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 176
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 176
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 176
+The number of incorrectly recieved messages: 0
+For modulation 5
+For node 1
+The total number of attempted transmissions: 279
+The number of failed transmissions without ack: 2
+The number of sucessful receptions and transmissions: 277
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 277
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 277
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 277
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 277
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 277
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 277
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 277
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 277
+The number of incorrectly recieved messages: 0
+For modulation 6
+For node 1
+The total number of attempted transmissions: 25
+The number of failed transmissions without ack: 24
+The number of sucessful receptions and transmissions: 1
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For modulation 7
+For node 1
+The total number of attempted transmissions: 24
+The number of failed transmissions without ack: 23
+The number of sucessful receptions and transmissions: 1
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For node 3
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For node 4
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For node 5
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number of incorrectly recieved messages: 0
+For modulation 8
+For node 1
+The total number of attempted transmissions: 24
+The number of failed transmissions without ack: 23
+The number of sucessful receptions and transmissions: 1
+The number of incorrectly recieved messages: 0
+For node 2
+The total number of attempted transmissions: 0
+The number of failed transmissions without ack: 0
+The number of sucessful receptions and transmissions: 0
+The number

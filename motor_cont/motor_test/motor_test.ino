@@ -22,11 +22,10 @@ void loop()
 {
   for (int i = 0; i <= 400; i++)
   {
-    md.setM1Speed(i);
     stopIfFault();
+    md.setM1Speed(100);
     if (abs(i)%200 == 100)
     {
-      Serial.print("M1 current: ");
       Serial.println(md.getM1CurrentMilliamps());
     }
     delay(2);
