@@ -171,7 +171,7 @@ uint8_t RF22Router::sendtoWait(uint8_t* buf, uint8_t len, uint8_t dest, uint8_t 
     _tmpMessage.header.id = _lastE2ESequenceNumber++;
     _tmpMessage.header.flags = 0;
     memcpy(_tmpMessage.data, buf, len);
-
+	
     return route(&_tmpMessage, sizeof(RoutedMessageHeader)+len);
 }
 
@@ -187,10 +187,10 @@ uint8_t RF22Router::route(RoutedMessage* message, uint8_t messageLen)
 	    return RF22_ROUTER_ERROR_NO_ROUTE;
 	next_hop = route->next_hop;
     }
-
+	
     if (!RF22ReliableDatagram::sendtoWait((uint8_t*)message, messageLen, next_hop))
 	return RF22_ROUTER_ERROR_UNABLE_TO_DELIVER;
-
+	
     return RF22_ROUTER_ERROR_NONE;
 }
 

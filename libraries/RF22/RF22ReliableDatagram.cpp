@@ -44,13 +44,14 @@ boolean RF22ReliableDatagram::sendtoWait(uint8_t* buf, uint8_t len, uint8_t addr
     // Assemble the message
     uint8_t thisSequenceNumber = ++_lastSequenceNumber;
     uint8_t retries = 0;
-    while (retries++ <= _retries)
+	
+	while (retries++ <= _retries)
     {
 	setHeaderId(thisSequenceNumber);
 	setHeaderFlags(0);
 	sendto(buf, len, address);
 	waitPacketSent();
-
+	
 	// Never wait for ACKS to broadcasts:
 	if (address == RF22_BROADCAST_ADDRESS)
 	    return true;
