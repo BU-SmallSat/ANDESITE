@@ -45,6 +45,7 @@ LSM9DS0::LSM9DS0(interface_mode interface, uint8_t gAddr, uint8_t xmAddr)
 uint16_t LSM9DS0::begin(gyro_scale gScl, accel_scale aScl, mag_scale mScl, 
 						gyro_odr gODR, accel_odr aODR, mag_odr mODR)
 {
+	//Serial.println("begin");
 	// Store the given scales in class variables. These scale variables
 	// are used throughout to calculate the actual g's, DPS,and Gs's.
 	gScale = gScl;
@@ -259,11 +260,8 @@ void LSM9DS0::readMag()
 	uint8_t temp[6]; // We'll read six bytes from the mag into temp	
 	xmReadBytes(OUT_X_L_M, temp, 6); // Read 6 bytes, beginning at OUT_X_L_M
 	mx = (temp[1] << 8) | temp[0]; // Store x-axis values into mx
-	Serial.println(mx);
 	my = (temp[3] << 8) | temp[2]; // Store y-axis values into my
-	Serial.println(my);
 	mz = (temp[5] << 8) | temp[4]; // Store z-axis values into mz
-	Serial.println(mz);
 }
 
 void LSM9DS0::readGyro()
@@ -590,8 +588,17 @@ void LSM9DS0::I2CreadBytes(uint8_t address, uint8_t subAddress, uint8_t * dest,
 	Wire.beginTransmission(address);
 	// Next send the register to be read. OR with 0x80 to indicate multi-read.
 	Wire.write(subAddress | 0x80);
+
+	//digitalWrite(13, HIGH);
+	//delay(20);
+	Serial.println("testing connection");
+
+
 	// End write, but send a restart to keep connection alive:
 	Wire.endTransmission(false);
+	
+	Serial.println("successful connection");
+
 	// Request `count` bytes of data from the device
 	Wire.requestFrom(address, count);
 	// Wait until the data has been read in

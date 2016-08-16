@@ -105,7 +105,7 @@ boolean RF22::init()
     if (   _deviceType != RF22_DEVICE_TYPE_RX_TRX
         && _deviceType != RF22_DEVICE_TYPE_TX)
 	return false;
-
+	
     // Set up interrupt handler
     // Use FALLING instead of LOW for Uno32 compatibility, where LOW is not implemented
     if (_interrupt == 0)
@@ -125,7 +125,7 @@ boolean RF22::init()
     }
     else
 	return false;
-
+	
     clearTxBuf();
     clearRxBuf();
   
@@ -610,7 +610,14 @@ bool RF22::waitAvailableTimeout(uint16_t timeout)
 
 void RF22::waitPacketSent()
 {
-    while (_mode == RF22_MODE_TX)
+	// unsigned long start_time = millis();
+    while (_mode == RF22_MODE_TX) {
+		//if ( (millis() - start_time) >= 5000 ) {
+		//	Serial.println("Setting mode idle...");
+		//	setModeIdle();
+		//	break;
+		//}
+	}
 	; // Wait for any previous transmit to finish
 }
 
