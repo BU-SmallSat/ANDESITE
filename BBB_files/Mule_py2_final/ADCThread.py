@@ -46,6 +46,8 @@ class ADCThread(WorkerThread):
             self.changeVector(string[13:])
         elif string == "AC:burstVector":
             self.burstVector()
+        elif string == "AE:requestHealth":
+            self.healthReport()
 
     def burstVector(self):
         pass

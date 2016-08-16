@@ -62,6 +62,8 @@ class RFM22BThread(WorkerThread):
             return 0
         elif "RC:sensorNode" in string:
             self.relayToNode(string[13:])
+        elif string == "RE:requestHealth":
+            self.healthReport()
         elif string == "newNode:":
             self.newTextFile()
             return 1

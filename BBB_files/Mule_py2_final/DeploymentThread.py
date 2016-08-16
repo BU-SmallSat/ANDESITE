@@ -60,7 +60,9 @@ class DeploymentThread(WorkerThread):
 
     def processResponse(self, string):
         if string == "DE:lowPowerMode":
-            self.    lowPowerMode()
+            self.lowPowerMode()
+        elif string == "DE:requestHealth":
+            self.healthReport()
 
     def init(self):
         self.interval = .5
