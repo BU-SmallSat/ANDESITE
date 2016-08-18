@@ -8,6 +8,8 @@ include interface with new microcontroller
 include ADC algorithms based on data derived from microcontroller
 '''
 
+from magnetorquer_driver import magnetorquer_driver
+
 # health status file
 ADCHealthFile = "/home/debian/Maria/healthFiles/ADCHealth.txt"
 ADCvector = ""

@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="Andesite" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="ANDESITE" autoUploadExternalChanges="true">
     <serverData>
-      <paths name="ANDESITE (1)">
+      <paths name="ANDESITE">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="Andesite">
-        <serverdata>
-          <mappings>
-            <mapping deploy="/home/debian/Maria" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/Maria" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

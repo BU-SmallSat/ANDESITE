@@ -115,7 +115,7 @@ def ADCInterpreter(string):
         Power.inputQueue.put("PE:restartSunsensor")
         Power.inputQueue.put("PE:restartADC")
     elif string == "EA:0":
-        simple_status[0] = 0;
+        simple_status[0] = 0
     else:
         return CurrentState
 

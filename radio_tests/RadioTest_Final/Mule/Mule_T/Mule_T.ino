@@ -32,14 +32,14 @@
 #define ACDH_SS_PIN               53
 
 #define CLIENT_ADDRESS 0 //(1,3,5,7)
-#define NUM_NODES 5
+#define NUM_NODES 1
 //#define SERVER_ADDRESS //(2,4,6,8) 
 
 // initialize address for storage in EEPROM
 int addr=0;
 //int CLIENT_ADDRESS[]={1, 3, 5, 7};
 //uint8_t SERVER_ADDRESS[8]={1,2,3, 4,5, 6,7, 8};
-uint8_t SERVER_ADDRESS[NUM_NODES]={1,2,3,4,5};
+uint8_t SERVER_ADDRESS[NUM_NODES]={1};
 
 int failed[NUM_NODES]; // Number of times sendtoWait fails
 int sentCount[NUM_NODES];
