@@ -18,15 +18,6 @@ class GlobalstarThread(WorkerThread):
         self.inputQueue = Queue.Queue()
         self.executiveQueue = executive_queue
 
-        # PC401 Health Statuses
-        self.currentReset = 0  # current reset number (starts at 0, incremented for each reset, persistent over the life of the mission, 2 bytes)
-        self.currentTime = 0  # current time from start of reset (seconds since last reset, 4 byte)
-        self.rssi = 0  # (0 to 4, 1 byte)
-        self.connectionStatus = 0  # (0 or 1, 1 byte)
-        self.gateway = 0  # (0 to 256, 1 byte)
-        self.contactTime = 0  # last contact time (seconds since last reset, 4 bytes)
-        self.attemptTime = 0  # last attempt time (seconds since last reset, 4 bytes)
-        self.opCodes = 0  # count of failed op codes (4 bytes)
     '''
     def lowPowerMode(self):
         # this function should turn off all unnecessary hardware and functions for low power mode
@@ -34,7 +25,6 @@ class GlobalstarThread(WorkerThread):
     '''
 
     def healthReport(self):
-        ## call command PC401 to GlobalStar device to get back stats
         # fill health string based on variables representing hardware components health
         healthString = "All Globalstar components are healthy"
         with open(GlobalstarHealthFile, "w") as healthFile:
@@ -49,13 +39,6 @@ class GlobalstarThread(WorkerThread):
             print("Sending health beeacon to ground:")
             subprocess.call(["cat", HealthBeaconFile])
             self.composeDownlink(HealthBeaconFile)
-        elif string == "CE:healthProfile":
-            print("Creating health profile")
-            self.healthReport()
-            if self.connectionStatus == 1:
-                self.executiveQueue.put("CE:0")
-            else:
-                self.executiveQueue.put("CE:1")
 
     def routeUplink(self, message):
         #message = GlobalstarSerial.receive_message()

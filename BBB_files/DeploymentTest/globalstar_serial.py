@@ -98,6 +98,3 @@ class GlobalStarSerial:
         response = self.send(bytearray('PC504'))
         if response == GlobalStarResponse.nak:
             self.__logger.error('clear_downlink_files (PC504) got a NAK')
-
-
-

@@ -29,7 +29,7 @@ class WorkerThread(Thread):
             self.__pauseSemaphore.acquire()
             self.__pauseSemaphore.release()
             if (self.__is_terminating):
-                self.log("Terminating")
+                #self.log("Terminating")
                 return
             self.loop()
 
@@ -38,7 +38,7 @@ class WorkerThread(Thread):
         self.__pauseSemaphore.acquire(blocking=False)
 
     def resume(self):
-        self.log("resuming")
+        #self.log("resuming")
         try:
             self.__pauseSemaphore.release()
         except ValueError:
@@ -50,10 +50,10 @@ class WorkerThread(Thread):
         self.loop()
 
     def terminate(self):
-        self.log("terminate() called")
+        #self.log("terminate() called")
         self.__is_terminating = True
         self.resume()
-        # self._stop()
+        #self.join()
 
     def log(self, message):
         self.__logger.info(message)

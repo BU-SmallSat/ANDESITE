@@ -8,7 +8,7 @@
 #define Desired_Current 2600
 
 MC33926_Arduino mc(D1,INV,FB,notSF,EN);
- 
+
 void stopIfFault()
 {
   if (mc.getStatusFlag())
@@ -28,16 +28,16 @@ void setup()
   delay(500);
   Serial.flush();
   delay(500);
-  mc.init();
-  mc.setSpeed(0);
-  while(message != "initSuccess\n"){
+  while(message != "1:initSuccess\n"){
     if(Serial.available() > 0){
       message = Serial.readString();
       //Serial.print(_Mule.message);
     }
     delay(100);
   }
-  Serial.println("initSuccess");
+  Serial.println("1:initSuccess");
+  mc.init();
+  mc.setSpeed(0);
 }
 
 void loop()

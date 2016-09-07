@@ -16,7 +16,7 @@ implement communication with the Arduino
 class DeploymentThread(WorkerThread):
 
     def __init__(self, executive_queue):
-        print('==========__init__')
+        # print('==========__init__')
         super(DeploymentThread,self).__init__("Deployment Thread")
         self.Nodes = [[0, 0], [0, 0], [1, 0], [0, 0]]
         self.inputQueue = Queue.Queue()
@@ -60,9 +60,7 @@ class DeploymentThread(WorkerThread):
 
     def processResponse(self, string):
         if string == "DE:lowPowerMode":
-            self.lowPowerMode()
-        elif string == "DE:requestHealth":
-            self.healthReport()
+            self.    lowPowerMode()
 
     def init(self):
         self.interval = .5

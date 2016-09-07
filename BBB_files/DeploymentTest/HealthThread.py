@@ -4,7 +4,7 @@ import subprocess
 
 # who needs to message the health thread? Should we be checking the messages more frequently?
 
-# IMPORTANT: All these are in a seprate folder - should we move them into the same folder - or create folder on startup?
+# IMPORTANT: All these are in a separate folder - should we move them into the same folder - or create folder on startup?
 # Health Beacon File location
 HealthBeaconFile = "/home/debian/Maria/healthFiles/healthBeacon.txt"
 # Health status files for other threads

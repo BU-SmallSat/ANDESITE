@@ -1,5 +1,6 @@
 import logging
 import Queue
+import subprocess
 import sys
 from threading import Timer
 from DeploymentThread import DeploymentThread
@@ -47,13 +48,23 @@ lpm = 0 # low power mode status: 1-Low Power Mode, 0-Normal
 # IMPORTANT:: need a method to start the radio on the Mule if the node ejected was the first one
 startNetwork = 0
 
+# setup threads and thread communication
+inputQueue = Queue.Queue()   # E
+Deployer = DeploymentThread(inputQueue)  # D
+Power = EPSThread(inputQueue)   # P
+Comm = GlobalstarThread(inputQueue)  # C
+RFM22B = RFM22BThread(inputQueue)   # R
+Health = HealthThread(inputQueue)  # H
+ADC = ADCThread(inputQueue)   # A
+GPS = GPSThread(inputQueue)  # G
+
 
 def initialization():
     # this will require initialization of necessary components required for
     # individual threads to do their own hardware initialization
     # specifics need to be identified
     print("system initialization")
-    watchdog = Watchdog()
+    # watchdog = Watchdog()
     ## working with BeagleBone
 
     #  Test initializing the health file
@@ -327,18 +338,8 @@ logger = logging.getLogger("main")
 
 # system Initialization
 initialization()
-failureStatus()
-threading.Thread(1080, loop())
-
-# setup threads and thread communication
-inputQueue = Queue.Queue()   # E
-Deployer = DeploymentThread(inputQueue)  # D
-Power = EPSThread(inputQueue)   # P
-Comm = GlobalstarThread(inputQueue)  # C
-RFM22B = RFM22BThread(inputQueue)   # R
-Health = HealthThread(inputQueue)  # H
-ADC = ADCThread(inputQueue)   # A
-GPS = GPSThread(inputQueue)  # G
+# failureStatus()
+# threading.Thread(1080, loop())
 
 # create reserve queue for messages received while in low power mode
 reserveQueue = Queue.Queue()

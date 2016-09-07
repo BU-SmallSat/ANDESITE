@@ -62,7 +62,7 @@ void setup() {
     //Serial.println("Done with main setup.");
 }
 
-// Receive messages from the wireless sensore nodes (WSN)
+// Receive messages from the wireless sensor nodes (WSN)
 void loop() {
   if(Serial.available() > 0){
     _Mule.message = "";

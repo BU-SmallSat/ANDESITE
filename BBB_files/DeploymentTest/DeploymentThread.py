@@ -1,8 +1,8 @@
 from worker_thread import WorkerThread
 import Queue
 import time
-import subprocess
 import serial
+import sys
 '''
 implement hardware failure messages
 implement communication with the Arduino
@@ -16,7 +16,7 @@ implement communication with the Arduino
 class DeploymentThread(WorkerThread):
 
     def __init__(self, executive_queue):
-        print('==========__init__')
+        # print('==========__init__')
         super(DeploymentThread,self).__init__("Deployment Thread")
         self.Nodes = [[0, 0], [0, 0], [1, 0], [0, 0]]
         self.inputQueue = Queue.Queue()
@@ -24,6 +24,7 @@ class DeploymentThread(WorkerThread):
         self.DeployCount = 1
         self.ManualControl = 0 #It is 1 when all nodes are either deployed or have 5 failing attempts
         self.ArduinoID = "1"
+        self.PowerTime = 10
         # self.FreeNodes = 4 #The number of undeployed nodes that have less than 5 failing attempts
 
     def sendMessage_to_exec_thread(self):
@@ -55,8 +56,8 @@ class DeploymentThread(WorkerThread):
     def healthReport(self):
         # fill health string based on variables representing hardware components health
         healthString = "All Deployment components are healthy"
-        with open(DeploymentHealthFile, "w") as healthFile:
-            subprocess.call(["echo", healthString], stdout=healthFile)
+        # with open(DeploymentHealthFile, "w") as healthFile:
+        #    subprocess.call(["echo", healthString], stdout=healthFile)
 
     def processResponse(self, string):
         if string == "DE:lowPowerMode":
@@ -64,11 +65,10 @@ class DeploymentThread(WorkerThread):
 
     def init(self):
         self.interval = .5
-        self.log("Initializing thread with an interval of {0}".format(self.interval))
-        self.PowerTime = 10
+        # self.log("Initializing thread with an interval of {0}".format(self.interval))
         #with open(DeploymentHealthFile, "w") as healthFile:
         #    subprocess.call(["echo", "Successful health file initialization"], stdout=healthFile)
-        self.ser = serial.Serial(port = '/dev/ttyO1', baudrate = 115200, timeout = 10)
+        self.ser = serial.Serial(port = '/dev/ttyO1', baudrate = 57600, timeout = 10)
         self.ser.flush()
 
         # BeagleBone - Arduino Communication test:
@@ -77,9 +77,13 @@ class DeploymentThread(WorkerThread):
         switch_timeout = 5
         restart_timeout = 10
         timer = 0
-        while message != self.ArduinoID+":initSuccess\r\n":
-            self.ser.write(self.ArduinoID.encode()+"initSuccess\n".encode())
-            message = self.ser.readline().decode()
+        print("Waiting for serial connection to arduino")
+        while message != self.ArduinoID.encode()+":initSuccess\r\n".encode():
+            self.ser.write(self.ArduinoID.encode()+":initSuccess\n".encode())
+            message = self.ser.readline()
+            # for i in range(0,len(message)):
+            #     print(" %02x",message[i])
+            # print("end of string")
             timer += 1
             if timer > switch_timeout :
                 self.ArduinoID = "2"
@@ -89,6 +93,7 @@ class DeploymentThread(WorkerThread):
         print("SUCCESS: Initialized serial communication with deployer arduino successful")
 
 #implement method to read messages from deployer arduinos in case of an error!?
+
 
     def loop(self):
         try:
@@ -105,6 +110,7 @@ class DeploymentThread(WorkerThread):
             if not (i >= 3 and self.Nodes[i][0] == 1):
                 # while self.Nodes[i][0] == 0 and self.Nodes[i][1] < 5:
                 Result = self.sendMessage(i + 1)
+               # print(Result)
                 if Result[:-2] == (self.ArduinoID+":Failure"):
                     self.Nodes[i][1] += 1
                     Success = 0
@@ -146,5 +152,11 @@ class DeploymentThread(WorkerThread):
     def sendMessage(self, n):
         transmit = self.ArduinoID + ":"+ str(n) +":"+ str(self.PowerTime).zfill(4)
         time.sleep(2)  # Essentially important delay; at least 2 seconds
+        print(transmit.encode())
         self.ser.write(transmit.encode())
-        return self.ser.readline().decode()
+        res = "0"
+        while(res[0] != self.ArduinoID):
+            temp = self.ser.readline()
+            if(len(temp) > 0):
+                res = temp
+        return res

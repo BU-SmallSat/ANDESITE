@@ -1,7 +1,8 @@
 import logging
 import Queue
 import sys
-from DeploymentThread import DeploymentThread
+import time
+from DeploymentThread_forTest import DeploymentThread
 
 
 def DeployerInterpreter(string):
@@ -11,6 +12,8 @@ def DeployerInterpreter(string):
         Deployer.singleRun()
     elif string == "ED:AttemptsExceeded":
         print("****ERROR: Limit reached on deployment attempts****")
+    elif string == "PE:restartDeployers":
+        print("****ERROR: serial bus connection failed - check deployment board****")
     else:
         print("ERROR: Improper message from the Deployment Thread")
 
@@ -23,20 +26,25 @@ logger = logging.getLogger("main")
 # setup threads and thread communication
 inputQueue = Queue.Queue()   # E
 Deployer = DeploymentThread(inputQueue)  # D
+time.sleep(10)
+try:
+    print("ready to start ejections")
+    Deployer.singleRun()
 
-Deployer.singleRun()
-
-while True:
+    while True:
         try:
             threadResponse = inputQueue.get(False)
             thread_char = threadResponse[0]
             subsystem_char = threadResponse[1]
-            if thread_char == 'E' and subsystem_char == 'D':
-                DeployerInterpreter(threadResponse)
-            else:
-                print("ERROR: Improper message from the Deployment Thread")
+            DeployerInterpreter(threadResponse)
         except Queue.Empty:
             pass
 
-logger.info("After calling terminate on threads")
-sys.exit(0)
+    logger.info("After calling terminate on threads")
+    sys.exit(0)
+
+except KeyboardInterrupt:
+    print("****KEYBOARD INTERRUPT: Quitting process****")
+    Deployer.terminate()
+    sys.exit(0)
+

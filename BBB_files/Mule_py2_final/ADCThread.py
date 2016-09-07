@@ -8,8 +8,6 @@ include interface with new microcontroller
 include ADC algorithms based on data derived from microcontroller
 '''
 
-from magnetorquer_driver import magnetorquer_driver
-
 # health status file
 ADCHealthFile = "/home/debian/Maria/healthFiles/ADCHealth.txt"
 ADCvector = ""
@@ -48,8 +46,6 @@ class ADCThread(WorkerThread):
             self.changeVector(string[13:])
         elif string == "AC:burstVector":
             self.burstVector()
-        elif string == "AE:requestHealth":
-            self.healthReport()
 
     def burstVector(self):
         pass
@@ -59,7 +55,7 @@ class ADCThread(WorkerThread):
         ADCvector = newVector
 
     def init(self):
-        self.interval = .01
+        self.interval = .01 # frequency of the most frequently sampled ADC hardware (
         self.log("Initializing thread with an interval of {0}".format(self.interval))
         with open(ADCHealthFile, "w") as healthFile:
             subprocess.call(["echo", "Successful health file initialization"], stdout=healthFile)

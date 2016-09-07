@@ -46,8 +46,6 @@ class GPSThread(WorkerThread):
             self.lowPowerMode()
         elif "GC:resetOrbitCount:" in string:
             self.resetOrbitCount(string[19:])
-        elif string == "GE:healthRequest":
-            self.healthReport()
 
     def resetOrbitCount(self,string):
         global DeployOrbitNum

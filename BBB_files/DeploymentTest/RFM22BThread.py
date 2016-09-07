@@ -142,7 +142,8 @@ class RFM22BThread(WorkerThread):
         # concatenate until we reach a new line - then compare string to messages - if none assume its data and store in
         # the data file, if it is a message - do appropriate processes
         message = self.ser.readline().decode()
-        print("arduino message:: " +message)
+        if(message[:2] != ""):
+            print("arduino message:: " +message)
         # self.ser.read() # discard extra new line return character. IMPORTANT:: need to find safer way to do this!!
         if not self.processResponse(message):
             # do we want to automatically just write to the current data file
