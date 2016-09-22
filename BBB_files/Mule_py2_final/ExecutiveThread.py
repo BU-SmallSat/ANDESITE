@@ -299,8 +299,8 @@ def failureStatus():
         else:
             subprocess.call(["cat", "No failures detected."], stdout=healthFile)
     # append the profiles from Comm Thread and EPS Thread
-    subprocess.call(["cat", GlobalstarHealthFile], stdout=healthFile)
-    subprocess.call(["cat", EPSHealthFile], stdout=healthFile)
+    #subprocess.call(["cat", GlobalstarHealthFile], stdout=healthFile)
+    #subprocess.call(["cat", EPSHealthFile], stdout=healthFile)
 
     # send message to globalstar
     Comm.inputQueue.put("CE:healthBeacon")

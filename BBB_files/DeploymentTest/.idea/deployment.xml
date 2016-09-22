@@ -2,14 +2,14 @@
 <project version="4">
   <component name="PublishConfigData" autoUpload="On explicit save action" serverName="Andesite" autoUploadExternalChanges="true">
     <serverData>
-      <paths name="ANDESITE (1)">
+      <paths name="Andesite">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/debian/Maria" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="Andesite">
+      <paths name="Copy of project-level server 'Andesite'">
         <serverdata>
           <mappings>
             <mapping deploy="/home/debian/Maria" local="$PROJECT_DIR$" web="/" />

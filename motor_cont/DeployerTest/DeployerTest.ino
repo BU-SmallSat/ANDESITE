@@ -28,9 +28,14 @@ void setup()
   delay(500);
   Serial.flush();
   delay(500);
-  while(message != "1:initSuccess\n"){
-    if(Serial.available() > 0){
+  Serial.println("WE BEGIN THE SETUP");
+  while(message != "1:initSuccess")
+  {
+    if(Serial.available() > 0)
+    {
       message = Serial.readString();
+      Serial.println("We read message");
+      Serial.println(message);
       //Serial.print(_Mule.message);
     }
     delay(100);
@@ -42,6 +47,7 @@ void setup()
 
 void loop()
 {
+  Serial.println("WE BEGIN THE LOOP");
   while (message[0] != '1'){
     message = Serial.readString();
   }

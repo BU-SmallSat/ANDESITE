@@ -14,7 +14,7 @@ or that the read was not preceeded by a write
 
 # all i2c operations should be done in a try catch loop in case acknowledgements are not received?
 
-class magnetorquer_driver:
+class magnetorquer_driver :
     def __init__(self):
         # create a second init function that can be called to reinitialize the magnetorquer board
         self.address = 0x10
@@ -29,15 +29,13 @@ class magnetorquer_driver:
         time.sleep(self.read_wait)
         reply = self.i2c_bus.readList(recvLength)
         (cc, stat) = struct.unpack("bb", reply)
-        if cc == :
-            # unpack stat
-            if (stat & 0x0F) == 0:
-                # accepted! return a successful transmission message - end of transmission
-                return
-            elif (stat & 0x0F) == 1:
-                print("general rejection notice")
-
-        else
+        # unpack stat
+        if (stat & 0x0F) == 0:
+            # accepted! return a successful transmission message - end of transmission
+            return
+        elif (stat & 0x0F) == 1:
+            print("general rejection notice")
+        else:
             # error handling for mistimed reading and writing operations
             return False
             # reply: 0x02, STAT
@@ -64,7 +62,7 @@ class magnetorquer_driver:
             elif (stat & 0x0F) == 1:
                 print("general rejection notice")
 
-        else
+        else:
             # error handling for mistimed reading and writing operations
             return False
         # reply: 0x02, STAT
