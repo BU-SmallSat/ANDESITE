@@ -1,5 +1,5 @@
-from worker_thread import WorkerThread
-import Queue
+from .worker_thread import WorkerThread
+import queue
 import subprocess
 
 # who needs to message the health thread? Should we be checking the messages more frequently?
@@ -21,7 +21,7 @@ class HealthThread(WorkerThread):
 
     def __init__(self, executive_queue):
         super(HealthThread, self).__init__("Health Thread")
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
 
     def lowPowerMode(self):
@@ -59,6 +59,6 @@ class HealthThread(WorkerThread):
         try:
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         #self.healthBeacon()

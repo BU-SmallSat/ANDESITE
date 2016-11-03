@@ -1,8 +1,8 @@
-from worker_thread import WorkerThread
-import Queue
+from .worker_thread import WorkerThread
+import queue
 import threading
 import subprocess
-from globalstar_serial import GlobalStarSerial
+from .globalstar.globalstar_serial import GlobalStarSerial
 
 # Should we have a ground command asking how many messages are in the queue?
 HealthBeaconFile = "/home/debian/Maria/healthFiles/healthBeacon.txt"
@@ -15,7 +15,7 @@ class GlobalstarThread(WorkerThread):
 
     def __init__(self, executive_queue):
         super(GlobalstarThread, self).__init__("Globalstar Thread")
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
 
         # PC401 Health Statuses
@@ -91,7 +91,7 @@ class GlobalstarThread(WorkerThread):
         try:
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         # read something from the globalstar queue and route it to the executive queue
         #self.routeUplink()

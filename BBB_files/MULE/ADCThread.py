@@ -1,5 +1,5 @@
 from .worker_thread import WorkerThread
-import Queue
+import queue
 import threading
 import subprocess
 
@@ -16,9 +16,9 @@ Detumbling = False
 
 
 class ADCThread(WorkerThread):
-    def __init__(self, executive_queue):
+    def __init__(self, executive_queue: queue.Queue):
         super(ADCThread, self).__init__("ADC Thread")
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
 
     def lowPowerMode(self):
@@ -37,15 +37,15 @@ class ADCThread(WorkerThread):
         # executive thread with useless messages
         self.executiveQueue.put("EA:Pointing")
 
-    def processResponse(self, string):
+    def processResponse(self, messageString:str):
         global Detumbling
-        if string == "AE:Detumbling":
+        if messageString == "AE:Detumbling":
             Detumbling = True
-        elif string == "AE:lowPowerMode":
+        elif messageString == "AE:lowPowerMode":
             self.lowPowerMode()
-        elif "AC:ADCvector:" in string:
-            self.changeVector(string[13:])
-        elif string == "AC:burstVector":
+        elif "AC:ADCvector:" in messageString:
+            self.changeVector(messageString[13:])
+        elif messageString == "AC:burstVector":
             self.burstVector()
 
     def burstVector(self):
@@ -67,7 +67,7 @@ class ADCThread(WorkerThread):
         try:
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         if Detumbling:
             Detumbling = False

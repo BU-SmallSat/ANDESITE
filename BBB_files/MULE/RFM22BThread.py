@@ -1,5 +1,5 @@
-from worker_thread import WorkerThread
-import Queue
+from .worker_thread import WorkerThread
+import queue
 import subprocess
 import serial
 import time
@@ -19,7 +19,7 @@ radioSuccess = 0
 class RFM22BThread(WorkerThread):
     def __init__(self, executive_queue):
         super(RFM22BThread, self).__init__("RFM22B Thread")
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
         self.device = "/dev/ttyO4"
         self.ser = serial.Serial(self.device, 115200, timeout = .5)
@@ -134,7 +134,7 @@ class RFM22BThread(WorkerThread):
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
              # print(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         # how to read in data from the rf radio?
         # need method to distinguish messages from data

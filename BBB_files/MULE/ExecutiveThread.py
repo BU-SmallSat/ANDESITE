@@ -1,15 +1,15 @@
 import logging
-import Queue
+import queue
 import subprocess
 import sys
 from threading import Timer
-from DeploymentThread import DeploymentThread
-from EPSThread import EPSThread
-from ADCThread import ADCThread
-from HealthThread import HealthThread
-from GlobalstarThread import GlobalstarThread
-from RFM22BThread import RFM22BThread
-from GPSThread import GPSThread
+from .DeploymentThread import DeploymentThread
+from .EPSThread import EPSThread
+from .ADCThread import ADCThread
+from .HealthThread import HealthThread
+from .GlobalstarThread import GlobalstarThread
+from .RFM22BThread import RFM22BThread
+from .GPSThread import GPSThread
 
 
 '''
@@ -49,7 +49,7 @@ lpm = 0 # low power mode status: 1-Low Power Mode, 0-Normal
 startNetwork = 0
 
 # setup threads and thread communication
-inputQueue = Queue.Queue()   # E
+inputQueue = queue.Queue()   # E
 Deployer = DeploymentThread(inputQueue)  # D
 Power = EPSThread(inputQueue)   # P
 Comm = GlobalstarThread(inputQueue)  # C
@@ -342,7 +342,7 @@ initialization()
 # threading.Thread(1080, loop())
 
 # create reserve queue for messages received while in low power mode
-reserveQueue = Queue.Queue()
+reserveQueue = queue.Queue()
 
 routeMessage = {'A': ADC.inputQueue, 'C': Comm.inputQueue, 'D': Deployer.inputQueue, 'G': GPS.inputQueue,
                 'H': Health.inputQueue, 'P': Power.inputQueue, 'R': RFM22B.inputQueue}
@@ -414,7 +414,7 @@ while True:
                 threadResponse = inputQueue.get(False)
             tempState = processMessage(threadResponse)
             # print(threadResponse)
-        except Queue.Empty:
+        except queue.Empty:
             MessageRecovery = 0
             tempState = None
     CurrentState = tempState

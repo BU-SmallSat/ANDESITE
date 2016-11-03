@@ -1,5 +1,5 @@
-from worker_thread import WorkerThread
-import Queue
+from .worker_thread import WorkerThread
+import queue
 import subprocess
 
 # health status file
@@ -21,7 +21,7 @@ class GPSThread(WorkerThread):
 
     def __init__(self, executive_queue):
         super(GPSThread, self).__init__("GPS Thread")
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
 
     def lowPowerMode(self):
@@ -72,7 +72,7 @@ class GPSThread(WorkerThread):
         try:
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         if GPSdir == 1:
             GPSlat += 1

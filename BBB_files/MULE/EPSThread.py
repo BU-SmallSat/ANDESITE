@@ -1,5 +1,5 @@
-from worker_thread import WorkerThread
-import Queue
+from .worker_thread import WorkerThread
+import queue
 import threading
 import time
 import subprocess
@@ -12,7 +12,7 @@ class EPSThread(WorkerThread):
 
     def __init__(self, executive_queue):
         super(EPSThread,self).__init__("EPS Thread")
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
         # Command 0x01 Health Statuses (if bit is higher then there is an error)
         self.unknType = 0  # unknown command type (byte 0, bit 0)
@@ -130,6 +130,6 @@ class EPSThread(WorkerThread):
         try:
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         # *****put main code here****

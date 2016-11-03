@@ -1,5 +1,5 @@
 from.worker_thread import WorkerThread
-import Queue
+import queue
 import time
 import subprocess
 import serial
@@ -19,7 +19,7 @@ class DeploymentThread(WorkerThread):
         # print('==========__init__')
         super(DeploymentThread,self).__init__("Deployment Thread")
         self.Nodes = [[0, 0], [0, 0], [1, 0], [0, 0]]
-        self.inputQueue = Queue.Queue()
+        self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
         self.DeployCount = 1
         self.ManualControl = 0 #It is 1 when all nodes are either deployed or have 5 failing attempts
@@ -94,7 +94,7 @@ class DeploymentThread(WorkerThread):
         try:
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         i = 0
         Finish = 0

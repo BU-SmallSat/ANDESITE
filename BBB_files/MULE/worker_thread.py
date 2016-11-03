@@ -4,7 +4,7 @@ from threading import Thread, BoundedSemaphore
 
 
 class WorkerThread(Thread):
-    def __init__(self, name):
+    def __init__(self, name: str):
         Thread.__init__(self)
         self.__pauseSemaphore = BoundedSemaphore(1)
         self.__logger = logging.getLogger(name)
@@ -52,7 +52,7 @@ class WorkerThread(Thread):
         self.resume()
         # self._stop()
 
-    def log(self, message):
+    def log(self, message:str):
         self.__logger.info(message)
 
     def init(self):
