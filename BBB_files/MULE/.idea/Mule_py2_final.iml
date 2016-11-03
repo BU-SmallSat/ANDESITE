@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <content url="file:C:/../../../../../..//C:/Projects/ANDESITErepository/BBB_files/Mule_py2_final" />
+    <content url="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="TestRunnerService">
+    <option name="projectConfiguration" value="Nosetests" />
+    <option name="PROJECT_TEST_RUNNER" value="Nosetests" />
+  </component>
+</module>

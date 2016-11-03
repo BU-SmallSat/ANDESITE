@@ -1,4 +1,4 @@
-from worker_thread import WorkerThread
+from.worker_thread import WorkerThread
 import Queue
 import time
 import subprocess

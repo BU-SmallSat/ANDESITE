@@ -38,12 +38,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="ADCThread.py" pinned="false" current-in-tab="true">
-        <entry file="file:$PROJECT_DIR$/../../../../../../../../../..//$PROJECT_DIR$/ADCThread.py">
+      <file leaf-file-name="DeploymentThread.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DeploymentThread.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="76">
+              <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ADCThread.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ADCThread.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ExecutiveThread.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ExecutiveThread.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-380">
+              <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -103,9 +127,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="950" />
-    <option name="width" value="980" />
-    <option name="height" value="1030" />
+    <option name="x" value="1912" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -132,6 +157,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -155,11 +181,10 @@
       <pane id="Scope">
         <subPane subId="Project Files" />
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/globalstar_test/FP_EMULATOR.py" />
@@ -197,6 +222,17 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="c:\cygwin\bin\bash.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -215,6 +251,26 @@
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoRunFileConfiguration" factoryName="Go Single File">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -467,15 +523,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="950" y="0" width="980" height="1030" extended-state="0" />
-    <editor active="false" />
+    <frame x="1912" y="-8" width="1936" height="1066" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.026096033" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17117117" sideWeight="0.48561946" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17083333" sideWeight="0.48561946" order="1" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32919955" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33102652" sideWeight="0.5281837" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3286026" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33533654" sideWeight="0.47181627" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.49563318" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -485,6 +541,7 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39933628" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33533654" sideWeight="0.47181627" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26895735" sideWeight="0.48072916" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -514,82 +571,79 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GlobalstarThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/RFM22BThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/worker_thread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GPSThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/HealthThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/packTest.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/magnetorquer_driver.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/Adafruit_i2c_test.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/eps_driver.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/EPSThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ExecutiveThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/DeploymentThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/radio_tests/RadioTest_Final/Mule/CommTestFinal.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ExecutiveThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/DeploymentThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/RFM22BThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GPSThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_message.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GlobalstarThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/magnetorquer_driver.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ExecutiveThread.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../C:/Users/mlkro/PycharmProjects/globalstar_test/runThisToSetCurrentDirInPythonModulePath.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../C:/Users/mlkro/PycharmProjects/globalstar_test/FP_EMULATOR.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../C:/Users/mlkro/AppData/Local/Temp/Temp1_Globalstar Radio Code 2.zip/Globalstar Radio Code/globalstar_testbench.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_testbench.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../C:/Users/mlkro/PycharmProjects/globalstar_test/FP_EMULATOR.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_testbench.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/test_tobytes.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_testbench.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/serialTest.py" />
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../..//$PROJECT_DIR$/globalstar_response.py">
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/worker_thread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GPSThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/HealthThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/packTest.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/magnetorquer_driver.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/Adafruit_i2c_test.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/eps_driver.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/EPSThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ExecutiveThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/DeploymentThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/radio_tests/RadioTest_Final/Mule/CommTestFinal.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ExecutiveThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/DeploymentThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/RFM22BThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GPSThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_message.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/GlobalstarThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ADCThread.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/magnetorquer_driver.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/ExecutiveThread.py" />
+    <entry file="file:C:/../../../../../../C:/Users/mlkro/PycharmProjects/globalstar_test/runThisToSetCurrentDirInPythonModulePath.py" />
+    <entry file="file:C:/../../../../../../C:/Users/mlkro/PycharmProjects/globalstar_test/FP_EMULATOR.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../../C:/Users/mlkro/AppData/Local/Temp/Temp1_Globalstar Radio Code 2.zip/Globalstar Radio Code/globalstar_testbench.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_testbench.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
+    <entry file="file:C:/../../../../../../C:/Users/mlkro/PycharmProjects/globalstar_test/FP_EMULATOR.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_testbench.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/test_tobytes.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_response.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/globalstar_testbench.py" />
+    <entry file="file:C:/../../../../../../engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/MariasGitRepo/BBB_files/Mule_py2_final/serialTest.py" />
+    <entry file="file:C:/../../../../../..//C:/Projects/ANDESITErepository/BBB_files/Mule_py2_final/globalstar_response.py" />
+    <entry file="file:C:/../../../../../..//C:/Projects/ANDESITErepository/BBB_files/Mule_py2_final/globalstar_testbench.py" />
+    <entry file="file:C:/../../../../../..//C:/Projects/ANDESITErepository/BBB_files/Mule_py2_final/globalstar_serial.py" />
+    <entry file="file:C:/../../../../../..//C:/Projects/ANDESITErepository/BBB_files/Mule_py2_final/ADCThread.py" />
+    <entry file="file://$PROJECT_DIR$/DeploymentThread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="79" column="81" selection-start-line="79" selection-start-column="81" selection-end-line="79" selection-end-column="81" />
+        <state relative-caret-position="76">
+          <caret line="4" column="10" selection-start-line="4" selection-start-column="10" selection-end-line="4" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../..//$PROJECT_DIR$/globalstar_testbench.py">
+    <entry file="file://$PROJECT_DIR$/ADCThread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="33" />
-          <folding />
+        <state relative-caret-position="285">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../..//$PROJECT_DIR$/globalstar_serial.py">
+    <entry file="file://$PROJECT_DIR$/ExecutiveThread.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="98" column="43" selection-start-line="98" selection-start-column="43" selection-end-line="98" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:$PROJECT_DIR$/../../../../../../../../../..//$PROJECT_DIR$/ADCThread.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="-380">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

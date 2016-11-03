@@ -1,4 +1,4 @@
-from worker_thread import WorkerThread
+from .worker_thread import WorkerThread
 import Queue
 import threading
 import subprocess
@@ -12,7 +12,8 @@ include ADC algorithms based on data derived from microcontroller
 ADCHealthFile = "/home/debian/Maria/healthFiles/ADCHealth.txt"
 ADCvector = ""
 
-Detumbling = 0
+Detumbling = False
+
 
 class ADCThread(WorkerThread):
     def __init__(self, executive_queue):
@@ -39,7 +40,7 @@ class ADCThread(WorkerThread):
     def processResponse(self, string):
         global Detumbling
         if string == "AE:Detumbling":
-            Detumbling = 1
+            Detumbling = True
         elif string == "AE:lowPowerMode":
             self.lowPowerMode()
         elif "AC:ADCvector:" in string:
@@ -50,16 +51,16 @@ class ADCThread(WorkerThread):
     def burstVector(self):
         pass
 
-    def changeVector(self,newVector):
+    def changeVector(self, newVector):
         global ADCvector
         ADCvector = newVector
 
     def init(self):
-        self.interval = .01 # frequency of the most frequently sampled ADC hardware (
+        self.interval = .01  # frequency of the most frequently sampled ADC hardware (
         self.log("Initializing thread with an interval of {0}".format(self.interval))
         with open(ADCHealthFile, "w") as healthFile:
             subprocess.call(["echo", "Successful health file initialization"], stdout=healthFile)
-        #threading.Timer(30, self.sendMessage).start()
+            # threading.Timer(30, self.sendMessage).start()
 
     def loop(self):
         global Detumbling
@@ -68,6 +69,6 @@ class ADCThread(WorkerThread):
             self.processResponse(executiveResponse)
         except Queue.Empty:
             pass
-        if Detumbling == 1:
-            Detumbling = 0
+        if Detumbling:
+            Detumbling = False
             threading.Timer(2, self.sendMessage).start()

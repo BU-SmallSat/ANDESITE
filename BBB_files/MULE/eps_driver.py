@@ -1,5 +1,5 @@
 from Adafruit_I2C import Adafruit_I2C
-import time
+import tim
 
 '''
 Throw error returns if the response from EPS is 0xF000

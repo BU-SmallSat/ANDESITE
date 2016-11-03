@@ -1,11 +1,9 @@
-from threading import Thread, BoundedSemaphore
 import logging
 import time
-import sys
+from threading import Thread, BoundedSemaphore
 
 
 class WorkerThread(Thread):
-
     def __init__(self, name):
         Thread.__init__(self)
         self.__pauseSemaphore = BoundedSemaphore(1)
@@ -15,7 +13,6 @@ class WorkerThread(Thread):
         self.interval = 0.0
         self.name = name
         self.start()
-
 
     def run(self):
         self.init()
@@ -28,7 +25,7 @@ class WorkerThread(Thread):
             # This will block the thread if pause() has been called
             self.__pauseSemaphore.acquire()
             self.__pauseSemaphore.release()
-            if (self.__is_terminating):
+            if self.__is_terminating:
                 self.log("Terminating")
                 return
             self.loop()
