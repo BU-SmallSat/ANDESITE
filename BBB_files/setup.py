@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages, Extension
 
 # makes __version__ a local variable
-exec(open('BBB_Files/MULE/_version.py').read())
+exec(open('MULE/_version.py').read())
 # http://python-packaging.readthedocs.org/en/latest/command-line-scripts.html
 
 
@@ -12,9 +12,7 @@ setup(name='MULE',
           'core': ['resources/*',
                    'resources/tone_in_noise/*']
       },
-      scripts=['scripts/corti',
-               'scripts/stimulus_generator',
-               'scripts/tone_in_noise.py'],
+      scripts=['scripts/mule'],
       #url='',
       #license='',
       #ext_modules=cythonize(extensions),
