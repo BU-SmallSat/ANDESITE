@@ -19,6 +19,7 @@ class ADCThread(WorkerThread):
         super(ADCThread, self).__init__("ADC Thread")
         self.inputQueue = queue.Queue()
         self.executiveQueue = executive_queue
+        self.adcRunner = ADCRunner()
 
     def lowPowerMode(self):
         # this function should turn off all unnecessary hardware and functions for low power mode
@@ -71,3 +72,7 @@ class ADCThread(WorkerThread):
         if Detumbling:
             Detumbling = False
             threading.Timer(2, self.sendMessage).start()
+
+    def terminate(self):
+        super(ADCThread,self).terminate()
+        self.adcRunner.exit()
