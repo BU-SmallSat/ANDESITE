@@ -46,4 +46,10 @@ git clone git://github.com/adafruit/adafruit-beaglebone-io-python.git
 cd adafruit-beaglebone-io-python/
 python3.5 setup.py install 
 
+#clean up
+cd ~
+rm -rf ~/adafruit-beaglebone-io-python
+rm -rf ~/i2c-tools*
+rm -rf ~/Python-3.5.2*
+
 # now we can install the MULE. 
