@@ -4,6 +4,13 @@ from time import sleep
 
 ADCPATH = './ADC.elf'
 
+MAG_MEAS = 'mag_meas'
+EULER_ANGLE = 'euler_angle'
+SUN_MEASURE = 'sun_meas'
+EPOCH = 'epoch'
+LLA = 'lla'
+S_FLAG = 's_flag'
+
 class ADCRunner:
     @staticmethod
     def date2num()->[]:
@@ -34,12 +41,12 @@ class ADCRunner:
         """
         concat = lambda s, f: ''.join([f % x for x in s])
         retval = ''
-        retval += concat(invals['mag_meas'], '%3.2f,')
-        retval += concat(invals['euler_angle'], '%3.2f,')
-        retval += concat(invals['sun_meas'], '%3.2f,')
-        retval += concat(invals['epoch'], '%02.0f,')
-        retval += concat(invals['lla'], '%3.2f,')
-        retval += concat([invals['s_flag']], '%1.0f,')
+        retval += concat(invals[MAG_MEAS], '%3.2f,')
+        retval += concat(invals[EULER_ANGLE], '%3.2f,')
+        retval += concat(invals[SUN_MEASURE], '%3.2f,')
+        retval += concat(invals[EPOCH], '%02.0f,')
+        retval += concat(invals[LLA], '%3.2f,')
+        retval += concat([invals[S_FLAG]], '%1.0f,')
         retval = retval[:-1] #remove the trailing comma
         retval += os.linesep
         return retval.encode('utf-8')
