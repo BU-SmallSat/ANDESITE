@@ -9,7 +9,7 @@ ADCPATH = './ADC.elf'
 
 class ADCRunner:
     @staticmethod
-    def date2num()->[]:
+    def date2adc()->[]:
         """
         Utility function which returns the current time in the correct format for passing to ADC.elf
         """
