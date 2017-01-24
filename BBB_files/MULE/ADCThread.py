@@ -1,4 +1,5 @@
 from .worker_thread import WorkerThread
+from .adc.adc_runner import AdcInput, ADCRunner
 import queue
 import threading
 import subprocess
@@ -12,8 +13,6 @@ include ADC algorithms based on data derived from microcontroller
 ADCHealthFile = "/home/debian/Maria/healthFiles/ADCHealth.txt"
 ADCvector = ""
 Detumbling = False
-ADCBinary = './adc/ADC.elf'
-
 
 class ADCThread(WorkerThread):
     def __init__(self, executive_queue: queue.Queue):
