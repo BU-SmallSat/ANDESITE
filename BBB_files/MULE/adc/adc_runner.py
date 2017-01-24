@@ -53,6 +53,8 @@ class ADCRunner:
         :param input:
         :return:
         """
+        if not input.isReady():
+            return None
         formatted = self.format_input(input)
         self.pid.write(formatted)
         response = self.pid.readline()
@@ -74,12 +76,28 @@ class ADCRunner:
 
 @attr.s
 class AdcInput(object):
+    CORRECT_VALUE_COUNT = 19
     mag_meas = attr.ib(validator=instance_of(list))
     euler_angle = attr.ib(validator=instance_of(list))
     sun_measure = attr.ib(validator=instance_of(list))
     epoch = attr.ib(validator=instance_of(list))
     lla = attr.ib(validator=instance_of(list))
     s_flag = attr.ib(validator=instance_of(int))
+
+    def isReady(self) ->bool:
+        mm = len(self.mag_meas)
+        ea = len(self.euler_angle)
+        sm = len(self.sun_measure)
+        ep = len(self.epoch)
+        ll = len(self.lla)
+        sf = 1
+        if (mm!=3 or ea !=3 or sm!=3 or ep!=6 or ll!=3):
+            return False
+        elif mm + ea + sm + ep + ll + sf != self.CORRECT_VALUE_COUNT:
+            return False
+        else:
+            return True
+
 
 if __name__ == "__main__":
     """  Test the binary here.   This should present bogus data 100 times and then exit quietly."""
