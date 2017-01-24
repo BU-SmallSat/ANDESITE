@@ -1,4 +1,5 @@
-#/bin/bash
+#!/usr/bin/env bash
+
 #go root; it'll be easier. 
 sudo bin/bash
 cd ~
@@ -52,4 +53,6 @@ rm -rf ~/adafruit-beaglebone-io-python
 rm -rf ~/i2c-tools*
 rm -rf ~/Python-3.5.2*
 
-# now we can install the MULE. 
+# now we can install the MULE.
+
+echo 'Have you installed the matlab embedded tools yet?!'
