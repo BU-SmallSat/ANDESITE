@@ -4,7 +4,7 @@
 # ***********************************************
 # ************* Date Created: 06/03/16 **********
 # ***********************************************
-from globalstar_serial import GlobalStarSerial
+from .globalstar_serial import GlobalStarSerial
 
 print("Sending message...")
 radio_stream = GlobalStarSerial()

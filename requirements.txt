@@ -1,0 +1,5 @@
+crc16
+Adafruit_BBIO
+docopt
+pyserial
+pexpect

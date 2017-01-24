@@ -49,32 +49,32 @@ class GlobalStarResponse():
 
     def parseACK(self, incoming):
         if len(incoming) >= 11:
-            print "***Parsing ack/nak string***"
+            print("***Parsing ack/nak string***")
             # print("recieved string: "+ incoming[:10])
             if incoming[:11] == HEALTH_POLL_ACK:
-                print "ACK received!"
+                print("ACK received!")
                 return self.ack
             elif incoming[:11] == HEALTH_POLL_NAK:
-                print "NAK received!"
+                print ("NAK received!")
                 return self.nak
             else:
                 print('Malformed response from GlobalStar radio')
-                print 'Recieved string: ', incoming[0:11]
-                print 'Expected string: ', HEALTH_POLL_ACK
+                print ('Recieved string: {0}', incoming[0:11])
+                print ('Expected string: {0}', HEALTH_POLL_ACK)
                 return self.error
         else:
             print("recieved insufficient bytes for poll ACK!")
-            print("recieved only " + len(incoming) + " bytes")
+            print("recieved only " + str(len(incoming)) + " bytes")
         return self.error
 
     def parseHealthPoll(self, incoming):
-        if(len(incoming) >= 11):
-            print "***Parsing poll response header string***"
+        if len(incoming) >= 11:
+            print ("***Parsing poll response header string***")
             # print("recieved string: "+ buffer[:11])
             if incoming[:11] == HEALTH_POLL_HDR:
                 if len(incoming)>=46:
-                    print "successfull Health Poll header recieved"
-                    print "***Parsing Health Status string***"
+                    print("successfull Health Poll header recieved")
+                    print("***Parsing Health Status string***")
                     print("Epoch: " + str(self.from_bytes(incoming[11:15], True)))
                     print("Elapsed time: " + self.timeElapsedDisplay(self.from_bytes(incoming[15:19], True)))
                     print("RSSI: " + str(self.from_bytes(incoming[19:20], True)))
@@ -86,16 +86,16 @@ class GlobalStarResponse():
                     print("Number of Successful Connects: " + str(self.from_bytes(incoming[34:38], True)))
                     print("Average Connection Duration: " + str(self.from_bytes(incoming[38:42], True)))
                     print("Average Connection Duration SD: " + str(self.from_bytes(incoming[42:46], True)))
-                    print 'recieved string: ', incoming
+                    print( 'recieved string: {0}'.format(incoming))
                 else:
                     print('Malformed response from GlobalStar radio')
-                    print 'Recieved string: ', incoming
+                    print ('Recieved string: {0}'.format(incoming))
             else:
                 print('Malformed response from GlobalStar radio')
-                print 'Recieved string: ', incoming[0:11]
-                print 'Expected string: ', HEALTH_POLL_HDR
+                print ('Recieved string: '.format(incoming[0:11]))
+                print ('Expected string: '.format(HEALTH_POLL_HDR))
         else:
             print("recieved insufficient bytes for poll RESPONSE!")
-            print("recieved only " + len(buffer) + " bytes")
-            print 'Recieved string: ', incoming
+            print("recieved only " + str(len(incoming)) + " bytes")
+            print('Recieved string: {0}'.format(incoming))
 

@@ -2,8 +2,8 @@ import serial
 import logging
 import struct
 import time
-from globalstar_response import GlobalStarResponse
-from globalstar_message import GlobalStarMessage
+from .globalstar_response import GlobalStarResponse
+from .globalstar_message import GlobalStarMessage
 
 
 ## enable pin for serial connection!
@@ -67,7 +67,7 @@ class GlobalStarSerial:
 
     def poll_health(self, timeOut, readInterval):
         packet = SYN1+SYN2+LEN9+"PC401".encode('UTF-8')
-        print "Writing message to globalstar and waiting for response"
+        print ("Writing message to globalstar and waiting for response")
         startTime = time.time()
         waitTime = 0
         self.__serial.flushInput()

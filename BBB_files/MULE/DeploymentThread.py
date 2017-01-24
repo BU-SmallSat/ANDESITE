@@ -11,7 +11,7 @@ implement communication with the Arduino
 # does deployment thread need to do any processing of messages from executive thread?
 
 # health status file
-#DeploymentHealthFile = "/home/debian/Maria/healthFiles/Deployerhealth.txt"
+DeploymentHealthFile = "/home/debian/Maria/healthFiles/Deployerhealth.txt"
 
 class DeploymentThread(WorkerThread):
 
