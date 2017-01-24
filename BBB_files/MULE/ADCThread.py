@@ -11,8 +11,8 @@ include ADC algorithms based on data derived from microcontroller
 # health status file
 ADCHealthFile = "/home/debian/Maria/healthFiles/ADCHealth.txt"
 ADCvector = ""
-
 Detumbling = False
+ADCBinary = './adc/ADC.elf'
 
 
 class ADCThread(WorkerThread):
