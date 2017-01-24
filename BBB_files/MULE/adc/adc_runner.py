@@ -1,5 +1,6 @@
 import pexpect, os
 from datetime import datetime
+from time import sleep
 
 ADCPATH = './ADC.elf'
 
@@ -66,3 +67,26 @@ class ADCRunner:
         :return:
         """
         self.pid.terminate()
+
+
+
+if __name__ == "__main__":
+    """  Test the binary here.   This should present bogus data 100 times and then exit quietly."""
+    testData = {'mag_meas': [1, 2, 3],
+                'euler_angle': [4, 5, 6],
+                'sun_meas': [7, 8, 9],
+                'epoch': [0, 1, 2, 3, 4, 5],
+                'lla': [6, 7, 8],
+                's_flag': 9
+                }
+    runner = ADCRunner()
+    i = 0
+    while i < 100:
+        result = runner.page(testData)
+        print(result)
+        i += 1
+        sleep(.1)
+
+
+
+    runner.exit()
