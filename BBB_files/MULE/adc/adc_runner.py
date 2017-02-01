@@ -17,7 +17,7 @@ class ADCRunner:
         return [now.year,now.month,now.day,now.hour,now.minute,now.second]
 
 
-    def process_output(self,values: str) -> ():
+    def process_output(self,values: str) -> AdcOutput:
         """
         Processes the response of ADC.elf and returns a tuple containing the magnetic moment and quaternion estimates.
         :param values:
@@ -27,7 +27,7 @@ class ADCRunner:
         # if len(floats) == 7:
         mag = (floats[0], floats[1], floats[2])
         quat = (floats[3], floats[4], floats[5], floats[6])
-        return (mag, quat)
+        return AdcOutput(mag,quat)
 
     def format_input(self,invals: AdcInput) -> bytes:
         """
@@ -72,6 +72,11 @@ class ADCRunner:
         :return:
         """
         self.pid.terminate()
+
+@attr.s
+class AdcOutput(object):
+    mag_dipole = attr.ib(validator=instance_of(tuple))
+    quaternion = attr.ib(validator=instance_of(tuple))
 
 
 @attr.s
