@@ -3,6 +3,7 @@ from datetime import datetime
 from time import sleep
 import attr
 from attr.validators import instance_of
+import struct
 
 ADCPATH = './ADC.elf'
 
@@ -14,10 +15,10 @@ class ADCRunner:
         Utility function which returns the current time in the correct format for passing to ADC.elf
         """
         now = datetime.utcnow()
-        return [now.year,now.month,now.day,now.hour,now.minute,now.second]
+        return [now.year, now.month, now.day, now.hour, now.minute, now.second]
 
 
-    def process_output(self,values: str) -> AdcOutput:
+    def process_output(self, values: str)->AdcOutput:
         """
         Processes the response of ADC.elf and returns a tuple containing the magnetic moment and quaternion estimates.
         :param values:
@@ -25,9 +26,10 @@ class ADCRunner:
         """
         floats = [float(f) for f in values.split(',') if values and f]
         # if len(floats) == 7:
-        mag = (floats[0], floats[1], floats[2])
+        to_hex = lambda f: struct.pack('<d', f)
+        mag = (to_hex(floats[0]), to_hex(floats[1]), to_hex(floats[2]))
         quat = (floats[3], floats[4], floats[5], floats[6])
-        return AdcOutput(mag,quat)
+        return AdcOutput(mag, quat)
 
     def format_input(self,invals: AdcInput) -> bytes:
         """
@@ -108,7 +110,7 @@ if __name__ == "__main__":
     """  Test the binary here.   This should present bogus data 100 times and then exit quietly."""
     testData = AdcInput(mag_meas = [1, 2, 3],
                         euler_angle= [4, 5, 6],
-                        sun_meas= [7, 8, 9],
+                        sun_measure= [7, 8, 9],
                         epoch= [0, 1, 2, 3, 4, 5],
                         lla= [6, 7, 8],
                         s_flag= 9)
