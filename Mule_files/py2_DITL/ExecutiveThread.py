@@ -10,6 +10,7 @@ from HealthThread import HealthThread
 from GlobalstarThread import GlobalstarThread
 from RFM22BThread import RFM22BThread
 from GPSThread import GPSThread
+from threading import _BoundedSemaphore
 import threading
 
 
