@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "WSN", "WSN.cppproj", "{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "CommTestMule", "..\CommTestMule\CommTestMule.cppproj", "{9830071C-567F-488B-9E2C-48A2742FAB0D}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "CommTest", "..\CommTest\CommTest.cppproj", "{F029513E-62BC-4585-8815-498B3BFF6443}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "mule_radio", "..\mule_radio\mule_radio.cppproj", "{3267B33E-200B-424C-A461-D91F67686A26}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Debug|AVR.Build.0 = Debug|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Release|AVR.ActiveCfg = Release|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Release|AVR.Build.0 = Release|AVR
+		{9830071C-567F-488B-9E2C-48A2742FAB0D}.Debug|AVR.ActiveCfg = Debug|AVR
+		{9830071C-567F-488B-9E2C-48A2742FAB0D}.Debug|AVR.Build.0 = Debug|AVR
+		{9830071C-567F-488B-9E2C-48A2742FAB0D}.Release|AVR.ActiveCfg = Release|AVR
+		{9830071C-567F-488B-9E2C-48A2742FAB0D}.Release|AVR.Build.0 = Release|AVR
+		{F029513E-62BC-4585-8815-498B3BFF6443}.Debug|AVR.ActiveCfg = Debug|AVR
+		{F029513E-62BC-4585-8815-498B3BFF6443}.Debug|AVR.Build.0 = Debug|AVR
+		{F029513E-62BC-4585-8815-498B3BFF6443}.Release|AVR.ActiveCfg = Release|AVR
+		{F029513E-62BC-4585-8815-498B3BFF6443}.Release|AVR.Build.0 = Release|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Debug|AVR.ActiveCfg = Debug|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Debug|AVR.Build.0 = Debug|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Release|AVR.ActiveCfg = Release|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

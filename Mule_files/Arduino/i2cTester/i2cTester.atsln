@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "i2cTester", "i2cTester.cppproj", "{25F8AE91-BA6B-4A2D-91BC-16C6579B0729}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "mule_radio", "..\mule_radio\mule_radio.cppproj", "{3267B33E-200B-424C-A461-D91F67686A26}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "WSN", "..\WSN\WSN.cppproj", "{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{25F8AE91-BA6B-4A2D-91BC-16C6579B0729}.Debug|AVR.ActiveCfg = Debug|AVR
+		{25F8AE91-BA6B-4A2D-91BC-16C6579B0729}.Debug|AVR.Build.0 = Debug|AVR
+		{25F8AE91-BA6B-4A2D-91BC-16C6579B0729}.Release|AVR.ActiveCfg = Release|AVR
+		{25F8AE91-BA6B-4A2D-91BC-16C6579B0729}.Release|AVR.Build.0 = Release|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Debug|AVR.ActiveCfg = Debug|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Debug|AVR.Build.0 = Debug|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Release|AVR.ActiveCfg = Release|AVR
+		{3267B33E-200B-424C-A461-D91F67686A26}.Release|AVR.Build.0 = Release|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Debug|AVR.Build.0 = Debug|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Release|AVR.ActiveCfg = Release|AVR
+		{C8F7BACC-AB5D-4AEA-9E7E-436BEB67C958}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
