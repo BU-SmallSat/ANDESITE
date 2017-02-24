@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages, Extension
 
 # makes __version__ a local variable
-exec(open('MULE/_version.py').read())
+exec(open('mule/_version.py').read())
 # http://python-packaging.readthedocs.org/en/latest/command-line-scripts.html
 
 setup(name='MULE',
