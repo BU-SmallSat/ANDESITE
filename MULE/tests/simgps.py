@@ -1,72 +1,9 @@
-## 
-## CONTRIBUTORS: 
-## 
-##     * Osi Van Dessel
-##     * Gabriel Gonzalez (gabeg@bu.edu) 
-## 
-## 
-## LICENSE: 
-## 
-##     None
-## 
-## 
-## NAME:
-## 
-##     gpskml - Creats a .kml file of a simulated satellite orbit.
-## 
-## 
-## SYNTAX: 
-## 
-##     gpskml [-h]
-## 
-## 
-## PURPOSE:
-## 
-##     Create a .kml file that, when uploaded to a .kml file analyzer (such as 
-##     Google Earth), will display the orbit defined in the file.
-## 
-## 
-## OPTIONS:
-## 
-##     -h
-##         Print program usage.
-## 
-## 
-## FUNCTIONS:
-## 
-##     Function - Function description.
-## 
-## 
-## FILE STRUCTURE:
-## 
-##     * Objective
-## 
-## 
-## MODIFICATION HISTORY:
-## 	
-##     ovdessel Jan 23 2015 <> Created.
-## 
-##     gabeg Jan 23 2015 <> Created.
-## 
-## 
-## NOTICE: 
-## 
-##     Notice.
-## 
-## **********************************************************************************
+from __future__ import print_function
 
-
-
-## ===============
-## LIBRARY IMPORTS
-## ===============
-
-## Import libraries
-import serial
 import math
 import time
+
 import pynmea2
-import string
 
 
 class magnetorquer_driver :
@@ -80,60 +17,42 @@ class magnetorquer_driver :
         self.g = "$GPGGA,000854,7924.00,N,00000.00,W,1,08,0.9,545.4,46.9*52"
 
 
-
-    ## #######################################
-    ## ##### EVENLY SPACED LIST CREATION #####
-    ## #######################################
-
-    ## Generate a list that increments by "step" from the given bounds
     def incrange(self,start, end, step=1):
-       arr = []
-
-       i = start - step
-       while (i+step) <= end:
+        """Generate a list that increments by "step" from the given bounds"""
+        arr = []
+        i = start - step
+        while (i+step) <= end:
           arr.append(i+step)
-
           i += step
+        return arr
 
-       return arr
-
-
-
-    ## Generate a list that decrements by "step" from the given bounds
     def decrange(self,start, end, step=1):
-       arr = []
-
-       i = start + step
-       while (i-step) >= end:
+        """Generate a list that decrements by "step" from the given bounds"""
+        arr = []
+        i = start + step
+        while (i-step) >= end:
           arr.append(i-step)
-
           i -= step
+        return arr
 
-       return arr
-
-
-
-    ## #########################################
-    ## ##### CONVERT DEGREES TO GPS FORMAT #####
-    ## #########################################
-
-    ## Convert degree values to GPS string values
     def conv_gps_deg(self,arr, deg):
-       for i in deg:
+        """
+        Convert degree values to GPS string values
+        :param arr:
+        :param deg:
+        :return:
+        """
+        for i in deg:
           val = math.floor(i)
           rem = (i - val) * 60
           arr.append(val*100 + rem)
+        return arr
 
-       return arr
-
-
-
-    ## ###########################
-    ## ##### GPS INFORMATION #####
-    ## ###########################
-
-    ## Generate simulated GPS string latitudes with the given resolution
     def gps_lat(self):
+        """
+        Generate simulated GPS string latitudes with the given resolution
+        :return:
+        """
         top = 90
         bot = -top
         start = 65
@@ -151,8 +70,13 @@ class magnetorquer_driver :
 
 
 
-    ## Generate simulate GPS string longitudes
+
     def gps_lon(self,lat):
+        """
+        Generate simulate GPS string longitudes
+        :param lat:
+        :return:
+        """
         n = len(lat)
         last = 0
 
@@ -169,14 +93,19 @@ class magnetorquer_driver :
 
 
 
-    ## Generate the time for each point in orbit
-    def gps_time(self,lat):
-       n = len(lat)
-       total = 90.0 * 60.0
-       step = total / n
 
-       time = []
-       for i in range(0, n):
+    def gps_time(self,lat):
+        """
+        Generate the time for each point in orbit
+        :param lat:
+        :return:
+        """
+        n = len(lat)
+        total = 90.0 * 60.0
+        step = total / n
+
+        time = []
+        for i in range(0, n):
           val = int( round(i*step) )
           hour = (val / 3600) % 24
           minute = (val / 60) % 60
@@ -186,53 +115,57 @@ class magnetorquer_driver :
 
           time.append(unit)
 
-       return time
+        return time
 
 
 
-    ## ######################
-    ## ##### GPS STRING #####
-    ## ######################
 
-    ## Generate the GPS string in GLL format
-    ##     $GPGLL,4916.45 (Lat 49deg 16.45min) ,N,12311.12 (Long 123deg.11.12min),W,225444(hh:mm:ss),A,*1D
-    ##
-    ## $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47
-    ##
-    ##Where:
-    ##     GGA          Global Positioning System Fix Data
-    ##     123519       Fix taken at 12:35:19 UTC
-    ##     4807.038,N   Latitude 48 deg 07.038' N
-    ##     01131.000,E  Longitude 11 deg 31.000' E
-    ##     1            Fix quality: 0 = invalid
-    ##                               1 = GPS fix (SPS)
-    ##                               2 = DGPS fix
-    ##                               3 = PPS fix
-    ##			       4 = Real Time Kinematic
-    ##			       5 = Float RTK
-    ##                               6 = estimated (dead reckoning) (2.3 feature)
-    ##			       7 = Manual input mode
-    ##			       8 = Simulation mode
-    ##     08           Number of satellites being tracked
-    ##     0.9          Horizontal dilution of position
-    ##     545.4,M      Altitude, Meters, above mean sea level
-    ##     46.9,M       Height of geoid (mean sea level) above WGS84
-    ##                      ellipsoid
-    ##     (empty field) time in seconds since last DGPS update
-    ##     (empty field) DGPS station ID number
-    ##     *47          the checksum data, always begins with *
+
 
     def gps_str(self,lat, lon, time):
-       head = "$GPGGA"
-       lat_dir = "N"
-       lon_dir = "W"
-       tail = "A"
+        """
+        Generate the GPS string in GLL format
+        $GPGLL,4916.45 (Lat 49deg 16.45min) ,N,12311.12 (Long 123deg.11.12min),W,225444(hh:mm:ss),A,*1D
 
-       last = 0
-       newlat = self.conv_gps_deg([], lat)
+        $GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47
 
-       gps_str = []
-       for i, j, k in zip(newlat, lon, time):
+        Where:
+        GGA          Global Positioning System Fix Data
+        123519       Fix taken at 12:35:19 UTC
+        4807.038,N   Latitude 48 deg 07.038' N
+        01131.000,E  Longitude 11 deg 31.000' E
+        1            Fix quality: 0 = invalid
+                                  1 = GPS fix (SPS)
+                                  2 = DGPS fix
+                                  3 = PPS fix
+                       4 = Real Time Kinematic
+                       5 = Float RTK
+                                  6 = estimated (dead reckoning) (2.3 feature)
+                       7 = Manual input mode
+                       8 = Simulation mode
+        08           Number of satellites being tracked
+        0.9          Horizontal dilution of position
+        545.4,M      Altitude, Meters, above mean sea level
+        46.9,M       Height of geoid (mean sea level) above WGS84
+                         ellipsoid
+        (empty field) time in seconds since last DGPS update
+        (empty field) DGPS station ID number
+        *47          the checksum data, always begins with *
+        :param lat:
+        :param lon:
+        :param time:
+        :return:
+        """
+        head = "$GPGGA"
+        lat_dir = "N"
+        lon_dir = "W"
+        tail = "A"
+
+        last = 0
+        newlat = self.conv_gps_deg([], lat)
+
+        gps_str = []
+        for i, j, k in zip(newlat, lon, time):
           if i < 0:
              i = -i
              lat_dir = "S"
@@ -244,17 +177,23 @@ class magnetorquer_driver :
           newk = str(k)
 
           msg = pynmea2.GGA("GP", "GGA", (newk,newi,lat_dir, newj, lon_dir, "1","08","0.9","500000","46.9"))
-       #   print str(msg)
+        #   print str(msg)
           gps_str.append( str(msg) )
 
-       return gps_str
+        return gps_str
 
 
 
 
 
-    ## Generate the GPS .kml file
     def kml_generator(self,alt, lat, lon):
+        """
+        Generate the KML file
+        :param alt:
+        :param lat:
+        :param lon:
+        :return:
+        """
 
         ## Write the header to the file
         kml = open("output.kml","w")
@@ -308,8 +247,13 @@ class magnetorquer_driver :
         kml.close()
 
 
-    ## Transmit GPS strings to sensor nodes
+    ##
     def gps_tx(self,gps):
+        """
+        Transmit GPS strings to sensor nodes
+        :param gps:
+        :return:
+        """
         #port = serial.Serial(com, baud)
         count = 0
         step = 50
@@ -335,7 +279,7 @@ class magnetorquer_driver :
     orb_alt = 500000
     orb_inc = 90
 
-    print "Starting GPS serial transfer..."
+    print("Starting GPS serial transfer...")
 
     #def main():
     while True:
@@ -349,11 +293,11 @@ class magnetorquer_driver :
         x = time.time()
         gps_tx(orb_gps)
 
-        print len(orb_lat)
-        print time.time() - x
+        print (len(orb_lat))
+        print (time.time() - x)
 
 
-    #if __name__ == '__main__':
+        #if __name__ == '__main__':
     #    try:
     #        main()
     #    except AttributeError:

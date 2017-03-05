@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 from Adafruit_I2C import Adafruit_I2C
 import time
 

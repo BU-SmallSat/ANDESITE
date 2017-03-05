@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # battery voltage, power from buses (VI)
 # power from solar chargers 3.3,5,12,battery
 import Queue
@@ -5,7 +7,7 @@ import threading
 import time
 import subprocess
 from eps_driver import EPS_driver
-#from battery_driver import battery_driver
+#from BatteryDriver import BatteryDriver
 
 # health status file
 EPSHealthFile = "/home/debian/Brent/healthFiles/EPShealth.txt"

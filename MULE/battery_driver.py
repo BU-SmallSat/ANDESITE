@@ -1,33 +1,35 @@
+from __future__ import print_function
+
 from Adafruit_I2C import Adafruit_I2C
 import time
 
-'''
+"""
 Throw error returns if the response from EPS is 0xF000
 this means that the reading information is not yet ready to be read
 or that the read was not preceeded by a write
-'''
+"""
 
 
-class battery_driver:
+class BatteryDriver:
     def __init__(self):
         self.address = 0x20
         self.batt = 0x2A
-        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1, debug=True) #second argument tells bus number
+        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1, debug=True)  # second argument tells bus number
         self.heater_status = 1
         self.settleTime = 2
 
     def adc__battery__current__direction(self):
-        self.i2c_bus.write16(self.batt, 0x0001) # ADC Channel 0
+        self.i2c_bus.write16(self.batt, 0x0001)  # ADC Channel 0
         time.sleep(self.settleTime)
         Num = self.i2c_bus.readS16(self.batt)
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        print (Num)
-        return Num #if Num == 0, Charge == 0. else: "Discharge" == 1
+        print(Num)
+        return Num  # if Num == 0, Charge == 0. else: "Discharge" == 1
 
     def adc__battery__current(self):
         self.i2c_bus.write16(self.batt, 0x0003)  # ADC Channel 1
         time.sleep(self.settleTime)
-        Num = self.i2c_bus.readS16(self.batt) # Unit: mA
+        Num = self.i2c_bus.readS16(self.batt)  # Unit: mA
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
         final_Output = -3.49185 * Num + 3173.465
         print(final_Output)  # check if necessary
@@ -43,12 +45,12 @@ class battery_driver:
         return final_Output
 
     def adc_battery_voltage(self):
-        self.i2c_bus.write16(self.batt, 0x0005) # ADC Channel 3
+        self.i2c_bus.write16(self.batt, 0x0005)  # ADC Channel 3
         time.sleep(self.settleTime)
-        Num = self.i2c_bus.readS16(self.batt) # return data type?? value in the space
+        Num = self.i2c_bus.readS16(self.batt)  # return data type?? value in the space
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
         final_Output = -3.49185 * Num + 3173.465
-        print (final_Output)  # check if necessary
+        print(final_Output)  # check if necessary
         return final_Output
 
     def adc__battery__temperature(self):
@@ -65,8 +67,8 @@ class battery_driver:
         time.sleep(self.settleTime)
         Num = self.i2c_bus.readS16(self.batt)  # Range of Num??
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        print (Num)
-        return Num #if Num == 0, Charge == 0. else: "Discharge" == 1
+        print(Num)
+        return Num  # if Num == 0, Charge == 0. else: "Discharge" == 1
 
     def adc__battery1__current(self):
         self.i2c_bus.write16(self.batt, 0x0033)  # ADC Channel 6
@@ -78,13 +80,15 @@ class battery_driver:
         return final_Output
 
     def adc__cell1__voltage(self):
-        self.i2c_bus.write16(self.batt, 0x0090) # ADC Channel 7
+        self.i2c_bus.write16(self.batt, 0x0090)  # ADC Channel 7
         time.sleep(self.settleTime)
         Num = self.i2c_bus.readS16(self.batt)  # Unit: V
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
         final_Output = -0.00483 * Num + 4.852724
         print(final_Output)  # check if necessary
         return final_Output
+
+
 '''
     def adc__battery1__voltage(self):
         self.i2c_bus.write8(0x00, 0x00)  # ADC Channel 8

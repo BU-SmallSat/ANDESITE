@@ -1,13 +1,18 @@
+from __future__ import print_function
+
 from worker_thread import WorkerThread
 import Queue
 import threading
 import subprocess
 from magnetorquer_driver import magnetorquer_driver
-#from MPU9250 import MPU9250
-#from sunsensor_driver import sunsensor_driver
-DetumbleWait = 10
+# from MPU9250 import MPU9250
+# from SunSensorDriver import SunSensorDriver
+
+
+DETUMBLE_WAIT = 10
 
 '''
+todo
 include interface with new microcontroller
 include ADC algorithms based on data derived from microcontroller
 '''
@@ -24,7 +29,7 @@ class ADCThread(WorkerThread):
         self.executiveQueue = executive_queue
         self.MTQ = magnetorquer_driver()
         #self.mpu9250 = MPU9250()
-        #self.SS = sunsensor_driver()
+        #self.SS = SunSensorDriver()
 
     def healthReport(self):
         # fill health string based on variables representing hardware components health
@@ -67,11 +72,11 @@ class ADCThread(WorkerThread):
 
     def BDOT_detumble(self):
         self.MTQ.BDOT_detumble()
-        threading.Timer(DetumbleWait, self.startPointing).start()
+        threading.Timer(DETUMBLE_WAIT, self.startPointing).start()
 
     def startPointing(self):
         self.MTQ.pointing_mode()
-        threading.Timer(DetumbleWait, self.executiveQueue.put, ["EA:Pointing"]).start()
+        threading.Timer(DETUMBLE_WAIT, self.executiveQueue.put, ["EA:Pointing"]).start()
 
     def init(self):
         self.interval = .1 # frequency of the most frequently sampled ADC hardware (
@@ -83,7 +88,7 @@ class ADCThread(WorkerThread):
     def loop(self):
         #print "IN ADC LOOP CALL"
         global Detumbling
-        gyro = self.mpu9250.readGyro()
+        #gyro = self.mpu9250.readGyro()
         #sunsensor = self.SS.read_data()
         #print "sunsensor: ",[sunsensor[0],sunsensor[1],sunsensor[2]]
         #print "Gyro: ", [gyro[0], gyro[1], gyro[2]]
@@ -92,9 +97,7 @@ class ADCThread(WorkerThread):
             executiveResponse = self.inputQueue.get(False)
             self.processResponse(executiveResponse)
         except Queue.Empty:
-            '''
-            if Detumbling == 1:
             pass
-            Detumbling = 0
-            threading.Timer(2, self.sendMessage).start()
-            '''
+            # if Detumbling == 1:
+            # Detumbling = 0
+            # threading.Timer(2, self.sendMessage).start()

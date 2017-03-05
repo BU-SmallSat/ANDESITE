@@ -1,10 +1,12 @@
+from __future__ import print_function
+
 from worker_thread import WorkerThread
 import Queue
 import time
 import subprocess
 import threading
 from eps_driver import EPS_driver
-from battery_driver import battery_driver
+from battery_driver import BatteryDriver
 
 # health status file
 EPSHealthFile = "/home/debian/Maria/healthFiles/EPShealth.txt"

@@ -1,10 +1,18 @@
-from worker_thread import WorkerThread
+from __future__ import print_function
+
 import Queue
 import subprocess
-import serial
 import time
-import threading
 
+import serial
+
+from worker_thread import WorkerThread
+
+"""
+RFM22B Thread.
+
+todo: docs here.
+"""
 
 # health status file
 RFM22BHealthFile = "/home/debian/Maria/healthFiles/RFM22Bhealth.txt"
@@ -32,12 +40,18 @@ class RFM22BThread(WorkerThread):
         # time.sleep(.2)
 
     def safeMode(self):
-        # can't turn off the arduino, but turn off the rf radio
-        # this function should turn off all unnecessary hardware and functions for low power mode
+        """
+        can't turn off the arduino, but turn off the rf radio
+        this function should turn off all unnecessary hardware and functions for low power mode
+
+        :return:
+        """
         print("RF22B thread entering safe mode")
 
     def healthReport(self):
-        # fill health string based on variables representing hardware components health
+        """
+        fill health string based on variables representing hardware components health
+        """
         healthString = "All RFM22B components are healthy"
         with open(RFM22BHealthFile, "w") as healthFile:
             subprocess.call(["echo", healthString], stdout=healthFile)

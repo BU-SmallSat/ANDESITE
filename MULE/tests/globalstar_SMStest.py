@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 # ***********************************************
 # ***************** ANDESITE ********************
 # ****** GLOBALSTAR RADIO TEST PROCEDURE ********
@@ -5,7 +7,7 @@
 # ************* Date Created: 06/03/16 **********
 # ***********************************************
 import time
-from globalstar_serial import GlobalStarSerial
+from MULE.globalstar_serial import GlobalStarSerial
 import Adafruit_BBIO.GPIO as GPIO
 import datetime
 

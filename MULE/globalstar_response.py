@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import crc16
 
 SYN1 = chr(0x47).encode("utf-8")

@@ -1,9 +1,8 @@
+from __future__ import print_function
 
+import time
 
 from Adafruit_I2C import Adafruit_I2C
-import time
-import struct
-import ctypes
 
 '''
 Throw error returns if the response from EPS is 0xF000
