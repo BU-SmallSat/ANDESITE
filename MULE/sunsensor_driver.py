@@ -5,7 +5,7 @@ class sunsensor_driver :
     def __init__(self):
         # create a second init function that can be called to reinitialize the magnetorquer board
         self.address = 0x77
-        self.i2c_bus = Adafruit_I2C(self.address,busnum=2)#,debug=True)
+        self.i2c_bus = Adafruit_I2C(self.address, bus_num=2)#,debug=True)
         self.data_size = 6
 
     def read_data(self):

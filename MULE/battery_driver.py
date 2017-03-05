@@ -12,7 +12,7 @@ class battery_driver:
     def __init__(self):
         self.address = 0x20
         self.batt = 0x2A
-        self.i2c_bus = Adafruit_I2C(self.address,busnum=1,debug=True) #second argument tells bus number
+        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1, debug=True) #second argument tells bus number
         self.heater_status = 1
         self.settleTime = 2
 
