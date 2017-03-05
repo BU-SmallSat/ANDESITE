@@ -1,14 +1,13 @@
 from __future__ import print_function
 
-from worker_thread import WorkerThread
 import Queue
+import math
 import subprocess
+
 import pynmea2
 import serial
-import math
-import time
-import pynmea2
 
+from worker_thread import WorkerThread
 
 # health status file
 GPSHealthFile = "/home/debian/Maria/healthFiles/GPShealth.txt"
@@ -20,14 +19,12 @@ Deploying = 0
 DeployOrbitNum = 5
 
 
-
 # IMPORTANT:: everyone who reads the GPS value needs to check that the GPS is not out of service (read service variable)
 # when this thread is paused it should update that variable
 # how to make the GPS information available to the other threads
 
 
 class GPSThread(WorkerThread):
-
     def __init__(self, executive_queue):
         super(GPSThread, self).__init__("GPS Thread")
         self.inputQueue = Queue.Queue()
@@ -48,9 +45,7 @@ class GPSThread(WorkerThread):
         orb_time = self.gps_time(orb_lat)
         self.orb_gps = self.gps_str(orb_lat, orb_lon, orb_time)
 
-
-
-        #self.run()
+        # self.run()
         self.loop()
 
         self.__serial = serial.Serial(
@@ -68,7 +63,7 @@ class GPSThread(WorkerThread):
             subprocess.call(["echo", healthString], stdout=healthFile)
         self.executiveQueue.put("EC:healthBeacon")
 
-    def processResponse(self,string):
+    def processResponse(self, string):
         global Deploying
         global OrbitCount
         if string == "GE:LatWait":
@@ -81,7 +76,7 @@ class GPSThread(WorkerThread):
         elif string == "GE:healthRequest":
             self.healthReport()
 
-    def resetOrbitCount(self,string):
+    def resetOrbitCount(self, string):
         global DeployOrbitNum
         print("resetting orbit delay count to: " + string)
         # convert to an integer
@@ -91,16 +86,15 @@ class GPSThread(WorkerThread):
 
     def read_gps(self):
         gps = ""
-        while(self.__serial.in_waiting>0):
+        while self.__serial.in_waiting > 0:
             gps = gps + self.__serial.read()
-        print gps
-        #lat = self.gps_translate(gps)
-        #return lat
+        print(gps)
+        # lat = self.gps_translate(gps)
+        # return lat
 
+    def gps_translate(self, gps_input):
 
-    def gps_translate(self,gps_input):
-
-        #print(gps_input)
+        # print(gps_input)
 
         year = 2017
         month = 01
@@ -121,23 +115,18 @@ class GPSThread(WorkerThread):
         sec = int(sec_str)
 
         lat = msg.latitude
-        lat_str = str(lat)
-        lat_dir = msg.lat_dir
 
         lon = msg.longitude
-        lon_dir = msg.lon_dir
 
         alt = msg.altitude
 
-        location = [round(lat,3), round(lon, 3), alt]
-        #print(location)
+        location = [round(lat, 3), round(lon, 3), alt]
+        # print(location)
 
         time = [year, month, day, hour, min, sec]
-        #print(time)
-        #print(lat)
-        return round(lat,2)
-
-
+        # print(time)
+        # print(lat)
+        return round(lat, 2)
 
     def init(self):
         self.interval = .05
@@ -148,20 +137,19 @@ class GPSThread(WorkerThread):
         self.orb_gps = self.gps_str(orb_lat, orb_lon, orb_time)
         self.onEquator = 0
 
-   #     with open(GPSHealthFile, "w") as healthFile:
-   #         subprocess.call(["echo", "Successful health file initialization: GPS"], stdout=healthFile)
-
+        #     with open(GPSHealthFile, "w") as healthFile:
+        #         subprocess.call(["echo", "Successful health file initialization: GPS"], stdout=healthFile)
 
     def loop(self):
         gps = self.orb_gps[self.count]
         GPS_lat = self.gps_translate(gps)
-        #print(GPS_lat)
+        # print(GPS_lat)
 
         if self.count < 361:
             self.count += 1
         else:
             self.count = 0
-        #print(self.count)
+        # print(self.count)
 
         global GPSlat
         global GPSdir
@@ -176,22 +164,22 @@ class GPSThread(WorkerThread):
         except Queue.Empty:
             pass
 
-        #try:
-        #GPSlat = self.read_gps()
-        #except pynmea2.ParseError:
-            #print("Waiting on GPS input on Serial Line")
+            # try:
+            # GPSlat = self.read_gps()
+            # except pynmea2.ParseError:
+            # print("Waiting on GPS input on Serial Line")
 
-        if GPS_lat <1 and GPS_lat > -1:
+        if GPS_lat < 1 and GPS_lat > -1:
             if Deploying == 1:
-                if(self.onEquator == 0):
+                if (self.onEquator == 0):
                     OrbitCount += 1
                     self.onEquator = 1
                 if OrbitCount >= DeployOrbitNum:
                     OrbitCount = 0
                     self.executiveQueue.put("EG:DeployLat")
-        elif GPS_lat >5 or GPS_lat<-5:
+        elif GPS_lat > 5 or GPS_lat < -5:
             self.onEquator = 0
-        #print(OrbitCount)
+        # print(OrbitCount)
 
         '''
         if GPSdir == 1:
@@ -210,8 +198,7 @@ class GPSThread(WorkerThread):
                     self.executiveQueue.put("EG:DeployLat")
         '''
 
-
-#############################################################################################################################################################################################
+    #############################################################################################################################################################################################
 
 
     ## #######################################
@@ -220,29 +207,27 @@ class GPSThread(WorkerThread):
 
     ## Generate a list that increments by "step" from the given bounds
     def incrange(self, start, end, step=1):
-       arr = []
+        arr = []
 
-       i = start - step
-       while (i+step) <= end:
-          arr.append(i+step)
+        i = start - step
+        while (i + step) <= end:
+            arr.append(i + step)
 
-          i += step
+            i += step
 
-       return arr
-
+        return arr
 
     ## Generate a list that decrements by "step" from the given bounds
     def decrange(self, start, end, step=1):
-       arr = []
+        arr = []
 
-       i = start + step
-       while (i-step) >= end:
-          arr.append(i-step)
+        i = start + step
+        while (i - step) >= end:
+            arr.append(i - step)
 
-          i -= step
+            i -= step
 
-       return arr
-
+        return arr
 
     ## #########################################
     ## ##### CONVERT DEGREES TO GPS FORMAT #####
@@ -250,13 +235,12 @@ class GPSThread(WorkerThread):
 
     ## Convert degree values to GPS string values
     def conv_gps_deg(self, arr, deg):
-       for i in deg:
-          val = math.floor(i)
-          rem = (i - val) * 60
-          arr.append(val*100 + rem)
+        for i in deg:
+            val = math.floor(i)
+            rem = (i - val) * 60
+            arr.append(val * 100 + rem)
 
-       return arr
-
+        return arr
 
     ## ###########################
     ## ##### GPS INFORMATION #####
@@ -275,10 +259,9 @@ class GPSThread(WorkerThread):
         o3 = [i for i in self.incrange(last, start, 1)]
         ## Not evenly spaced, fix this
 
-        lat = o1+o2+o3
+        lat = o1 + o2 + o3
 
         return lat
-
 
     ## Generate simulate GPS string longitudes
     def gps_lon(self, lat):
@@ -287,36 +270,33 @@ class GPSThread(WorkerThread):
 
         lon = []
         for i in lat:
-           if i >= last:
-              lon.append(0)
-           else:
-              lon.append(18000.000)
+            if i >= last:
+                lon.append(0)
+            else:
+                lon.append(18000.000)
 
-           last = i
+            last = i
 
         return lon
 
-
     ## Generate the time for each point in orbit
     def gps_time(self, lat):
-       n = len(lat)
-       total = 90.0 * 60.0
-       step = total / n
+        n = len(lat)
+        total = 90.0 * 60.0
+        step = total / n
 
-       time = []
-       for i in range(0, n):
-          val = int( round(i*step) )
-          hour = (val / 3600) % 24
-          minute = (val / 60) % 60
-          sec = val % 60
+        time = []
+        for i in range(0, n):
+            val = int(round(i * step))
+            hour = (val / 3600) % 24
+            minute = (val / 60) % 60
+            sec = val % 60
 
-          unit = str(hour).zfill(2) + str(minute).zfill(2) + str(sec).zfill(2)
+            unit = str(hour).zfill(2) + str(minute).zfill(2) + str(sec).zfill(2)
 
-          time.append(unit)
+            time.append(unit)
 
-       return time
-
-
+        return time
 
     ## ######################
     ## ##### GPS STRING #####
@@ -350,39 +330,38 @@ class GPSThread(WorkerThread):
     ##     (empty field) DGPS station ID number
     ##     *47          the checksum data, always begins with *
 
-    def gps_str(self,lat, lon, time):
-       head = "$GPGGA"
-       lat_dir = "N"
-       lon_dir = "W"
-       tail = "A"
+    def gps_str(self, lat, lon, time):
+        head = "$GPGGA"
+        lat_dir = "N"
+        lon_dir = "W"
+        tail = "A"
 
-       last = 0
-       newlat = self.conv_gps_deg([], lat)
+        last = 0
+        newlat = self.conv_gps_deg([], lat)
 
-       gps_str = []
-       for i, j, k in zip(newlat, lon, time):
-          if i < 0:
-             i = -i
-             lat_dir = "S"
-          else:
-             lat_dir = "N"
+        gps_str = []
+        for i, j, k in zip(newlat, lon, time):
+            if i < 0:
+                i = -i
+                lat_dir = "S"
+            else:
+                lat_dir = "N"
 
-          newi = "{:07.2F}".format(i)
-          newj = "{:08.2F}".format(j)
-          newk = str(k)
+            newi = "{:07.2F}".format(i)
+            newj = "{:08.2F}".format(j)
+            newk = str(k)
 
-          msg = pynmea2.GGA("GP", "GGA", (newk,newi,lat_dir, newj, lon_dir, "1","08","0.9","500000","46.9"))
-       #   print str(msg)
-          gps_str.append( str(msg) )
+            msg = pynmea2.GGA("GP", "GGA", (newk, newi, lat_dir, newj, lon_dir, "1", "08", "0.9", "500000", "46.9"))
+            #   print str(msg)
+            gps_str.append(str(msg))
 
-       return gps_str
-
+        return gps_str
 
     ## Generate the GPS .kml file
     def kml_generator(self, alt, lat, lon):
 
         ## Write the header to the file
-        kml = open("output.kml","w")
+        kml = open("output.kml", "w")
         kml.write('<?xml version="1.0" encoding="UTF-8"?>\n')
         kml.write('<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">\n')
         kml.write("<Document>\n")
@@ -422,8 +401,8 @@ class GPSThread(WorkerThread):
         kml.write('			<tessellate>1</tessellate>\n')
         kml.write('			<coordinates>\n')
 
-        for i,j in zip(lat, lon):
-            kml.write(str(j)+","+str(i)+","+str(alt)+" \n")
+        for i, j in zip(lat, lon):
+            kml.write(str(j) + "," + str(i) + "," + str(alt) + " \n")
 
         kml.write('			</coordinates>\n')
         kml.write('		</LineString>\n')
@@ -434,8 +413,8 @@ class GPSThread(WorkerThread):
 
 
 
-    #if __name__ == '__main__':
-    #    try:
-    #        main()
-    #    except AttributeError:
-    #        print(g)
+        # if __name__ == '__main__':
+        #    try:
+        #        main()
+        #    except AttributeError:
+        #        print(g)

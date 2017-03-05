@@ -4,39 +4,39 @@ import time
 
 from Adafruit_I2C import Adafruit_I2C
 
-'''
+"""
 Throw error returns if the response from EPS is 0xF000
 this means that the reading information is not yet ready to be read
 or that the read was not preceeded by a write
-'''
+"""
 
-## any bytes that return 0xFF are empty/nonsense bytes and are considered the end of a response
-## at least 1 millisecond delay between transfers
+
+# any bytes that return 0xFF are empty/nonsense bytes and are considered the end of a response
+# at least 1 millisecond delay between transfers
 
 # all i2c operations should be done in a try catch loop in case acknowledgements are not received?
 
-class magnetorquer_driver :
+class MagnetorquerDriver:
     def __init__(self):
         # create a second init function that can be called to reinitialize the magnetorquer board
         self.address = 0x20
         self.mag = 0x10
-        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1)#,debug=True)
+        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1)  # ,debug=True)
         self.heater_status = 1
         self.read_wait = .001
         self.settleTime = 2
 
-
     def send_command(self, byteList, recvLength):
         # figure out how to do ack/nak handling with the adafruit i2c library?
-        ## should everything be in a try catch loop?
-        self.i2c_bus.writeList(self.mag,byteList)
+        # should everything be in a try catch loop?
+        self.i2c_bus.writeList(self.mag, byteList)
         time.sleep(self.read_wait)
         reply = self.i2c_bus.readList(self.mag, recvLength)
         return reply
 
-    def unpack_stat_reply(self,reply,command):
+    def unpack_stat_reply(self, reply, command):
         (cc, stat) = reply
-        #print(cc, stat)
+        # print(cc, stat)
         if cc == command:
             # unpack stat
             if stat == 128:
@@ -47,21 +47,21 @@ class magnetorquer_driver :
                 return False
         else:
             # error handling for mistimed reading and writing operations
-            #print("Wrong CC recieved")
+            # print("Wrong CC recieved")
             return False
 
     # operational commads
-    def software_reset(self): ## ???????????????????
+    def software_reset(self):  # ???????????????????
         # self.i2c_bus.write16(0xAA, 0xA5)  # ADC Channel 0
         # response is only available if the reset command was not accepted
         # restart scheme to re-initialize communication with iMTQ device
-       	reply = self.send_command([0xAA, 0xA5],2)
-        self.unpack_stat_reply(reply,2)
+        reply = self.send_command([0xAA, 0xA5], 2)
+        self.unpack_stat_reply(reply, 2)
 
     def no_op(self):
         # best used to check communication without changing any operataion
         reply = self.send_command([0x02], 2)
-        self.unpack_stat_reply(reply,2)
+        self.unpack_stat_reply(reply, 2)
         # reply: 0x02, STAT
 
     def cancel_op(self):
@@ -107,9 +107,9 @@ class magnetorquer_driver :
         self.unpack_stat_reply(reply, 8)
         # reply: 0x08, STAT
 
-    def start_bdot(self,duration):
+    def start_bdot(self, duration):
         # pad duration to be 2 bytes in hex
-        reply = self.send_command([0x09,duration[1], duration[0]], 2)
+        reply = self.send_command([0x09, duration[1], duration[0]], 2)
         self.unpack_stat_reply(reply, 9)
         # reply: 0x09, STAT
 
@@ -165,42 +165,43 @@ class magnetorquer_driver :
         self.unpack_stat_reply(reply[0:2], 0x4A)
         print(reply)
 
-    def set_parameter(self, param_id, value,size):
-        if(size == 1):
-            reply = self.send_command([0x82,param_id[1],param_id[0],value], 5)
-        elif(size == 2):
-            reply = self.send_command([0x82, param_id[1],param_id[0],value[1],value[0]], 6)
-        elif(size == 4):
-            reply = self.send_command([0x82,param_id[1],param_id[0],value[3],value[2],value[1],value[0]], 8)
-        elif(size == 8):
-            reply = self.send_command([0x82,param_id[1],param_id[0],value[7],value[6],value[5],value[4],value[3],value[2],value[1],value[0]], 12)
+    def set_parameter(self, param_id, value, size):
+        reply = None
+        if size == 1:
+            reply = self.send_command([0x82, param_id[1], param_id[0], value], 5)
+        elif size == 2:
+            reply = self.send_command([0x82, param_id[1], param_id[0], value[1], value[0]], 6)
+        elif size == 4:
+            reply = self.send_command([0x82, param_id[1], param_id[0], value[3], value[2], value[1], value[0]], 8)
+        elif size == 8:
+            reply = self.send_command([0x82, param_id[1], param_id[0], value[7], value[6], value[5], value[4], value[3], value[2], value[1], value[0]], 12)
         self.unpack_stat_reply(reply[0:2], 0x82)
         print(reply)
 
     # configuration comands
-    def get_parameter(self, param_id,size):
-        reply = self.send_command([0x81,param_id[1],param_id[0]], size+4)
+    def get_parameter(self, param_id, size):
+        reply = self.send_command([0x81, param_id[1], param_id[0]], size + 4)
         self.unpack_stat_reply(reply[0:2], 0x81)
         print(reply)
 
-    def reset_parameter(self, param_id,size):
-        reply = self.send_command([0x83,param_id[1],param_id[0]], size+4)
+    def reset_parameter(self, param_id, size):
+        reply = self.send_command([0x83, param_id[1], param_id[0]], size + 4)
         self.unpack_stat_reply(reply[0:2], 0x83)
         print(reply)
 
     def BDOT_detumble(self):
-        gain_id = [0xA0,0x00]
-        gain_value = [0xC1,0x2E,0x84,0x80,0x00,0x00,0x00,0x00]
-        #gain_value = [0xC0,0xC3,0x88,0x00,0x00,0x00,0x00,0x00]
-        rate_id = [0x20,0x00]
+        gain_id = [0xA0, 0x00]
+        gain_value = [0xC1, 0x2E, 0x84, 0x80, 0x00, 0x00, 0x00, 0x00]
+        # gain_value = [0xC0,0xC3,0x88,0x00,0x00,0x00,0x00,0x00]
+        rate_id = [0x20, 0x00]
         rate_value = 0x08
-        #self.get_parameter(gain_id,8)
-        #self.get_parameter(rate_id,1)
-        self.set_parameter(rate_id,rate_value,1)
-        self.set_parameter(gain_id,gain_value,8)
+        # self.get_parameter(gain_id,8)
+        # self.get_parameter(rate_id,1)
+        self.set_parameter(rate_id, rate_value, 1)
+        self.set_parameter(gain_id, gain_value, 8)
         self.start_bdot([0x27, 0x10])
-        #self.get_parameter(rate_id,1)
-        #self.get_parameter(gain_id,8)
+        # self.get_parameter(rate_id,1)
+        # self.get_parameter(gain_id,8)
 
     def pointing_mode(self):
         self.start_dipole([0x00, 0x00], [0x03, 0xE8], [0x00, 0x00], [0x27, 0x10])

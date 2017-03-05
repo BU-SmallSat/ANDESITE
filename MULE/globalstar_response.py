@@ -6,8 +6,9 @@ SYN1 = chr(0x47).encode("utf-8")
 SYN2 = chr(0x55).encode("utf-8")
 NAK = chr(0x0F).encode("utf-8")
 ACK = chr(0x06).encode("utf-8")
-LEN9 = (chr(0x00)+chr(0x00)+chr(0x00)+chr(0x09)).encode("utf-8")
-LEN44 = (chr(0x00)+chr(0x00)+chr(0x00)+chr(0x2C)).encode("utf-8")
+LEN9 = (chr(0x00) + chr(0x00) + chr(0x00) + chr(0x09)).encode("utf-8")
+LEN44 = (chr(0x00) + chr(0x00) + chr(0x00) + chr(0x2C)).encode("utf-8")
+
 
 class GlobalStarResponse():
     def __init__(self):
@@ -25,7 +26,7 @@ class GlobalStarResponse():
             num += byte << (offset * 8)
         return num
 
-    def timeElapsedDisplay(self,secs):
+    def timeElapsedDisplay(self, secs):
         d = secs // 86400
         secs = secs - (d * 86400)
         h = secs // 3600
@@ -46,22 +47,22 @@ class GlobalStarResponse():
         else:
             return self.error
 
-    def parseACK(self, incoming,poll):
+    def parseACK(self, incoming, poll):
         POLL_ACK = SYN1 + SYN2 + LEN9 + ACK + poll.encode('UTF-8')
         POLL_NAK = SYN1 + SYN2 + LEN9 + NAK + poll.encode('UTF-8')
         if len(incoming) >= 11:
-            #print "***Parsing ack/nak string***"
+            # print "***Parsing ack/nak string***"
             # print("recieved string: "+ incoming[:10])
             if incoming[:11] == POLL_ACK:
-                print "ACK received!"
+                print("ACK received!")
                 return self.ack
             elif incoming[:11] == POLL_NAK:
-                print "NAK received!"
+                print("NAK received!")
                 return self.nak
             else:
                 print('Malformed response from GlobalStar radio')
-                print 'Recieved string: ', incoming[0:11]
-                print 'Expected string: ', POLL_ACK
+                print('Recieved string: ', incoming[0:11])
+                print('Expected string: ', POLL_ACK)
                 return self.error
         else:
             print("recieved insufficient bytes for poll ACK!")
@@ -73,9 +74,9 @@ class GlobalStarResponse():
         SYN_HDR = SYN1 + SYN2
         MSG_HDR = "R111".encode('UTF-8')
         if (len(incoming) >= 11):
-            print "***Parsing poll response header string***"
+            print("***Parsing poll response header string***")
             # print("recieved string: "+ buffer[:11])
-            #if incoming[:2] == SYN_HDR and incoming[6:11] == MSG_HDR:
+            # if incoming[:2] == SYN_HDR and incoming[6:11] == MSG_HDR:
             if len(incoming) > 11:
                 print("\n")
                 print("Response:", incoming)
@@ -86,35 +87,35 @@ class GlobalStarResponse():
                 print("Payload Size (max 34): " + payloadSize)
                 print("File name (internal use only)", incoming[28:28 + int(fileNameSize)])
                 print(
-                "Payload: " + incoming[28 + int(fileNameSize):28 + int(fileNameSize) + int(payloadSize)].decode(
-                    "utf8"))
+                    "Payload: " + incoming[28 + int(fileNameSize):28 + int(fileNameSize) + int(payloadSize)].decode(
+                        "utf8"))
                 print("CRC Integer: ", int(str(incoming[-2:]).encode('hex'), 16))
 
                 print("\n")
             else:
                 print('Malformed response from GlobalStar radio')
-                print 'Recieved string: ', incoming
+                print('Recieved string: ', incoming)
                 return self.error
-            #else:
-            #    print('Malformed response from GlobalStar radio')
-            #    print 'Recieved string: ', incoming[0:11]
-            #    print 'Expected string: ', MSG_HDR
-            #    return self.error
+                # else:
+                #    print('Malformed response from GlobalStar radio')
+                #    print 'Recieved string: ', incoming[0:11]
+                #    print 'Expected string: ', MSG_HDR
+                #    return self.error
         else:
             print("recieved insufficient bytes for poll RESPONSE!")
             print("recieved only " + len(incoming) + " bytes")
-            print 'Recieved string: ', incoming
+            print('Recieved string: ', incoming)
             return self.error
 
     def parseHealthPoll(self, incoming):
         POLL_HDR = SYN1 + SYN2 + LEN44 + "RC401".encode('UTF-8')
-        if(len(incoming) >= 11):
-            #print "***Parsing poll response header string***"
+        if (len(incoming) >= 11):
+            # print "***Parsing poll response header string***"
             # print("recieved string: "+ buffer[:11])
             if incoming[:11] == POLL_HDR:
-                if len(incoming)>=46:
-                    #print "successfull Health Poll header recieved"
-                    print "***Parsing Health Status string***"
+                if len(incoming) >= 46:
+                    # print "successfull Health Poll header recieved"
+                    print("***Parsing Health Status string***")
                     print("Epoch: " + str(self.from_bytes(incoming[11:15], True)))
                     print("Elapsed time: " + self.timeElapsedDisplay(self.from_bytes(incoming[15:19], True)))
                     print("RSSI: " + str(self.from_bytes(incoming[19:20], True)))
@@ -129,33 +130,33 @@ class GlobalStarResponse():
                     print("Recieved string: ", (incoming))
                 else:
                     print('Malformed response from GlobalStar radio')
-                    print 'Recieved string: ', incoming
+                    print('Recieved string: ', incoming)
             else:
                 print('Malformed response from GlobalStar radio')
-                print 'Recieved string: ', incoming[0:11]
-                print 'Expected string: ', POLL_HDR
+                print('Recieved string: ', incoming[0:11])
+                print('Expected string: ', POLL_HDR)
         else:
             print("recieved insufficient bytes for poll RESPONSE!")
             print("recieved only " + len(incoming) + " bytes")
-            print 'Recieved string: ', incoming
+            print('Recieved string: ', incoming)
 
-    def parseQueueLenPoll(self,incoming, poll):
-        POLL_HDR = SYN1 + SYN2 + LEN9 + ('R'+poll).encode('UTF-8')
-        if(len(incoming) >= 11):
-            #print "***Parsing poll response header string***"
+    def parseQueueLenPoll(self, incoming, poll):
+        POLL_HDR = SYN1 + SYN2 + LEN9 + ('R' + poll).encode('UTF-8')
+        if (len(incoming) >= 11):
+            # print "***Parsing poll response header string***"
             # print("recieved string: "+ buffer[:11])
-            #if incoming[:11] == POLL_HDR:
-            if len(incoming)>=15:
+            # if incoming[:11] == POLL_HDR:
+            if len(incoming) >= 15:
                 print("Messages Queue: " + str(self.from_bytes(incoming[11:], True)))
-                #print 'recieved string: ', incoming
+                # print 'recieved string: ', incoming
             else:
                 print('Malformed response from GlobalStar radio')
-                print 'Recieved string: ', incoming
-            #else:
-                #print('Malformed response from GlobalStar radio')
-                #print 'Recieved string: ', incoming[0:11]
-                #print 'Expected string: ', POLL_HDR
+                print('Recieved string: ', incoming)
+                # else:
+                # print('Malformed response from GlobalStar radio')
+                # print 'Recieved string: ', incoming[0:11]
+                # print 'Expected string: ', POLL_HDR
         else:
             print("recieved insufficient bytes for poll RESPONSE!")
             print("recieved only " + len(incoming) + " bytes")
-            print 'Recieved string: ', incoming
+            print('Recieved string: ', incoming)

@@ -8,48 +8,51 @@ Throw error returns if the response from EPS is 0xF000
 this means that the reading information is not yet ready to be read
 or that the read was not preceeded by a write
 '''
+
+
 class EPS_driver:
     def __init__(self):
         self.address = 0x20
         self.eps = 0x2B
-        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1, debug=True) #second argument tells bus number
+        self.i2c_bus = Adafruit_I2C(self.address, bus_num=1, debug=True)  # second argument tells bus number
         self.heater_status = 1
-        self.read_wait = 0.2   # Longest delay is 200ms
+        self.read_wait = 0.2  # Longest delay is 200ms
 
     def send_command(self, byteList, recvLength):
         self.i2c_bus.writeList(self.eps, byteList)
-        time.sleep(self.read_wait) #Look up in datasheet
+        time.sleep(self.read_wait)  # Look up in datasheet
         reply = self.i2c_bus.readList(self.eps, recvLength)
         return reply
 
     def board__status(self):
         Num = self.send_command([0x00, 0x01], 4)
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print (Num)
-        return Num #if Num == 0, Charge == 0. else: "Discharge" == 1
+        # print (Num)
+        return Num  # if Num == 0, Charge == 0. else: "Discharge" == 1
 
     def get__last__error(self):
         Num = self.send_command([0x00, 0x03], 4)
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
         final_Output = Num
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def get__version(self):
         Num = self.send_command([0x00, 0x04], 4)
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
         final_Output = Num
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def get__checksum(self):
-        Num = self.send_command([0x00, 0x05], 4) # return data type?? value in the space
+        Num = self.send_command([0x00, 0x05], 4)  # return data type?? value in the space
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        final_Output=Num
-        #print (final_Output)  # check if necessary
+        final_Output = Num
+        # print (final_Output)  # check if necessary
         return final_Output
 
- # GET TELEMETRY SECTION
+        # GET TELEMETRY SECTION
+
     def Pow_12v(self):
         Num = self.send_command([0x30, 0xE2, 0x10], 2)
         Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
@@ -57,17 +60,16 @@ class EPS_driver:
         Num = self.send_command([0x34, 0xE2, 0x10], 2)
         Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
         I = 0.00207 * Num
-        return I*V
+        return I * V
 
     def Pow_5v(self):
         Num = self.send_command([0x10, 0xE2, 0x10], 2)
         Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
-        V = 0.005865  * Num
+        V = 0.005865 * Num
         Num = self.send_command([0x14, 0xE2, 0x10], 2)
         Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
         I = 0.005237 * Num
-        return I*V
-
+        return I * V
 
     def Pow_3v3(self):
         Num = self.send_command([0x00, 0xE2, 0x10], 2)
@@ -75,8 +77,8 @@ class EPS_driver:
         V = 0.004311 * Num
         Num = self.send_command([0x04, 0xE2, 0x10], 2)
         Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
-        I = 0.005237  * Num
-        return I*V
+        I = 0.005237 * Num
+        return I * V
 
     def Pow_Batt(self):
         Num = self.send_command([0x20, 0xE2, 0x10], 2)
@@ -94,35 +96,35 @@ class EPS_driver:
 
         return V
 
-    def BCR_voltage(self, bcr_num): # input BCR number 1-9
+    def BCR_voltage(self, bcr_num):  # input BCR number 1-9
         if bcr_num > 0 and bcr_num < 10:
             cmd = bcr_num * 16
             Num = self.send_command([cmd, 0xE1, 0x10], 2)
             Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
             result = Num * 0.0249
-            #print(result)
+            # print(result)
             return result
         else:
             return -1
-    
-    def BCR_current(self, bcr_num): # input BCR number 1-9
+
+    def BCR_current(self, bcr_num):  # input BCR number 1-9
         if bcr_num > 0 and bcr_num < 10:
             cmd = bcr_num * 16 + 4
             Num = self.send_command([cmd, 0xE1, 0x10], 2)
             Num = ((Num[1]) >> 8) | ((Num[0]) << 8)
             result = Num * 0.0009775
-            #print(result)
+            # print(result)
             return result
         else:
             return -1
 
-    def BCR_temperature(self, bcr_num): # input BCR number 1-9
+    def BCR_temperature(self, bcr_num):  # input BCR number 1-9
         if bcr_num > 0 and bcr_num < 10:
             cmd = bcr_num * 16 + 8
             Num = self.send_command([cmd, 0xE1, 0x10], 2)
             Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-            result = (0.4963*Num) - 273.15
-            #print(result)
+            result = (0.4963 * Num) - 273.15
+            # print(result)
             return result
         else:
             return -1
@@ -154,130 +156,129 @@ class EPS_driver:
     def get__comms__watchdog__period(self):
         Num = self.send_command([0x00, 0x20], 2)  # ADC Channel 5. Range of Num??
         Num = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print (Num)
-        return Num #if Num == 0, Charge == 0. else: "Discharge" == 1
+        # print (Num)
+        return Num  # if Num == 0, Charge == 0. else: "Discharge" == 1
 
-    def set__comms__watchdog__period(self, period): # input desired timeout period in minutes, default is 4mins
-        self.i2c_bus.write16(self.eps, [period, 0x21]) # minimum 1 minute, max 90 minutes
-        time.sleep(self.read_wait) 
-        #Function does not return any bytes, no need to read
+    def set__comms__watchdog__period(self, period):  # input desired timeout period in minutes, default is 4mins
+        self.i2c_bus.write16(self.eps, [period, 0x21])  # minimum 1 minute, max 90 minutes
+        time.sleep(self.read_wait)
+        # Function does not return any bytes, no need to read
 
     def reset__comms__watchdog(self):
-        self.i2c_bus.write16(self.eps, 0x0022) # ADC Channel 4
+        self.i2c_bus.write16(self.eps, 0x0022)  # ADC Channel 4
         time.sleep(self.read_wait)
-        #Function does not return any bytes
+        # Function does not return any bytes
 
     def get__number__brownout__resets(self):
-        Num = self.send_command([0x00, 0x31], 4) # ADC Channel 6. Unit: mA
+        Num = self.send_command([0x00, 0x31], 4)  # ADC Channel 6. Unit: mA
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def get__number__autosoftware__resets(self):
-        Num = self.send_command([0x00, 0x32], 4) #ADC channel 7. Unit: V
+        Num = self.send_command([0x00, 0x32], 4)  # ADC channel 7. Unit: V
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def get__number__manual__resets(self):
-        Num = self.send_command([0x00, 0x33], 4) # ADC Channel 8. Unit: V
+        Num = self.send_command([0x00, 0x33], 4)  # ADC Channel 8. Unit: V
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def get__number__comms__watchdog__resets(self):
-        Num = self.send_command([0x00, 0x34], 2) # ADC Channel 9. Unit: C
+        Num = self.send_command([0x00, 0x34], 2)  # ADC Channel 9. Unit: C
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def switch__on__all__PDMs(self):
         self.i2c_bus.write16(self.eps, 0x0040)  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes 
+        # Returns 0 bytes
 
     def switch__off__all__PDMs(self):
         self.i2c_bus.write16(self.eps, 0x0041)  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes
+        # Returns 0 bytes
 
-    def get__actual__state__all__PDMs(self): 
-        Num = self.send_command([0x00, 0x42], 4)  #ADC Channel 9. Unit: C
+    def get__actual__state__all__PDMs(self):
+        Num = self.send_command([0x00, 0x42], 4)  # ADC Channel 9. Unit: C
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # Return bytes represent the state of each PDM, 0 is off and 1 on
+        # print(final_Output)  # Return bytes represent the state of each PDM, 0 is off and 1 on
         return final_Output
 
     def get__expected__state__all__PDMs(self):
-        Num = self.send_command([0x00, 0x43], 4)  #ADC Channel 9. Unit: C
+        Num = self.send_command([0x00, 0x43], 4)  # ADC Channel 9. Unit: C
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def get__initial__state__all__PDMs(self):
         Num = self.send_command([0x00, 0x44], 4)  # ADC Channel 9. Unit: C
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
     def set__all__PDMs__initial__state(self):
-        Num = self.send_command([0x00, 0x45], 4) # ADC Channel 9. Unit: C
+        Num = self.send_command([0x00, 0x45], 4)  # ADC Channel 9. Unit: C
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)
+        # print(final_Output)
         return final_Output
 
-    def switch__PDM_N__on(self, N): #Input PDM to turn on, PDM1 is 0x01
+    def switch__PDM_N__on(self, N):  # Input PDM to turn on, PDM1 is 0x01
         self.i2c_bus.writeList(self.eps, [N, 0x50])  # ADC Channel 9
-        time.sleep(self.read_wait) # Unit: C
-        #Returns 0 bytes, biggest delay in thi
+        time.sleep(self.read_wait)  # Unit: C
+        # Returns 0 bytes, biggest delay in thi
 
     def switch__PDM_N__off(self, N):
         self.i2c_bus.writeList(self.eps, [N, 0x51])  # ADC Channel 9
-        time.sleep(self.read_wait) # Unit: C
-        #Returns 0 bytes
+        time.sleep(self.read_wait)  # Unit: C
+        # Returns 0 bytes
 
     def set__PDM_N__initial__state__on(self, N):
         self.i2c_bus.writeList(self.eps, [N, 0x52])  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes
+        # Returns 0 bytes
 
     def set__PDM_N__initial__state__off(self, N):
         self.i2c_bus.writeList(self.eps, [N, 0x53])  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes
+        # Returns 0 bytes
 
     def get__PDM_N__actual__status(self, N):
-        Num = self.send_command([N, 0x54], 2) # ADC Channel 9. Unit: C
+        Num = self.send_command([N, 0x54], 2)  # ADC Channel 9. Unit: C
         final_Output = ((Num & 0xFF00) >> 8) | ((Num & 0x00FF) << 8)
-        #print(final_Output)  # check if necessary
+        # print(final_Output)  # check if necessary
         return final_Output
 
-    def set__PDM_N__timer__limit(self, limit, N): # Set length of time channel can remain enabled for
+    def set__PDM_N__timer__limit(self, limit, N):  # Set length of time channel can remain enabled for
         self.i2c_bus.writeList(self.eps, [N, limit, 0x60])  # ADC Channel 9
         time.sleep(self.read_wait)
-        #limit = 0xFF sets PDM enabled indefinitely 
-        #Returns 0 bytes
+        # limit = 0xFF sets PDM enabled indefinitely
+        # Returns 0 bytes
 
     def get__PDM_N__timer__limit(self, N):
         self.i2c_bus.writeList(self.eps, [N, 0x61])  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes (doesn't really make sense cause its a get)
+        # Returns 0 bytes (doesn't really make sense cause its a get)
 
     def get__PDM_N__tcurrent__timer__value(self, N):
         self.i2c_bus.writeList(self.eps, [N, 0x62])  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes, same as the one before
+        # Returns 0 bytes, same as the one before
 
-    def PCM__reset(self, bus): #input Battery, 5V, 3.3V or 12V
+    def PCM__reset(self, bus):  # input Battery, 5V, 3.3V or 12V
         powerBus = {"Battery: 0x01, 5V: 0x02, 3.3V: 0x04, 12V: 0x08"}
         self.i2c_bus.writeList(self.eps, [powerBus[bus], 0x62])  # ADC Channel 9
         time.sleep(self.read_wait)
-        #No bytes returned
+        # No bytes returned
 
     def manual__reset(self):
         self.i2c_bus.write16(self.eps, 0x0080)  # ADC Channel 9
         time.sleep(self.read_wait)
-        #Returns 0 bytes
-
+        # Returns 0 bytes
 
     '''
     def adc__battery2__current__direction(self):

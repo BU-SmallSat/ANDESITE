@@ -5,6 +5,7 @@ import Queue
 import time
 import subprocess
 import serial
+
 '''
 implement hardware failure messages
 implement communication with the Arduino
@@ -15,16 +16,16 @@ implement communication with the Arduino
 # health status file
 DeploymentHealthFile = "/home/debian/Maria/healthFiles/Deployerhealth.txt"
 
-class DeploymentThread(WorkerThread):
 
+class DeploymentThread(WorkerThread):
     def __init__(self, executive_queue):
         # print('==========__init__')
-        super(DeploymentThread,self).__init__("Deployment Thread")
+        super(DeploymentThread, self).__init__("Deployment Thread")
         self.Nodes = [[0, 0], [0, 0], [1, 0], [0, 0]]
         self.inputQueue = Queue.Queue()
         self.executiveQueue = executive_queue
         self.DeployCount = 1
-        self.ManualControl = 0 #It is 1 when all nodes are either deployed or have 5 failing attempts
+        self.ManualControl = 0  # It is 1 when all nodes are either deployed or have 5 failing attempts
         self.ArduinoID = "1"
         # self.FreeNodes = 4 #The number of undeployed nodes that have less than 5 failing attempts
 
@@ -32,23 +33,19 @@ class DeploymentThread(WorkerThread):
         # self.DeployCount += 1
         if self.DeployCount >= 4:
             self.executiveQueue.put("ED:DeploymentComplete")
-        elif self.There_are_Free_Nodes():
+        elif self.is_free_node():
             self.executiveQueue.put("ED:NextDeployment")
         else:
             print('THERE IS NO FREE NODES')
             self.executiveQueue.put("ED:AttemptsExceeded")
 
-
-    def There_are_Free_Nodes(self):
+    def is_free_node(self):
         # Function checks whether there are undeployed nodes with less than 5 attempts
         Free = 4
-        for k in range(4):
+        for k in range(Free):
             if self.Nodes[k][0] == 1 or self.Nodes[k][1] >= 5:
                 Free -= 1
-        if Free == 0:
-            return False
-        else:
-            return True
+        return not Free == 0
 
     def lowPowerMode(self):
         # this function should turn off all unnecessary hardware and functions for low power mode
@@ -63,21 +60,20 @@ class DeploymentThread(WorkerThread):
 
     def processResponse(self, string):
         if string == "DE:lowPowerMode":
-            self.    lowPowerMode()
+            self.lowPowerMode()
         elif string == "DC:restartDeployers":
             self.restartDeployers()
 
     def restartDeployers(self):
         pass
 
-
     def init(self):
         self.interval = .5
         self.log("Initializing thread with an interval of {0}".format(self.interval))
         self.PowerTime = 10
-        #with open(DeploymentHealthFile, "w") as healthFile:
+        # with open(DeploymentHealthFile, "w") as healthFile:
         #    subprocess.call(["echo", "Successful health file initialization"], stdout=healthFile)
-        self.ser = serial.Serial(port = '/dev/ttyO5', baudrate = 115200, timeout = 10)
+        self.ser = serial.Serial(port='/dev/ttyO5', baudrate=115200, timeout=10)
         self.ser.flush()
 
         # BeagleBone - Arduino Communication test:
@@ -99,7 +95,7 @@ class DeploymentThread(WorkerThread):
         '''
         # print("SUCCESS: Initialized serial communication with deployer arduino successful")
 
-#implement method to read messages from deployer arduinos in case of an error!?
+    # implement method to read messages from deployer arduinos in case of an error!?
 
     def loop(self):
         try:
@@ -115,25 +111,24 @@ class DeploymentThread(WorkerThread):
                 i += 1
             if not (i >= 3 and self.Nodes[i][0] == 1):
                 # while self.Nodes[i][0] == 0 and self.Nodes[i][1] < 5:
-                Result = self.ArduinoID+":Success"
-                if Result == (self.ArduinoID+":Failure"):
+                Result = self.ArduinoID + ":Success"
+                if Result == (self.ArduinoID + ":Failure"):
                     self.Nodes[i][1] += 1
                     Success = 0
                     Qstring = 'ED:failed deployment of node #' + str(i + 1) + 'attempt #' + str(self.Nodes[i][1])
                     # self.executiveQueue.put(Qstring)
-                elif Result == (self.ArduinoID+":Success"):
+                elif Result == (self.ArduinoID + ":Success"):
                     Success = 1
                     self.Nodes[i][0] = 1
                     Qstring = 'ED:successful deployment of node #' + str(i + 1)
                     # self.executiveQueue.put(Qstring)
-                # end of former while loop
+                    # end of former while loop
 
             if self.Nodes[i][0] == 0 and i < 3:
-            # if not Success and i < 3:
+                # if not Success and i < 3:
                 i += 1
             else:
                 Finish = 1
-
 
         # the return from the arduino needs to be checked for a success or not successful message
         # if the return is successful, then we need to update the radio network to include the new WSN
@@ -143,7 +138,7 @@ class DeploymentThread(WorkerThread):
         self.executiveQueue.put("RD:updateNetwork")
 
         if Success:
-        # if self.Nodes[i][0] == 1:
+            # if self.Nodes[i][0] == 1:
             self.DeployCount += 1
             print("SUCCESS: Deplpoyed pair of WSN")
         else:
@@ -153,10 +148,9 @@ class DeploymentThread(WorkerThread):
         #     self.Nodes[k][1] = 0
         self.sendMessage_to_exec_thread()
 
-
     def sendMessage(self, n):
         pass
         # transmit = self.ArduinoID + ":"+ str(n) +":"+ str(self.PowerTime).zfill(4)
-        #time.sleep(2)  # Essentially important delay; at least 2 seconds
+        # time.sleep(2)  # Essentially important delay; at least 2 seconds
         # self.ser.write(transmit.encode())
-        #return self.ser.readline().decode()
+        # return self.ser.readline().decode()

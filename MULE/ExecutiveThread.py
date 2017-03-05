@@ -1,22 +1,19 @@
 from __future__ import print_function
 
-import logging
 import Queue
+import logging
 import subprocess
 import sys
+import threading
 from threading import Timer
+
+from ADCThread import ADCThread
 from DeploymentThread import DeploymentThread
 from EPSThread import EPSThread
-from ADCThread import ADCThread
-from HealthThread import HealthThread
-from GlobalstarThread import GlobalstarThread
-from RFM22BThread import RFM22BThread
 from GPSThread import GPSThread
-from threading import _BoundedSemaphore
-import threading
-
-
-
+from GlobalstarThread import GlobalstarThread
+from HealthThread import HealthThread
+from RFM22BThread import RFM22BThread
 
 '''
 IMPORTANT::
@@ -59,13 +56,13 @@ gpsHealth = 0
 RFM22BHealth = 0
 
 # setup threads and thread communication
-inputQueue = Queue.Queue()   # E
+inputQueue = Queue.Queue()  # E
 Deployer = DeploymentThread(inputQueue)  # D
-Power = EPSThread(inputQueue)   # P
+Power = EPSThread(inputQueue)  # P
 Comm = GlobalstarThread(inputQueue)  # C
-RFM22B = RFM22BThread(inputQueue)   # R
+RFM22B = RFM22BThread(inputQueue)  # R
 Health = HealthThread(inputQueue)  # H
-ADC = ADCThread(inputQueue)   # A
+ADC = ADCThread(inputQueue)  # A
 GPS = GPSThread(inputQueue)  # G
 
 
@@ -76,16 +73,18 @@ def initialization():
     # specifics need to be identified
     print("*** BEGINING ANDESITE FLIGHT COMPUTER OPERATIONS***")
     # watchdog = Watchdog()
-    ## working with BeagleBone
+    # working with BeagleBone
     threading.Timer(8, Comm.GlobalstarEnable).start()
-    threading.Timer(HealthFreq, Health.healthBeacon, [ADCHealth,EPSHealth,DeploymentHealth,globalstarHealth,gpsHealth,RFM22BHealth]).start()
+    threading.Timer(HealthFreq, Health.healthBeacon, [ADCHealth, EPSHealth, DeploymentHealth, globalstarHealth, gpsHealth, RFM22BHealth]).start()
 
     #  Test initializing the health file
     with open(HealthBeaconFile, "w") as healthFile:
         subprocess.call(["echo", "Successful health file initialization"], stdout=healthFile)
 
+
 def loop():
     pass
+
 
 class Watchdog:
     def __init__(self, timeout, userHandler=None):  # timeout in seconds
@@ -120,11 +119,12 @@ def ADCInterpreter(string):
     else:
         return CurrentState
 
+
 ## develop profile for comm interpreter
 
 def CommInterpreter(string):
-# ground commands to configure which b-dot detumbling and pointing algorithm
-# get and set methods for which method were using
+    # ground commands to configure which b-dot detumbling and pointing algorithm
+    # get and set methods for which method were using
     global EPSReturnState
     global globalstarHealth
     global PointingState
@@ -137,7 +137,7 @@ def CommInterpreter(string):
         processMessage("RE:safeMode")
         return 5
     elif string == "EC:deployState":
-        DeployState =1
+        DeployState = 1
         print("***RECEIVED GROUND COMMAND: 'EC:deployNow'***")
         if PointingState == 1:
             return 2
@@ -156,14 +156,14 @@ def CommInterpreter(string):
 def DeployerInterpreter(string):
     global DeploymentHealth
     if string == "ED:DeploymentComplete" and CurrentState == 3:
-        #send update to ground on current deployment state
-        #set boolean that says we should accept grount commands for ejection attempts
+        # send update to ground on current deployment state
+        # set boolean that says we should accept grount commands for ejection attempts
         return 4
     elif string == "ED:NextDeployment" and CurrentState == 3:
         return 1
     elif string == "ED:AttemptsExceeded":
-        #send update to ground on current deployment state
-        #set boolean that says we should accept grount commands for ejection attempts
+        # send update to ground on current deployment state
+        # set boolean that says we should accept grount commands for ejection attempts
         return 4
     elif string == "ED:HealthUpdate":
         DeploymentHealth = 1
@@ -180,6 +180,7 @@ def GPSInterpreter(string):
     else:
         return CurrentState
 
+
 ## Develop profile for power interpreter
 
 def HealthInterpreter(string):
@@ -190,7 +191,7 @@ def HealthInterpreter(string):
     global gpsHealth
     global RFM22BHealth
     if string == "CH:healthBeacon":
-        #set all health variables to 0
+        # set all health variables to 0
         EPSHealth = 0
         ADCHealth = 0
         DeploymentHealth = 0
@@ -217,8 +218,9 @@ def RFM22BInterpreter(string):
     if string == "ER:HealthUpdate":
         RF22BHealth = 1
     elif "ER:Done:" in string:
-        processMessage("CE"+string[2:])
+        processMessage("CE" + string[2:])
     return CurrentState
+
 
 def processMessage(string):
     global MessageRecovery
@@ -232,10 +234,11 @@ def processMessage(string):
         return next_state
     else:
         # include error handling for if the thread char is not one of the items in the dictionary
-        print("sending to thread: "+string)
+        print("sending to thread: " + string)
 
         routeMessage[thread_char].put(string)
         return CurrentState
+
 
 # logging setup
 logging.basicConfig(stream=sys.stdout, level=logging.INFO, format="%(asctime)s.%(msecs)03d:%(name)s:%(message)s",
@@ -277,7 +280,7 @@ print("performing ADC detumbling algorithms")
 
 # State Machine
 while True:
-    if CurrentState == 1: # ADC algorithms state
+    if CurrentState == 1:  # ADC algorithms state
         processMessage("AE:Detumbling")
         print("waiting for pointing mode and deploy ready command from ground")
     elif CurrentState == 2:  # waiting to deploy state and pointing
@@ -298,12 +301,12 @@ while True:
         processMessage("RE:ScienceMode")
         processMessage("GE:ScienceMode")
         print("Deployment state complete - Entering Science Mode")
-    elif CurrentState == 5:   # safe mode
+    elif CurrentState == 5:  # safe mode
         # Be very careful with conflicts between low power mode and other modes
-            # make sure that all other running processes are stopped and transitioned to low power mode before
-            # hardware is turned off - also make sure that messages that should indicate a state transition that come
-            # during low power mode (or on the cusp before and after) are handled correctly
-            # lots of potential for edge cases that could cause a lot of problems!
+        # make sure that all other running processes are stopped and transitioned to low power mode before
+        # hardware is turned off - also make sure that messages that should indicate a state transition that come
+        # during low power mode (or on the cusp before and after) are handled correctly
+        # lots of potential for edge cases that could cause a lot of problems!
         Comm.GlobalstarDisable()
         print("entering safe mode state in executive thread")
     tempState = None

@@ -19,8 +19,8 @@ RFM22BHealthFile = "/home/debian/Maria/healthFiles/RFM22Bhealth.txt"
 # do we need an executive thread health file - are there any health statuses to report?
 verbose = 1
 
-class HealthThread(WorkerThread):
 
+class HealthThread(WorkerThread):
     def __init__(self, executive_queue):
         super(HealthThread, self).__init__("Health Thread")
         self.inputQueue = Queue.Queue()
@@ -29,15 +29,14 @@ class HealthThread(WorkerThread):
     def processResponse(self, string):
         global verbose
         if string == "HC:requestHealth":
-            #how to relay this information
+            # how to relay this information
             pass
         elif string == "HC:verboseModeOn":
             verbose = 1
         elif string == "HC:verboseModeOff":
             verbose = 0
 
-
-    def healthBeacon(self, ADCHealth,EPSHealth,DeploymentHealth,globalstarHealth,gpsHealth,RFM22BHealth):
+    def healthBeacon(self, ADCHealth, EPSHealth, DeploymentHealth, globalstarHealth, gpsHealth, RFM22BHealth):
         # read all files into a single health beacon file
         with open(HealthBeaconFile, "w") as healthFile:
             subprocess.call(["echo", "HealthBeacon"], stdout=healthFile)
@@ -74,13 +73,11 @@ class HealthThread(WorkerThread):
                 with open(HealthBeaconFile, "a") as healthFile:
                     subprocess.call(["cat", RFM22BHealthFile], stdout=healthFile)
 
-
-
     def init(self):
         self.interval = 10
         self.log("Initializing thread with an interval of {0}".format(self.interval))
         with open(HealthBeaconFile, "w") as healthFile:
-            subprocess.call(["echo", "Successful health file initialization"], stdout = healthFile)
+            subprocess.call(["echo", "Successful health file initialization"], stdout=healthFile)
 
     def loop(self):
         try:
@@ -88,4 +85,4 @@ class HealthThread(WorkerThread):
             self.processResponse(executiveResponse)
         except Queue.Empty:
             pass
-        #self.healthBeacon()
+            # self.healthBeacon()

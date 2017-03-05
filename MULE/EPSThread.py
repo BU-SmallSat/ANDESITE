@@ -1,21 +1,18 @@
 from __future__ import print_function
 
-from worker_thread import WorkerThread
 import Queue
-import time
 import subprocess
-import threading
+
 from eps_driver import EPS_driver
-from battery_driver import BatteryDriver
+from worker_thread import WorkerThread
 
 # health status file
 EPSHealthFile = "/home/debian/Maria/healthFiles/EPShealth.txt"
 
 
 class EPSThread(WorkerThread):
-
     def __init__(self, executive_queue):
-        super(EPSThread,self).__init__("EPS Thread")
+        super(EPSThread, self).__init__("EPS Thread")
         self.inputQueue = Queue.Queue()
         self.executiveQueue = executive_queue
         self.eps = EPS_driver()
@@ -32,12 +29,12 @@ class EPSThread(WorkerThread):
         self.overflow = 0  # I2C overflow (byte 1, bit 2)
         self.msgLength = 0  # received message too long (byte 1, bit 3)
 
-# should have a low power mode that has two different exit protocol depending on how the function was called
+    # should have a low power mode that has two different exit protocol depending on how the function was called
     # if the function was called from ground, then low power mode should not be exited until a full battery charge
     # if low power mode was called based on the battery threshold then it should exit once the battery regains a
     # sufficient voltage
 
-# should low power mode be a function or a state in the main loop?
+    # should low power mode be a function or a state in the main loop?
     # probably a separate function so that it can be called at a less frequent interval so that the battery voltage can
     # be checked periodically, but not as frequently as it monitors the voltage when it is in active mode
 
@@ -100,7 +97,6 @@ class EPSThread(WorkerThread):
     def restartEPS(self):
         pass
 
-
     def init(self):
         self.interval = .5
         self.log("Initializing thread with an interval of {0}".format(self.interval))
@@ -115,6 +111,6 @@ class EPSThread(WorkerThread):
             self.processResponse(executiveResponse)
         except Queue.Empty:
             pass
-        #check EPS voltages and currents every minute if it goes low send warning ground command
-            #else just log most recent one in health file
-        # *****put main code here****
+            # check EPS voltages and currents every minute if it goes low send warning ground command
+            # else just log most recent one in health file
+            # *****put main code here****

@@ -1,11 +1,12 @@
 from __future__ import print_function
 
-from worker_thread import WorkerThread
 import Queue
-import threading
 import subprocess
-from globalstar_serial import GlobalStarSerial
+import threading
+
 import Adafruit_BBIO.GPIO as GPIO
+
+from worker_thread import WorkerThread
 
 # Should we have a ground command asking how many messages are in the queue?
 HealthBeaconFile = "/home/debian/Maria/healthFiles/healthBeacon.txt"

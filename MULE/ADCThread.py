@@ -4,7 +4,7 @@ from worker_thread import WorkerThread
 import Queue
 import threading
 import subprocess
-from magnetorquer_driver import magnetorquer_driver
+from magnetorquer_driver import MagnetorquerDriver
 # from MPU9250 import MPU9250
 # from SunSensorDriver import SunSensorDriver
 
@@ -27,7 +27,7 @@ class ADCThread(WorkerThread):
         super(ADCThread, self).__init__("ADC Thread")
         self.inputQueue = Queue.Queue()
         self.executiveQueue = executive_queue
-        self.MTQ = magnetorquer_driver()
+        self.MTQ = MagnetorquerDriver()
         #self.mpu9250 = MPU9250()
         #self.SS = SunSensorDriver()
 
