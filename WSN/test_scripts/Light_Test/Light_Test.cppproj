@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="14.0">
+  <PropertyGroup>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>7.0</ProjectVersion>
+    <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
+    <ProjectGuid>{00c8ca6b-02c9-4dfd-8159-e16a4531d54a}</ProjectGuid>
+    <avrdevice>atmega2560</avrdevice>
+    <avrdeviceseries>none</avrdeviceseries>
+    <OutputType>Executable</OutputType>
+    <Language>CPP</Language>
+    <OutputFileName>$(MSBuildProjectName)</OutputFileName>
+    <OutputFileExtension>.elf</OutputFileExtension>
+    <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
+    <AssemblyName>Light_Test</AssemblyName>
+    <Name>Light_Test</Name>
+    <RootNamespace>Light_Test</RootNamespace>
+    <ToolchainFlavour>Native</ToolchainFlavour>
+    <KeepTimersRunning>true</KeepTimersRunning>
+    <OverrideVtor>false</OverrideVtor>
+    <OverrideVtorValue>
+    </OverrideVtorValue>
+    <eraseonlaunchrule>0</eraseonlaunchrule>
+    <ProgFlashFromRam>true</ProgFlashFromRam>
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
+    <CacheFlash>true</CacheFlash>
+    <UncachedRange />
+    <BootSegment>0</BootSegment>
+    <AsfFrameworkConfig>
+      <framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.25.0" />
+        </dependencies>
+      </framework-data>
+    </AsfFrameworkConfig>
+    <preserveEEPROM>true</preserveEEPROM>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega2560__</Value>
+      <Value>ARDUINO=106011</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>D:/user/Documents/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>../../../Light_Test</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega2560__</Value>
+      <Value>ARDUINO=106011</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>D:/user/Documents/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>../../../Light_Test</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+    <VMSETTING_IncludePaths>D:/Program Files (x86)/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/user/Documents/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;../../../Light_Test;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master;D:/Program Files (x86)/Arduino/libraries/Adafruit_TSL2561_U;D:/Program Files (x86)/Arduino/libraries/LSM9DS0;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src;D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master;</VMSETTING_IncludePaths>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <ToolchainSettings>
+      <AvrGccCpp>
+  <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
+  <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
+  <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
+  <avrgcc.common.outputfiles.srec>True</avrgcc.common.outputfiles.srec>
+  <avrgcc.common.outputfiles.usersignatures>False</avrgcc.common.outputfiles.usersignatures>
+  <avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcc.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcc.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega2560__</Value>
+      <Value>ARDUINO=106011</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcc.compiler.symbols.DefSymbols>
+  <avrgcc.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>D:/user/Documents/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>../../../Light_Test</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+    </ListValues>
+  </avrgcc.compiler.directories.IncludePaths>
+  <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
+  <avrgcc.compiler.optimization.PackStructureMembers>True</avrgcc.compiler.optimization.PackStructureMembers>
+  <avrgcc.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcc.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcc.compiler.optimization.DebugLevel>Default (-g2)</avrgcc.compiler.optimization.DebugLevel>
+  <avrgcc.compiler.warnings.AllWarnings>True</avrgcc.compiler.warnings.AllWarnings>
+  <avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultCharTypeUnsigned>
+  <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
+  <avrgcccpp.compiler.symbols.DefSymbols>
+    <ListValues>
+      <Value>__AVR_ATmega2560__</Value>
+      <Value>ARDUINO=106011</Value>
+      <Value>ARDUINO_MAIN</Value>
+      <Value>F_CPU=16000000L</Value>
+      <Value>__AVR__</Value>
+      <Value>ARDUINO_AVR_MEGA2560</Value>
+      <Value>ARDUINO_ARCH_AVR</Value>
+    </ListValues>
+  </avrgcccpp.compiler.symbols.DefSymbols>
+  <avrgcccpp.compiler.directories.IncludePaths>
+    <ListValues>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
+      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>D:/user/Documents/Arduino/libraries</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>../../../Light_Test</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+    </ListValues>
+  </avrgcccpp.compiler.directories.IncludePaths>
+  <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
+  <avrgcccpp.compiler.optimization.PackStructureMembers>True</avrgcccpp.compiler.optimization.PackStructureMembers>
+  <avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>True</avrgcccpp.compiler.optimization.AllocateBytesNeededForEnum>
+  <avrgcccpp.compiler.optimization.DebugLevel>Default (-g2)</avrgcccpp.compiler.optimization.DebugLevel>
+  <avrgcccpp.compiler.warnings.AllWarnings>True</avrgcccpp.compiler.warnings.AllWarnings>
+  <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
+</AvrGccCpp>
+    </ToolchainSettings>
+    <VMSETTING_IncludePaths>D:/Program Files (x86)/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/user/Documents/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;../../../Light_Test;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master;D:/Program Files (x86)/Arduino/libraries/Adafruit_TSL2561_U;D:/Program Files (x86)/Arduino/libraries/LSM9DS0;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src;D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master;</VMSETTING_IncludePaths>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="Light_Test.ino">
+      <SubType>compile</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="__vm\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="__vm\.Light_Test.vsarduino.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
+</Project>
