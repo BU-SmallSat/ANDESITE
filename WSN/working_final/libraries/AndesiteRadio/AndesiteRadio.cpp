@@ -80,6 +80,7 @@ int AndesiteRadio::send(uint8_t *message, uint8_t len, uint8_t addr) {
 
 // Send message to the given radio address
 int AndesiteRadio::sendCommand(uint8_t message[], uint8_t len, uint8_t addr) {
+	Serial.println("WHAT THE ACTUAL *#($&@#(*$&@#");
     digitalWrite(RF_CS_PIN, LOW);
     digitalWrite(ADS_CS_PIN, HIGH);
     digitalWrite(SD_CS_PIN, HIGH);

@@ -322,6 +322,7 @@ boolean AndesiteOrbit::waitTransferStartCmd(unsigned long _transfer_start) {
 	bool scienceMode = false;
 	while(!scienceMode){
 		// Send message to Mule saying done with Science mode
+		
 		if ( !message_sent ) {
 			uint8_t data[]="::Ready";
 			if ( !_Radio.sendCommand(data, sizeof(data), ACDH_MULE_ADDR) ) {

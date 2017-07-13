@@ -77,12 +77,27 @@ int AndesiteWSN::init() {
         resetFunc();
 	}
 	
+	
+	
     // Initialize radio 
+	Serial.println("hi");
     if ( _Radio.init() != 0 ) {
         Serial.println("ERROR: Radio setup failed.");
         delay(10000);
         resetFunc();
     }
+	
+	
+	Serial.println("testing radio after init");
+	uint8_t data[]="::Ready";
+	if ( !_Radio.sendCommand(data, sizeof(data), ACDH_MULE_ADDR) ) {
+		Serial.println("Send Fail.");
+	}
+	else{
+		Serial.println("::Received acknowledgement from Mule");
+		return true;
+	}
+	Serial.println("finished testing radio after init");
 
 	int val = analogRead(BATTERY_OUT);    // read the input pin
 	Serial.print("READING BATTERY OUTPUT:  ");
@@ -565,32 +580,7 @@ void AndesiteWSN::wait() {
     // _File.setLines(0);
 }
 bool AndesiteWSN::batteryCheck(){
-    Serial.println("in battery check");
-    batteryLevel = 100;  //edit to get this value from actual WSN battery - EPS?
-    switch (state){
-        case 's':
-            if(batteryLevel > 60){ //edit with percent battery required for science mode
-                Serial.println("SUFFICIENT BATTERY FOR SCIENCE MODE");
-                return true;
-            } 
-            else {
-                return false;
-            }
-            break;
-        case 't':
-            if(batteryLevel > 75){  //edit with percent battery required for data transfer mode
-                Serial.println("SUFFICIENT BATTERY FOR DATA TRANSFER MODE");
-                return true;
-            }
-            else {
-                return false;
-            }
-            break;
-        default:
-            //enter error checking case here
-            return false;
-            break;
-    }
+	return true;
 }
 
 void AndesiteWSN::lowPowerMode() {
