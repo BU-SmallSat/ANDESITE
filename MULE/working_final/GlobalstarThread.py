@@ -61,15 +61,7 @@ class GlobalstarThread(WorkerThread):
         GPIO.output("P9_15", GPIO.HIGH)
         time.sleep(.5) #is this necessary
         print("****Enabling Globalstar****")
-        self.executiveQueue.put("EC:GlobalstarEnabled")
-        threading.Timer(10, self.routeUplink, ["EC:HelloAndesite"]).start()
-        threading.Timer(15, self.routeUplink, ["EC:EnableDeployer"]).start()
-        threading.Timer(20, self.routeUplink, ["EC:deployPair1"]).start()
-        threading.Timer(25, self.routeUplink, ["RC:radioInit"]).start()
-        threading.Timer(50, self.routeUplink, ["RC:listFiles"]).start()
-        threading.Timer(100, self.routeUplink, ["RC:listFiles"]).start()
-        threading.Timer(105, self.routeUplink, ["RC:pull_1_001_file"]).start()
-        #send downlink to ground "Hello Andesite" - but only on startup enable
+
 
     def GlobalstarDisable(self):
         print("****Disabling Globalstar****")
@@ -92,6 +84,8 @@ class GlobalstarThread(WorkerThread):
             self.GlobalstarEnable()
         elif string == "CE:DisableGlobalstar":
             self.GlobalstarDisable()
+        elif string == "CE:globalStarHealth":
+            self.healthTest()
         elif string == "CE:HelloBU":
             print("DOWNLINKING HELLO BU MESSAGE")
         elif string == "CE:HealthPoll":

@@ -129,6 +129,8 @@ class GlobalStarSerial:
         packet = SYN1+SYN2+LEN9+"PC401".encode('UTF-8')
         print "Writing health poll message"
         # print("response was: " + incoming)
+        RSSI = 0
+        Connected = 0
         incoming = self.transmit(packet,timeOut, readInterval)
         if len(incoming) > 11:
             response = self.parser.parseACK(incoming, "C401")
@@ -136,8 +138,7 @@ class GlobalStarSerial:
                 print('Malformed response from GlobalStar radio: ')
                 print(incoming)
             elif response == self.parser.ack and len(incoming) > 11:
-                healthInfo = self.parser.parseHealthPoll(incoming[11:])
-                return True
+                [RSSI,Connected] = self.parser.parseHealthPoll(incoming[11:])
         else:
             if len(incoming) == 0:
                 print('Timeout on send')
@@ -145,7 +146,7 @@ class GlobalStarSerial:
             else:
                 print('Malformed response from GlobalStar radio: ')
                 print(incoming)
-        return False
+        return [RSSI,Connected]
 
     def push_file_poll(self, timeOut, readInterval):
         packet = bytearray(SYN1+SYN2+LEN9+"PP333".encode('UTF-8'))

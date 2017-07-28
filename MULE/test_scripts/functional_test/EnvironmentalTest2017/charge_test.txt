@@ -1,0 +1,2023 @@
+
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.026305
+5v current: 0.319457
+5v power: 1.60568831639
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.864728
+raw batt current: 0.005237
+raw batt power: 0.041187580536
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08901
+12v power: 1.0674622161
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.189
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3215975
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.687
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.687
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3215975
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.687
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.97912
+12v current: 0.08694
+12v power: 1.0414646928
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 18.3015
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.09936
+12v power: 1.1915857296
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+ERROR EMPTY RESPONSE FROM EPS
+BCR #4 current on connector A: 64.0604625
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.026305
+5v current: 0.319457
+5v power: 1.60568831639
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.5874
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.0645
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.189
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.11592
+12v power: 1.3901833512
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.95214
+12v current: 0.08487
+12v power: 1.0143781218
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13869
+12v power: 1.6632550809
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.189
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13662
+12v power: 1.6384303782
+***5 VOLT BUS***
+5v voltage: 5.026305
+5v current: 0.319457
+5v power: 1.60568831639
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.189
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13662
+12v power: 1.6384303782
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.97912
+12v current: 0.13869
+12v power: 1.6613841528
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.189
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.005865
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13662
+12v power: 1.6384303782
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.5625
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13869
+12v power: 1.6632550809
+***5 VOLT BUS***
+5v voltage: 5.026305
+5v current: 0.324694
+5v power: 1.63201107567
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08901
+12v power: 1.0674622161
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.10143
+12v power: 1.2164104323
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.026305
+5v current: 0.324694
+5v power: 1.63201107567
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 14.9649
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3215975
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08901
+12v power: 1.0674622161
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3215975
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08901
+12v power: 1.0674622161
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 12.01959
+12v current: 0.08694
+12v power: 1.0449831546
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.05474
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.31422
+5v power: 1.5812084574
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.318665
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.09108
+12v power: 1.0922869188
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.93865
+12v current: 0.08901
+12v power: 1.0626592365
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.891662
+raw batt current: 0.005237
+raw batt power: 0.041328633894
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 18.3264
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.97912
+12v current: 0.12834
+12v power: 1.5374002608
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.14283
+12v power: 1.7129044863
+***5 VOLT BUS***
+5v voltage: 5.026305
+5v current: 0.319457
+5v power: 1.60568831639
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.0029325
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.05474
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.97912
+12v current: 0.13662
+12v power: 1.6365873744
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.05474
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.32062
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13662
+12v power: 1.6384303782
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.15111
+12v power: 1.8122032971
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.5376
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3235525
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.13662
+12v power: 1.6384303782
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3128
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1651975
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.05474
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.3215975
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08901
+12v power: 1.0674622161
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08073
+12v power: 0.9681634053
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 14.7657
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.97912
+12v current: 0.09936
+12v power: 1.1902453632
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.1632425
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3215975
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.3235525
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.00391
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.052785
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0498
+BCR #4 current on connector A: 0.32062
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.918596
+raw batt current: 0.005237
+raw batt power: 0.041469687252
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6621
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1641
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.001955
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.10143
+12v power: 1.2164104323
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.319457
+5v power: 1.60756193169
+***3.3 VOLT BUS***
+3.3v voltage: 3.336714
+3.3v current: 0.020948
+3.3v power: 0.069897484872
+***RAW BATT BUS***
+raw batt voltage: 7.909618
+raw batt current: 0.005237
+raw batt power: 0.041422669466
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.4878
+BCR #1 current on connector A: 0.16422
+BCR #1 current on connector B: 0.001955
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.0009775
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.3235525
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08694
+12v power: 1.0426375134
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.345642
+5v power: 1.73932930314
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.1612875
+BCR #1 current on connector B: 0.0009775
+***BCR 2***
+BCR #2 voltage: 15.1392
+BCR #2 current on connector A: 0.001955
+BCR #2 current on connector B: 0.0537625
+***BCR 5***
+BCR #5 voltage: 0.0
+BCR #5 current on connector A: 0.322575
+BCR #5 current on connector B: 0.0029325
+***BCR 4***
+BCR #4 voltage: 0.0747
+BCR #4 current on connector A: 0.322575
+BCR #4 current on connector B: 0.001955
+
+
+---*** END EPS STATUS TEST ***---
+***WILL REPEAT INDEFINITELY - CTRL C TO EXIT***
+
+VOLTAGE BUSES HEALTH INFO
+***12 VOLT BUS***
+12v voltage: 11.99261
+12v current: 0.08487
+12v power: 1.0178128107
+***5 VOLT BUS***
+5v voltage: 5.03217
+5v current: 0.324694
+5v power: 1.63391540598
+***3.3 VOLT BUS***
+3.3v voltage: 3.332403
+3.3v current: 0.020948
+3.3v power: 0.069807178044
+***RAW BATT BUS***
+raw batt voltage: 7.90064
+raw batt current: 0.005237
+raw batt power: 0.04137565168
+
+BCR HEALTH INFO
+***BCR 1***
+BCR #1 voltage: 15.6372
+BCR #1 current on connector A: 0.162265
+BCR #1 current on connector B: 0.001955
+***BCR 2***
