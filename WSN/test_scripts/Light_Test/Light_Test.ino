@@ -1,7 +1,7 @@
-#include <Wire.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
 #include <SFE_LSM9DS0.h>
+
 /* This driver uses the Adafruit unified sensor library (Adafruit_Sensor),
    which provides a common 'type' for sensor data and some helper functions.
    
@@ -34,8 +34,14 @@
    =======
    2013/JAN/31  - First version (KTOWN)
 */
-   
-Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 12345);
+
+Adafruit_TSL2561_Unified tsl1 = Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 12345);
+Adafruit_TSL2561_Unified tsl2 = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT, 54321);
+Adafruit_TSL2561_Unified tsl3 = Adafruit_TSL2561_Unified(TSL2561_ADDR_HIGH, 11111);
+
+bool OneOn =   true;    // light sensor 1
+bool TwoOn =   false;   // 3rd, non-existent light sensor (supported by library) 
+bool ThreeOn = true;    // light sensor 2
 
 /**************************************************************************/
 /*
@@ -43,24 +49,53 @@ Adafruit_TSL2561_Unified tsl = Adafruit_TSL2561_Unified(TSL2561_ADDR_LOW, 12345)
     sensor API sensor_t type (see Adafruit_Sensor for more information)
 */
 /**************************************************************************/
-#define LSM9DS0_XM  0x1D // Would be 0x1E if SDO_XM is LOW
-#define LSM9DS0_G   0x6B // Would be 0x6A if SDO_G is LOW
-LSM9DS0 DOF(MODE_SPI, LSM9DS0_G, LSM9DS0_XM);
-
 void displaySensorDetails(void)
 {
-  sensor_t sensor;
-  tsl.getSensor(&sensor);
-  Serial.println("------------------------------------");
-  Serial.print  ("Sensor:       "); Serial.println(sensor.name);
-  Serial.print  ("Driver Ver:   "); Serial.println(sensor.version);
-  Serial.print  ("Unique ID:    "); Serial.println(sensor.sensor_id);
-  Serial.print  ("Max Value:    "); Serial.print(sensor.max_value); Serial.println(" lux");
-  Serial.print  ("Min Value:    "); Serial.print(sensor.min_value); Serial.println(" lux");
-  Serial.print  ("Resolution:   "); Serial.print(sensor.resolution); Serial.println(" lux");  
-  Serial.println("------------------------------------");
-  Serial.println("");
-  delay(500);
+	sensor_t sensor1;
+	sensor_t sensor2;
+	sensor_t sensor3;
+	
+	if(OneOn) {
+	tsl1.getSensor(&sensor1);
+	Serial.println("------------------------------------");
+	Serial.print  ("Sensor:       "); Serial.println(sensor1.name);
+	Serial.print  ("Driver Ver:   "); Serial.println(sensor1.version);
+	Serial.print  ("Unique ID:    "); Serial.println(sensor1.sensor_id);
+	Serial.print  ("Max Value:    "); Serial.print(sensor1.max_value); Serial.println(" lux");
+	Serial.print  ("Min Value:    "); Serial.print(sensor1.min_value); Serial.println(" lux");
+	Serial.print  ("Resolution:   "); Serial.print(sensor1.resolution); Serial.println(" lux");
+	Serial.println("------------------------------------");
+	Serial.println("");
+	}
+
+	if(TwoOn){
+	tsl2.getSensor(&sensor2);
+	Serial.println("------------------------------------");
+	Serial.print  ("Sensor:       "); Serial.println(sensor2.name);
+	Serial.print  ("Driver Ver:   "); Serial.println(sensor2.version);
+	Serial.print  ("Unique ID:    "); Serial.println(sensor2.sensor_id);
+	Serial.print  ("Max Value:    "); Serial.print(sensor2.max_value); Serial.println(" lux");
+	Serial.print  ("Min Value:    "); Serial.print(sensor2.min_value); Serial.println(" lux");
+	Serial.print  ("Resolution:   "); Serial.print(sensor2.resolution); Serial.println(" lux");
+	Serial.println("------------------------------------");
+	Serial.println("");
+	}
+	
+	if(ThreeOn) {
+	tsl3.getSensor(&sensor3);
+	Serial.println("------------------------------------");
+	Serial.print  ("Sensor:       "); Serial.println(sensor3.name);
+	Serial.print  ("Driver Ver:   "); Serial.println(sensor3.version);
+	Serial.print  ("Unique ID:    "); Serial.println(sensor3.sensor_id);
+	Serial.print  ("Max Value:    "); Serial.print(sensor3.max_value); Serial.println(" lux");
+	Serial.print  ("Min Value:    "); Serial.print(sensor3.min_value); Serial.println(" lux");
+	Serial.print  ("Resolution:   "); Serial.print(sensor3.resolution); Serial.println(" lux");
+	Serial.println("------------------------------------");
+	Serial.println("");
+	}
+	
+	delay(5);
+
 }
 
 /**************************************************************************/
@@ -71,15 +106,30 @@ void displaySensorDetails(void)
 void configureSensor(void)
 {
   /* You can also manually set the gain or enable auto-gain support */
-  //tsl.setGain(TSL2561_GAIN_1X);      /* No gain ... use in bright light to avoid sensor saturation */
-  // tsl.setGain(TSL2561_GAIN_16X);     /* 16x gain ... use in low light to boost sensitivity */
-   tsl.enableAutoRange(true);            /* Auto-gain ... switches automatically between 1x and 16x */
   
-  /* Changing the integration time gives you better sensor resolution (402ms = 16-bit data) */
-   tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);      /* fast but low resolution */
-  // tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_101MS);  /* medium resolution and speed   */
-  // tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS);  /* 16-bit data but slowest conversions */
+  /*										COLLECTION
+     tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);       // fast but low resolution 
+     tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_101MS);      // medium resolution and speed   
+     tsl.setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS);      // 16-bit data but slowest conversions 
+	 /^ Changing the integration time gives you better sensor resolution (402ms = 16-bit data) ^/
+  */
+  
+  /*										  GAIN
+	tsl.setGain(TSL2561_GAIN_1X);      // No gain ... use in bright light to avoid sensor saturation 
+	tsl.setGain(TSL2561_GAIN_16X);     // 16x gain ... use in low light to boost sensitivity 
+	tsl.enableAutoRange(true);         // Auto-gain ... switches automatically between 1x and 16x 
+  */
+  
+	tsl1.enableAutoRange(true);
+	tsl1.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
 
+	tsl2.enableAutoRange(true);
+	tsl2.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
+	
+	tsl3.enableAutoRange(true);
+	tsl3.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
+	
+	
   /* Update these values depending on what you've set above! */  
   Serial.println("------------------------------------");
   Serial.print  ("Gain:         "); Serial.println("Auto");
@@ -96,16 +146,32 @@ void setup(void) {
 	Serial.begin(115200);
 	Serial.println("Light Sensor Test"); Serial.println("");
 	pinMode(13,OUTPUT);
-  
+	
 	digitalWrite(13,HIGH);
   
 	/* Initialise the sensor */
-	if(!tsl.begin())
+	if(!tsl1.begin() && OneOn)
 	{
-	/* There was a problem detecting the TSL2561 ... check your connections */
-	Serial.print("Ooops, no TSL2561 detected ... Check your wiring or I2C ADDR!");
-	while(1);	//hang
+		/* There was a problem detecting the TSL2561 ... check your connections */
+		Serial.print("Ooops, no TSL2561 ==Version 1== detected ... Check your wiring or I2C ADDR!");
+		while(1);	//hang
 	}
+	
+	if(!tsl2.begin() && TwoOn)
+	{
+		/* There was a problem detecting the TSL2561 ... check your connections */
+		Serial.print("Ooops, no TSL2561 ===Version 2== detected ... Check your wiring or I2C ADDR!");
+		while(1);	//hang
+	}
+	
+	if(!tsl3.begin() && ThreeOn)
+	{
+		/* There was a problem detecting the TSL2561 ... check your connections */
+		Serial.print("Ooops, no TSL2561 ===Version 3== detected ... Check your wiring or I2C ADDR!");
+		while(1);	//hang
+	}
+		
+		
   
 	/* Display some basic information on this sensor */
 	displaySensorDetails();
@@ -116,8 +182,10 @@ void setup(void) {
 	/* We're ready to go! */
 	Serial.println("SETUP COMPLETE");
 	Serial.println("==============");
-	Wire.begin();
-	DOF.begin();
+	//Wire.begin();
+	
+		
+	displaySensorDetails();
 	digitalWrite(13,LOW);
 }
 
@@ -129,20 +197,48 @@ void setup(void) {
 /**************************************************************************/
 void loop(void) 
 {  
+	//displaySensorDetails();
 	/* Get a new sensor event */ 
-	sensors_event_t event;
+	sensors_event_t event1;
+	sensors_event_t event2;
+	sensors_event_t event3;
 	digitalWrite(13,HIGH);
-	tsl.getEvent(&event);
- 
+	if(OneOn) tsl1.getEvent(&event1);
+	if(TwoOn) tsl2.getEvent(&event2);
+ 	if(ThreeOn) tsl3.getEvent(&event3);
+	 
 	/* Display the results (light is measured in lux) */
-	if (event.light) {
-		Serial.print(event.light); Serial.println(" lux");
+	if(OneOn) {
+	if (event1.light) {
+		Serial.print(event1.light); Serial.println(" lux");
 	} else {
 	/* If event.light = 0 lux the sensor is probably saturated
 		and no reliable data could be generated! */
-	Serial.println("Sensor overload");
+	Serial.println("Sensor 1 overload");
+	}
 	}
 	
+	
+	if(TwoOn) {
+	if (event2.light) {
+		Serial.print(event2.light); Serial.println(" lux");
+	} else {
+	/* If event.light = 0 lux the sensor is probably saturated
+		and no reliable data could be generated! */
+	Serial.println("Sensor 2 overload");
+	}
+	}
+	
+	
+	if(ThreeOn) {
+	if (event3.light) {
+		Serial.print(event3.light); Serial.println(" lux");
+	} else {
+	/* If event.light = 0 lux the sensor is probably saturated
+	and no reliable data could be generated! */
+		Serial.println("Sensor 3 overload");
+	}
+	}
 	
 	delay(500);
 	digitalWrite(13,LOW);
