@@ -106,6 +106,8 @@ class GlobalStarResponse():
 
     def parseHealthPoll(self, incoming):
         POLL_HDR = SYN1 + SYN2 + LEN44 + "RC401".encode('UTF-8')
+        RSSI = 0
+        Connected = 0
         if(len(incoming) >= 11):
             #print "***Parsing poll response header string***"
             # print("recieved string: "+ buffer[:11])
@@ -115,8 +117,10 @@ class GlobalStarResponse():
                     print "***Parsing Health Status string***"
                     print("Epoch: " + str(self.from_bytes(incoming[11:15], True)))
                     print("Elapsed time: " + self.timeElapsedDisplay(self.from_bytes(incoming[15:19], True)))
-                    print("RSSI: " + str(self.from_bytes(incoming[19:20], True)))
-                    print("Connected: " + str(self.from_bytes(incoming[20:21], True)))
+                    RSSI = self.from_bytes(incoming[19:20],True)
+                    print("RSSI: " + str(RSSI))
+                    Connected = self.from_bytes(incoming[20:21], True)
+                    print("Connected: " + str(Connected))
                     print("Gateway: " + str(self.from_bytes(incoming[21:22], True)))
                     print("Last Contact: " + self.timeElapsedDisplay(self.from_bytes(incoming[22:26], True)))
                     print("Last Attempt: " + self.timeElapsedDisplay(self.from_bytes(incoming[26:30], True)))
@@ -136,6 +140,7 @@ class GlobalStarResponse():
             print("recieved insufficient bytes for poll RESPONSE!")
             print("recieved only " + len(incoming) + " bytes")
             print 'Recieved string: ', incoming
+        return [RSSI, Connected]
 
     def parseQueueLenPoll(self,incoming, poll):
         POLL_HDR = SYN1 + SYN2 + LEN9 + ('R'+poll).encode('UTF-8')

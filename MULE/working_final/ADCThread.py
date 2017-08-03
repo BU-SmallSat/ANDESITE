@@ -1,7 +1,6 @@
 from worker_thread import WorkerThread
 import Queue
 from magnetorquer_driver import magnetorquer_driver
-from MPU9250 import MPU9250
 #from sunsensor_driver import sunsensor_driver
 import time
 

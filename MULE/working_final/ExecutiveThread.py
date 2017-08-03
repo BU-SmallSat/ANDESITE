@@ -234,7 +234,7 @@ def healthPoll():
     # need to tell EPS to pass most recent EPS data
     processMessage("PE:HealthPoll")
     EPSSemaphore.release()
-    # need to tell GPS to pass most recent data and need to collect 5 sec of IMU gyro and accelerometer data
+    # need to tell GPS to pass most recent data and need to collect 5 sec of IMU and accelerometer data
     processMessage("AE:HealthPoll")
     ADCSemaphore.release()
     # wait for threads to finish with their data aquiring
