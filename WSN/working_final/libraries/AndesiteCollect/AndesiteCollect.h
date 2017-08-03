@@ -1,14 +1,14 @@
 // -*-c++-*-
 // **********************************************************************************
-// 
+//
 // Name:    AndesiteCollect.h
 // Class:   <AndesiteCollect>
 // Author:  Gabriel Gonzalez
-// 
-// Description: The skeleton for the ANDESITE Satellite data collection method. 
-//              
+//
+// Description: The skeleton for the ANDESITE Satellite data collection method.
+//
 // Notes: None.
-// 
+//
 // **********************************************************************************
 
 
@@ -30,9 +30,9 @@ public:
     static void mag(unsigned long timer_diff);
     static void gyro();
     static void gps();
-	
+
     static void temp();
-	static void light();
+	  static void light();
 };
 
 #endif
