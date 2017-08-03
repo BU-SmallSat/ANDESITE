@@ -63,22 +63,21 @@
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
-      <Value>D:/user/Documents/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/Adafruit_Sensor</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SFE_LSM9DS0</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SPI/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
       <Value>../../../Light_Test</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -101,22 +100,21 @@
   </avrgcccpp.compiler.symbols.DefSymbols>
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
-      <Value>D:/user/Documents/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/Adafruit_Sensor</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SFE_LSM9DS0</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SPI/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
       <Value>../../../Light_Test</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -127,7 +125,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>D:/Program Files (x86)/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/user/Documents/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;../../../Light_Test;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master;D:/Program Files (x86)/Arduino/libraries/Adafruit_TSL2561_U;D:/Program Files (x86)/Arduino/libraries/LSM9DS0;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src;D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>D:/Program Files (x86)/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/user/Documents/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;../../../Light_Test;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master;D:/Program Files (x86)/Arduino/libraries/Adafruit_TSL2561_U;D:/Program Files (x86)/Arduino/libraries/LSM9DS0;C:/Users/satellite maker/Documents/Arduino/libraries/Adafruit_Sensor;C:/Users/satellite maker/Documents/Arduino/libraries/SFE_LSM9DS0;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Users/satellite maker/Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Users/satellite maker/Documents/Arduino/libraries/SPI/src;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -152,22 +150,21 @@
   </avrgcc.compiler.symbols.DefSymbols>
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
-      <Value>D:/user/Documents/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/Adafruit_Sensor</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SFE_LSM9DS0</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SPI/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
       <Value>../../../Light_Test</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -190,22 +187,21 @@
   </avrgcccpp.compiler.symbols.DefSymbols>
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master</Value>
-      <Value>D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries/LSM9DS0</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
-      <Value>D:/Program Files (x86)/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
-      <Value>D:/user/Documents/Arduino/libraries</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/Adafruit_Sensor</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SFE_LSM9DS0</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries/SPI/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Users/satellite maker/Documents/Arduino/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega</Value>
       <Value>../../../Light_Test</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -216,7 +212,7 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>D:/Program Files (x86)/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/user/Documents/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;../../../Light_Test;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master;D:/Program Files (x86)/Arduino/libraries/Adafruit_TSL2561_U;D:/Program Files (x86)/Arduino/libraries/LSM9DS0;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SPI/src;D:/user/Documents/Arduino/libraries/Adafruit_TSL2561-master;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>D:/Program Files (x86)/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;D:/user/Documents/Arduino/libraries;D:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;D:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;../../../Light_Test;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;D:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;D:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;D:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;D:/user/Documents/Arduino/libraries/Adafruit_Sensor-master;D:/Program Files (x86)/Arduino/libraries/Adafruit_TSL2561_U;D:/Program Files (x86)/Arduino/libraries/LSM9DS0;C:/Users/satellite maker/Documents/Arduino/libraries/Adafruit_Sensor;C:/Users/satellite maker/Documents/Arduino/libraries/SFE_LSM9DS0;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/Wire/src/utility;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Users/satellite maker/Documents/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/mega;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr/;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Users/satellite maker/Documents/Arduino/libraries/SPI/src;</VMSETTING_IncludePaths>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Light_Test.ino">
