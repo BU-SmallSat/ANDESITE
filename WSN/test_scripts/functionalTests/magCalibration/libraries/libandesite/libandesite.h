@@ -20,16 +20,14 @@
 //*************************************************//
 //************CONFIGURABLE VARIABLES***************//
 //*************************************************//
-//GPS Variables
+//GPS Timeout Variables
 #define GPS_READ_TIMEOUT			1000
-#define GPS_SCIENCE_TIMEOUT			5
 #define GPS_INIT_TIMEOUT			3000
-#define GPS_ENABLE					11
 
 
 //No Lock GPS Timeout Variables
 #define SCIENCE_MODE_TIMEOUT		30000
-#define TRANSFER_MODE_TIMEOUT		1800000
+#define TRANSFER_MODE_TIMEOUT		30000
 
 #define MULE_LISTEN_TIMEOUT			30000
 
@@ -52,7 +50,7 @@
 #define TEN_HZ_TCCRIB					11
 
 
-#define FILE_FAIL_COUNT					5					
+
 
 
 //*************************************************//
@@ -63,11 +61,7 @@
 
 // Serial communications
 #define ACDH_SERIAL_BAUD          (unsigned long) 115200
-#define ACDH_GPS_BAUD             (unsigned long) 9600
-
-//TEMP SENSOR VARIABLES
-#define ONE_WIRE_BUS 24
-#define NUM_TEMP_SENSORS 4
+#define ACDH_GPS_BAUD             (unsigned long) 115200
 
 // Pins
 #define SD_CS_PIN               9		//low enable (select on low)

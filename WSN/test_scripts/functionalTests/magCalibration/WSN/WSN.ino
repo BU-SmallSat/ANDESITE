@@ -1,10 +1,8 @@
-#include <DallasTemperature.h>
-#include <OneWire.h>
 // ========
 // Includes
 // ========
 #include <avr/wdt.h>
-#include <RF22ReliableDatagram.h>
+#include <RF22Mesh.h>
 #include <SdFat.h>
 #include <TinyGPS.h>
 #include <AndesiteWSN.h>
@@ -20,10 +18,7 @@
 #include "libandesite.h"
 #include "ADS1248.h"
 
-// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
-DeviceAddress Temp1,Temp2,Temp3,Temp4;
+
 //**********************************************//
 //************MODIFY FOR FLIGHT NODES***********//
 RF22ReliableDatagram RF22(ACDH_WSN1_ADDR);
@@ -37,19 +32,17 @@ RF22ReliableDatagram RF22(ACDH_WSN1_ADDR);
 SdFat SD;
 TinyGPSPlus GPS;
 
-
 // Initiate 9-axis IMU
 #define LSM9DS0_XM  0x1D // Would be 0x1E if SDO_XM is LOW
 #define LSM9DS0_G   0x6B // Would be 0x6A if SDO_G is LOW
 LSM9DS0 DOF(MODE_I2C, LSM9DS0_G, LSM9DS0_XM);
-
-
 
 AndesiteRadio _Radio;
 AndesiteOrbit _Orbit;
 AndesiteFile _File;
 AndesiteWSN WSN;
 ADS1248 _ADC;
+AndesiteCollect _Data;
 
 
 int check = 0;
@@ -67,17 +60,18 @@ ISR(TIMER1_COMPA_vect) {
 	//now = millis();
 	//Serial.println(now-lastInt);
 	//Serial.println(WSN._science_mode_state);
-	WSN._science_mode_state = 1;
-
+	//WSN._science_mode_state = 1;
 	
-	if(count == 3001){
+	if(count == 300){
 		WSN._science_mode_state = 3;
 		count = 0;
 	}
+	
 	else if(count%3 == 0){
 		WSN._science_mode_state = 2;
 		count++;
 	}
+	
 	else {
 		WSN._science_mode_state = 1;
 		count++;
@@ -103,6 +97,8 @@ void setupWatchdog(){
 void setup() {
 	// Set baud rate
 	Serial.begin(ACDH_SERIAL_BAUD);
+	Serial1.begin(ACDH_SERIAL_BAUD);
+	
 	
 	//Setup WDT
 	//setupWatchdog();
@@ -132,7 +128,9 @@ void setup() {
 //		Serial.println(":: WSN initialization succeeded");
 //		// while (1) {}
 //	}
-	WSN.init();
+
+  WSN.init();
+
 	Serial.println("Done with main setup.");
 	
 	//wdt_reset();  //COMMENT OUT TO TEST WDT
@@ -156,8 +154,6 @@ void loop() {
 		//wdt_reset();
 		WSN.listenMuleMessage();
 		//wdt_reset();
-		
-		
 	}
 	//WSN.healthBeacon();
 	

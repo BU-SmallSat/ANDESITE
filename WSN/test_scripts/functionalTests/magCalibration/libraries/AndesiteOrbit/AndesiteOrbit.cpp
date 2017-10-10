@@ -68,8 +68,8 @@ boolean AndesiteOrbit::setLatitude() {
 					_latitude = GPS.location.lat();
                     _dt       = millis() - _dt;
                     _dl       = (_dv * _dt) / _radius * 180.0 / (double)3.1415926589;
-					_lock     = GPS.sentenceHasFix;
-                    return _lock;
+					_lock     = true;
+                    return true;
 				}
 			}
 			
@@ -78,7 +78,7 @@ boolean AndesiteOrbit::setLatitude() {
         
 		if ( (millis() - timer_start) >= GPS_READ_TIMEOUT ) { break; }
     }
-	//_lock = false;
+	_lock = false;
 	_latitude = GPS.location.lat();
 	//_dt = millis() - _dt;
 	//_dl = = (_dv * _dt) / _radius * 180.0 / (double)3.1415926589;

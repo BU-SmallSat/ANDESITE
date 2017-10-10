@@ -20,8 +20,6 @@
 // Includes
 #include "Arduino.h"
 #include <SPI.h>
-#include <DallasTemperature.h>
-
 
 
 // =======
@@ -58,8 +56,12 @@ public:
     // Wait for WSN orbit to finish
     void             wait();
 
+    //check battery levels
+    bool             batteryCheck();
+
 	// Low Power Mode
 	void			 lowPowerMode();
+
 
     int              _science_mode_state;
 	unsigned long	_transfer_start;
@@ -86,6 +88,4 @@ private:
     int              batteryLevel;
 };
 
-extern DallasTemperature sensors;
-extern DeviceAddress Temp1, Temp2, Temp3, Temp4;
 #endif

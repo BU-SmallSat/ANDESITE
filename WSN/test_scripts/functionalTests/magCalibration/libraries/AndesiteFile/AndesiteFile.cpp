@@ -69,24 +69,32 @@ boolean AndesiteFile::init() {
     setUnfinishedFiles();
     
     // Put last orbit in first element
+    _start_orbit = 1;
     Serial.print("first element in _unfinised_files_arr");
     Serial.println(_unfinished_files_arr[0]);
     Serial.print("Number of Files: ");
     Serial.println(_num_files);
+    Serial.print("Start Orbit: ");
+    Serial.println(_start_orbit);
     Serial.print("Last Orbit: ");
     Serial.println(_last_orbit);
+    Serial.println("IF ( _start_orbit <= last_orbit )");
+    Serial.println("\tSetting Last_Orbit + 1");
+    Serial.println("ELSE");
+    Serial.println("\tSetting _start_orbit");
     
-    if ( _last_orbit > 0 )
+    if ( _start_orbit <= _last_orbit )
         _Orbit.setOrbit( _last_orbit + 1 );
     else
-        _Orbit.setOrbit(1);
+        _Orbit.setOrbit( _start_orbit );
     
     AndesiteFile::set();
-    _failure = 0;
+    
+    // Open up orbit info file
+    _handle = SD.open(_file.c_str(), O_CREAT | O_WRITE);
+    
 	Serial.print("Setting starting orbit value...");
-	while ( !_handle && _failure < FILE_FAIL_COUNT) { 
-		// Open up orbit info file
-		_handle = SD.open(_file.c_str(), O_CREAT | O_WRITE);
+	if ( !_handle ) { 
 		Serial.println("Fail.");
         ++_failure;
         _handle.close();
@@ -209,7 +217,6 @@ boolean AndesiteFile::send() {
         }
     } 
 
-	
     // Make sure SD card file was opened correctly
     if ( !_file_open_bool ) {
         Serial.print("ERROR: File '");
@@ -270,10 +277,9 @@ void AndesiteFile::write(bool done) {
         }   
     }
     
-	_handle = SD.open(_file.c_str(), O_CREAT | O_APPEND | O_WRITE);
-    _failure = 0;
-    while ( !_handle && _failure < FILE_FAIL_COUNT) {
-		_handle = SD.open(_file.c_str(), O_CREAT | O_APPEND | O_WRITE);
+    _handle = SD.open(_file.c_str(), O_CREAT | O_APPEND | O_WRITE);
+    
+    if ( !_handle ) {
         ++_failure;
         Serial.println(":: File wr failed.");
         _handle.close();
@@ -383,11 +389,11 @@ void AndesiteFile::set() {
 // Return the size of the data file
 unsigned long AndesiteFile::size() {
     _handle = SD.open(_file.c_str(), O_READ);
-    _failure = 0;
-    if ( !_handle && _failure < FILE_FAIL_COUNT) {
-		_handle = SD.open(_file.c_str(), O_READ);
+    
+    if ( !_handle ) {
         ++_failure;
         _handle.close();
+        return -1;
     }
     
     unsigned long size = _handle.size();

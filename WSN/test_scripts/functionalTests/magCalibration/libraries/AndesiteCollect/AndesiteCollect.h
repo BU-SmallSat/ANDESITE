@@ -20,7 +20,6 @@
 #define ANDESITECOLLECT_H
 
 #include <SPI.h>
-#include <DallasTemperature.h>
 
 // =======
 // Classes
@@ -28,17 +27,10 @@
 
 class AndesiteCollect {
 public:
-    static void mag(unsigned long timer_diff);
-    static void gyro();
-    static void gps();
-    static void temp();
-	DeviceAddress TEMP_ONE = "285DD74809000007";
-	DeviceAddress TEMP_TWO = "2817EA48090000D5";
-	DeviceAddress TEMP_THREE = "2817EA48090000D5";
-	DeviceAddress TEMP_FOUR = "2817EA48090000D5";
+	static String mag();
+    static String gyro();
+    static String gps();
+    static String temp();
 };
-
-extern DallasTemperature sensors;
-extern DeviceAddress Temp1,Temp2, Temp3, Temp4;
 
 #endif

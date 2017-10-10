@@ -22,6 +22,7 @@
 #include "AndesiteFile.h"
 #include "ADS1248.h"
 #include <SPI.h>
+#include <DallasTemperature.h>
 
 
 
@@ -31,27 +32,20 @@
 
 // Collect and store magnetometer data
 void AndesiteCollect::mag(unsigned long timer_diff) {
-    //DOF.readMag();
     //Serial.println("collecting mag");
     String data;    
-    /*
-    char temp[10] = {0};
+	long X_raw = _ADC.READ_DATA(MUX_CH1_X);
+	long Y_raw = _ADC.READ_DATA(MUX_CH2_Y);
+	long Z_raw = _ADC.READ_DATA(MUX_CH3_Z);
+
+	float voltageX = ((5.0/8388608.0)*X_raw)/64;
+	float voltageY = ((5.0/8388608.0)*Y_raw)/64;
+	float voltageZ = ((5.0/8388608.0)*Z_raw)/64;
+					
+	data = "M"+String(voltageX,6)+","+String(voltageY,6)+","+String(voltageZ,6)+ ","+String(timer_diff,6);
+	Serial.println(data);
+	//_handle.println(data); //didnt include parity
     
-    // Concatenate strings to write just one string to file
-    data = "M";
-    //dtostrf(acdh_adc_readData(.....),1,4,temp);
-    dtostrf(DOF.calcMag(DOF.mx), 1, 4, temp);
-    data += temp;
-    data += ",";
-    dtostrf(DOF.calcMag(DOF.my), 1, 4, temp);
-    data += temp;
-    data += ",";
-    dtostrf(DOF.calcMag(DOF.mz), 1, 4, temp);
-    data += temp;
-    */
-    
-	data = _ADC.payloadMessage() + ", " + String(timer_diff,6);
-    Serial.println(data);
 	/*File _handle = SD.open(_File._file.c_str(), O_CREAT | O_APPEND | O_WRITE);
 	 
 	 if ( !_handle ) {
@@ -65,30 +59,16 @@ void AndesiteCollect::mag(unsigned long timer_diff) {
 }
 
 void AndesiteCollect::temp() {
-    //DOF.readMag();
-    //Serial.println("collecting mag");
     String data;    
-    /*
-    char temp[10] = {0};
-    
-    // Concatenate strings to write just one string to file
-    data = "M";
-    //dtostrf(acdh_adc_readData(.....),1,4,temp);
-    dtostrf(DOF.calcMag(DOF.mx), 1, 4, temp);
-    data += temp;
-    data += ",";
-    dtostrf(DOF.calcMag(DOF.my), 1, 4, temp);
-    data += temp;
-    data += ",";
-    dtostrf(DOF.calcMag(DOF.mz), 1, 4, temp);
-    data += temp;
-    */
-    data = "T100.00";
-	//Serial.println(data);
-    _File.store(data);
+	data= "T"+String(sensors.getTempC(Temp1))+",";
+	data+= String(sensors.getTempC(Temp2))+",";
+	data+= String(sensors.getTempC(Temp3))+",";
+	data+= String(sensors.getTempC(Temp4));
+    //data = "T100.00";
+	Serial.println(data);
+    //_File.store(data);
     data = "";
 }
-
 
 
 // Collect and store gyroscope data
@@ -96,9 +76,8 @@ void AndesiteCollect::gyro() {
     //DOF.readGyro();
     //Serial.println("collecting gyro");
     String data;
-    /*
     char temp[10] = {0};
-    
+    /*
     // Concatenate strings to write just one string to file
     data = "G";
     dtostrf(DOF.calcGyro(DOF.gx), 1, 4, temp);
@@ -109,10 +88,10 @@ void AndesiteCollect::gyro() {
     data += ",";
     dtostrf(DOF.calcGyro(DOF.gz), 1, 4, temp);
     data += temp;
-    */
-    data = "G400,500,600";
-	//Serial.println(data);
-    _File.store(data);
+	*/
+	data = "G400,500,600";
+	Serial.println(data);
+    //_File.store(data);
     data = "";
 }
 
@@ -120,33 +99,21 @@ void AndesiteCollect::gyro() {
 
 // Collect and store GPS data
 void AndesiteCollect::gps() {
-    String data;
-    //Serial.println("collecting gps");
-    /*
-    char temp[10] = {0};
-    
-    // Concatenate strings to write just one string to file
-    data = "T";
-    data += GPS.time.hour();
-    data += ":";
-    data += GPS.time.minute();
-    data += ":";
-    data += GPS.time.second();
-    data += ".";
-    data += GPS.time.centisecond();
-    data += ",";
-    
-    dtostrf(GPS.location.lat(), 1, 4, temp);
-    data += temp;
-    data += ",";
-    dtostrf(GPS.location.lng(), 1, 4, temp);
-    data += temp;
-    data += ",";
-    dtostrf(GPS.altitude.meters(), 1, 4, temp);
-    data += temp;
-    */
-    data = Serial2.readString();
-	//Serial.println(data);
-    _File.store(data);
-    data = "";
+    String data = "L";
+	unsigned long timer_start = millis();
+	while(1){
+		if ( GPS.encode(Serial1.read()) ) {
+				//Serial.print("Here:");
+				data = "*" + String(GPS.location.lat());
+				Serial.println(data);
+				//_File.store(data);
+				return;
+		}
+		if ( (millis() - timer_start) >= GPS_SCIENCE_TIMEOUT ) { break; }
+	}
+	//data = "L100,200,300";
+	data = GPS.location.lat();
+	Serial.println(data);
+	//_File.store(data);
+    return;
 }

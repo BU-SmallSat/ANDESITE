@@ -26,7 +26,6 @@
 #include "libandesite.h"
 #include "ADS1248.h"
 #include <SPI.h>
-#include <DallasTemperature.h>
 
 
 
@@ -56,65 +55,47 @@ int AndesiteWSN::init() {
     pinMode(SD_CS_PIN, OUTPUT); 
 	pinMode(ADS_CS_PIN, OUTPUT);
 	pinMode(RF_SHDN_PIN, OUTPUT);	
-	pinMode(GPS_ENABLE, OUTPUT);
 	  
 	Serial.print("*****Setting Chip Selects LOW*****");
     //digitalWrite(RF_SHDN_PIN, LOW);
 	digitalWrite(RF_CS_PIN, HIGH);
 	digitalWrite(ADS_CS_PIN, HIGH);
 	digitalWrite(SD_CS_PIN, LOW);
-	digitalWrite(GPS_ENABLE, LOW);
     delay(1000);
 	
 	//setup LED
 	pinMode(LED_ONE_PIN, OUTPUT);
 	pinMode(LED_TWO_PIN, OUTPUT);
-	digitalWrite(LED_ONE_PIN, HIGH);
-	digitalWrite(LED_TWO_PIN, HIGH);
-	delay(200);
 	digitalWrite(LED_ONE_PIN, LOW);
 	digitalWrite(LED_TWO_PIN, LOW);
     
     // Initialize SD card
-    while( !SD.begin(SD_CS_PIN) ) {
+    if ( !SD.begin(SD_CS_PIN) ) {
         Serial.println("ERROR: SD card initialization failed.");
         SD.initErrorHalt();
-        delay(50);
-        //resetFunc();
+        delay(10000);
+        resetFunc();
 	}
-	Serial.println("SD card Initialized");
 	
     // Initialize radio 
-    while ( _Radio.init() != 0 ) {
+    if ( _Radio.init() != 0 ) {
         Serial.println("ERROR: Radio setup failed.");
-        delay(50);
-        //resetFunc();
-    }	
+        delay(10000);
+        resetFunc();
+    }
+
+	int val = analogRead(BATTERY_OUT);    // read the input pin
+	Serial.print("READING BATTERY OUTPUT:  ");
+	Serial.println(val);             // debug value
 	
-	//Setup science instruments
-	/*
-	Wire.begin();
-	uint16_t stat = DOF.begin();
-	while (stat != 0x49D4){
-		Serial.print("Status: ");
-		Serial.println(stat,HEX);
-		delay(50);
-		stat = DOF.begin();
-	}
-	Serial.println("Gyro Initialized");
-	*/
-	//setup GPS
-	Serial1.begin(ACDH_GPS_BAUD);
 	
+
 	SPI.begin();
 	_ADC.initialize();
     delay(1000);
-	
-	sensors.begin();
-    if (!sensors.getAddress(Temp1, 0)) Serial.println("Unable to find address for Device 1");
-    if (!sensors.getAddress(Temp2, 1)) Serial.println("Unable to find address for Device 2");
-    if (!sensors.getAddress(Temp3, 2)) Serial.println("Unable to find address for Device 3");
-    if (!sensors.getAddress(Temp4, 3)) Serial.println("Unable to find address for Device 4");
+    // Setup science instruments
+    //DOF.begin();
+    //Wire.begin();
     
     // Setup LEDs
    // acdh_init_led();
@@ -154,6 +135,11 @@ boolean AndesiteWSN::isScienceMode() {
 		}	
 		_orb_start = true;
 		
+    }
+    
+    //make sure there is enough battery for science mode
+    if(!batteryCheck()){
+        return false;
     }
 	
     bool orb_check;
@@ -233,66 +219,68 @@ int AndesiteWSN::scienceMode() {
 
     // Enter Science Mode when latitude is ABOVE a certain threshold	
     while ( !done) {
-		// // chip select and slave select
-        // if ( !count_adc ) { 
-        //     // acdh_adc_setup();
-        //     count_adc = 1;
-        // }
-        
-        /* 
-        // Enter low power mode when in Science Mode for 30 min
-        if ( (millis() - timer_start) >= _science ) {
-            Serial.println("Science Timeout.");
-            delay(2000);
-            _File.write();
-            _File.write("\n");
-            return 1;
-        }
-        */
-		
         switch(_science_mode_state){
             case 1:
 				timer_previous = timer_now;
 				timer_now		= millis();
 				timer_diff = timer_now-timer_previous;
+				               
+				//collect magnetometer data
+				data = AndesiteCollect::mag()+","+String(timer_diff,6);
+				++count_mag;
 				
-                //collect magnetometer data
-                AndesiteCollect::mag(timer_diff);
-                ++count_mag; 
+				Serial.println(data);
+				_handle.println(data);
+                
                 _science_mode_state = 0;
                 break;
             
             case 2:
 				timer_previous = timer_now;
-				timer_now		= millis();
-				timer_diff = timer_now-timer_previous;				
-                //collect magnetometer data
-                AndesiteCollect::mag(timer_diff);
+				timer_now		= millis();		
+				timer_diff = timer_now-timer_previous;		
+                
+				//collect magnetometer data
+                data = AndesiteCollect::mag();
                 ++count_mag; 
 
                 // Collect gyroscope and gps data
-                AndesiteCollect::gyro();
-				if(_Orbit._lock){
-					AndesiteCollect::gps();
-				}
-				++count_gg;
+                data += AndesiteCollect::gyro();
+                //AndesiteCollect::gps();
+                ++count_gg;
+
+				data += ","+String(timer_diff,6);
+				Serial.println(data);
+				_handle.println(data); //didn't include parity
 
                 _science_mode_state = 0;
                 break;
+				
             case 3:
+
 				timer_previous = timer_now;
 				timer_now		= millis();
 				timer_diff = timer_now-timer_previous;
-				//collect magnetometer data
-				AndesiteCollect::mag(timer_diff);
-				++count_mag;
-                //collect temperature sensor data
-                AndesiteCollect::temp();
-                ++count_temp;
+				
+                //collect magnetometer data
+				data = AndesiteCollect::mag();
+                ++count_mag; 
 
+				// Collect gyroscope and gps data
+				data+= AndesiteCollect::gyro();
+				//AndesiteCollect::gps();
+				++count_gg;
+
+				//collect temperature sensor data
+				data += AndesiteCollect::temp();
+				++count_temp;
+				
+				data += ","+String(timer_diff,6);
+				Serial.println(data);
+				_handle.println(data); //didn't include parity
+				
                 _science_mode_state = 0;
 				break;
-
             default:
 				//Serial.println("hello");
                 //Serial.println(_science_mode_state); 
@@ -311,14 +299,6 @@ int AndesiteWSN::scienceMode() {
 						done = true;
 					}
 				}
-				
-				/*
-				//check for file overfow 
-				if ( _File._ready_write_bool > 0 ) {
-					_File.write(done);
-
-				} 
-				*/
 				break;
         }
 	}
@@ -339,11 +319,11 @@ int AndesiteWSN::scienceMode() {
     Serial.println(" sec");
 	
 	// Display sampling rate -- ONLY FOR TESTING. REMOVE IN REAL SIMULATION
-	double Hm  = (double) count_mag / timer_run;
+	//double Hm  = (double) count_mag / timer_run;
 	double Hgg = (double) count_gg  / timer_run;
 	double Ht = (double) count_temp / timer_run;
-	Serial.print("Mag Sample Rate = ");
-	Serial.print(Hm,3);
+	//Serial.print("Mag Sample Rate = ");
+	//Serial.print(Hm,3);
 	Serial.println(" Hz");
 	Serial.print("GG Sample Rate = ");
 	Serial.print(Hgg,3);
@@ -362,6 +342,11 @@ boolean AndesiteWSN::isTransferMode() {
     
     //set state to data transfer mode
     state = 't';
+
+    //check if there is sufficient battery for date transfer mode
+    if(!batteryCheck()){
+        return false;
+    }
 
 	if(_Orbit._lock){
 		// Check current position (latitude)
@@ -505,8 +490,9 @@ bool AndesiteWSN::listenMuleMessage() {
 
 // Send health beacon to Mule
 void AndesiteWSN::healthBeacon() {
-	//state of instruments, state(Science/Transfer)
+	//Send battery level, state of instruments, state(Science/Transfer)
 	char _transmit_message[RF22_MESH_MAX_MESSAGE_LEN];
+	bool battLevel = batteryCheck();
 
 	//global variable called state is either 's' or 't'
 
@@ -545,6 +531,34 @@ void AndesiteWSN::wait() {
     }
     
     // _File.setLines(0);
+}
+bool AndesiteWSN::batteryCheck(){
+    Serial.println("in battery check");
+    batteryLevel = 100;  //edit to get this value from actual WSN battery - EPS?
+    switch (state){
+        case 's':
+            if(batteryLevel > 60){ //edit with percent battery required for science mode
+                Serial.println("SUFFICIENT BATTERY FOR SCIENCE MODE");
+                return true;
+            } 
+            else {
+                return false;
+            }
+            break;
+        case 't':
+            if(batteryLevel > 75){  //edit with percent battery required for data transfer mode
+                Serial.println("SUFFICIENT BATTERY FOR DATA TRANSFER MODE");
+                return true;
+            }
+            else {
+                return false;
+            }
+            break;
+        default:
+            //enter error checking case here
+            return false;
+            break;
+    }
 }
 
 void AndesiteWSN::lowPowerMode() {
