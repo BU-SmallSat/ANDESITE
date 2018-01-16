@@ -1,42 +1,49 @@
-#include <AndesiteWSN.h>
-
+#include <DallasTemperature.h>
+#include <OneWire.h>
 // ========
 // Includes
 // ========
 #include <avr/wdt.h>
-#include <RF22Mesh.h>
+#include <RF22ReliableDatagram.h>
 #include <SdFat.h>
 #include <TinyGPS.h>
-
-
+#include <AndesiteWSN.h>
 //#include <EEPROM.h>
 #include <SPI.h>
 #include <Wire.h>
 #include <SFE_LSM9DS0.h>
-
 #include "AndesiteCollect.h"
 #include "AndesiteData.h"
 #include "AndesiteOrbit.h"
 #include "AndesiteFile.h"
 #include "AndesiteRadio.h"
-
 #include "libandesite.h"
 #include "ADS1248.h"
 
+// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+DeviceAddress Temp1,Temp2,Temp3,Temp4;
+//**********************************************//
+//************MODIFY FOR FLIGHT NODES***********//
+RF22ReliableDatagram RF22(ACDH_WSN1_ADDR);
+//**********************************************//
+//**********************************************//
 
 // ========
 // Declares
 // ========
-
 // Create instance of classes for instruments
-RF22Mesh RF22(ACDH_WSN1_ADDR);
 SdFat SD;
 TinyGPSPlus GPS;
+
 
 // Initiate 9-axis IMU
 #define LSM9DS0_XM  0x1D // Would be 0x1E if SDO_XM is LOW
 #define LSM9DS0_G   0x6B // Would be 0x6A if SDO_G is LOW
 LSM9DS0 DOF(MODE_I2C, LSM9DS0_G, LSM9DS0_XM);
+
+
 
 AndesiteRadio _Radio;
 AndesiteOrbit _Orbit;
@@ -62,8 +69,8 @@ ISR(TIMER1_COMPA_vect) {
 	//Serial.println(WSN._science_mode_state);
 	WSN._science_mode_state = 1;
 
-	/*
-	if(count == 3000){
+	
+	if(count == 30){
 		WSN._science_mode_state = 3;
 		count = 0;
 	}
@@ -75,7 +82,7 @@ ISR(TIMER1_COMPA_vect) {
 		WSN._science_mode_state = 1;
 		count++;
 	}
-	*/
+	
 };
 
 
@@ -96,8 +103,6 @@ void setupWatchdog(){
 void setup() {
 	// Set baud rate
 	Serial.begin(ACDH_SERIAL_BAUD);
-	Serial1.begin(ACDH_SERIAL_BAUD);
-	
 	
 	//Setup WDT
 	//setupWatchdog();
@@ -109,8 +114,8 @@ void setup() {
 	//TCCR1B = THIRTY_HZ_TCCRIB; // 16MHZ with 64 prescalar
 	//OCR1A = (THIRTY_HZ_OCRIA);  //30Hz
 	
-	//TCCR1B = FOURTY_HZ_TCCRIB; // 16MHZ with 8 prescalar
-	//OCR1A = (FOUTY_HZ_OCRIA);  //50Hz
+	TCCR1B = THIRTY_HZ_TCCRIB; // 16MHZ with 8 prescalar
+	OCR1A = (THIRTY_HZ_OCRIA);  //30Hz
 	TIMSK1 &= !(1 << OCIE1A);
 	
 	//wdt_reset();
@@ -127,9 +132,7 @@ void setup() {
 //		Serial.println(":: WSN initialization succeeded");
 //		// while (1) {}
 //	}
-
-  WSN.init();
-
+	WSN.init();
 	Serial.println("Done with main setup.");
 	
 	//wdt_reset();  //COMMENT OUT TO TEST WDT
@@ -143,7 +146,7 @@ void loop() {
 	// Enter Science Mode
 	if ( WSN.isScienceMode() ) {
 		//wdt_reset();
-		WSN.scienceMode();
+		WSN.scienceMode(false);
 		//wdt_reset();
 	}
 	//WSN.healthBeacon();
@@ -153,6 +156,8 @@ void loop() {
 		//wdt_reset();
 		WSN.listenMuleMessage();
 		//wdt_reset();
+		
+		
 	}
 	//WSN.healthBeacon();
 	

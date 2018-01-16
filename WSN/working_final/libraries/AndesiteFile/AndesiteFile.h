@@ -21,9 +21,10 @@
 
 // Includes
 #include "Arduino.h"
-#include <RF22Mesh.h>
 #include <SdFat.h>
-
+#include <RF22Router.h>
+#include <RF22Mesh.h>
+#include <RF22.h>
 // =======
 // Classes
 // =======
@@ -85,7 +86,7 @@ private:
     
     // Variables
     
-    char                _transmit_message[RF22_MESH_MAX_MESSAGE_LEN];
+    char                _transmit_message[RF22_MAX_MESSAGE_LEN];
     ifstream::pos_type  _file_position;
     String              _collected_data;
     String              _writing_data;
@@ -111,5 +112,5 @@ private:
 // =======
 
 extern AndesiteFile _File;
-
+extern RF22ReliableDatagram RF22;
 #endif

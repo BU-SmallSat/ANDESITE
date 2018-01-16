@@ -20,6 +20,8 @@
 // Includes
 #include "Arduino.h"
 #include <SPI.h>
+#include <DallasTemperature.h>
+
 
 
 // =======
@@ -38,7 +40,7 @@ public:
     
     // Execute Science mode, collect magnetometer data at 30 Hz and GPS and Gyroscope
     //   data at 10 Hz
-    int              scienceMode();
+    int              scienceMode(bool isCalibration);
     
     // Check if it is ok to go into Transfer mode (send data)
     boolean          isTransferMode();
@@ -56,14 +58,12 @@ public:
     // Wait for WSN orbit to finish
     void             wait();
 
-    //check battery levels
-    bool             batteryCheck();
-
 	// Low Power Mode
 	void			 lowPowerMode();
 
-
     int              _science_mode_state;
+	int				_temp_timing;
+	
 	unsigned long	_transfer_start;
     
 private:
@@ -88,4 +88,6 @@ private:
     int              batteryLevel;
 };
 
+extern DallasTemperature sensors;
+extern DeviceAddress Temp1, Temp2, Temp3, Temp4;
 #endif

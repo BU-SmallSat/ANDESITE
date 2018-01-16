@@ -68,6 +68,7 @@ public:
 	unsigned int        _initial_timeout;
 	unsigned int		_nolock_timeout;
 	boolean				_lock;
+	unsigned int        _orbit;
     
 private:
     
@@ -75,7 +76,6 @@ private:
     String              zeroPadFields(); 
     
     // Data file header information
-    unsigned int        _orbit;
     ifstream::pos_type  _position;
     unsigned int        _status;
     

@@ -68,8 +68,8 @@ boolean AndesiteOrbit::setLatitude() {
 					_latitude = GPS.location.lat();
                     _dt       = millis() - _dt;
                     _dl       = (_dv * _dt) / _radius * 180.0 / (double)3.1415926589;
-					_lock     = true;
-                    return true;
+					_lock     = GPS.sentenceHasFix;
+                    return _lock;
 				}
 			}
 			
@@ -78,7 +78,7 @@ boolean AndesiteOrbit::setLatitude() {
         
 		if ( (millis() - timer_start) >= GPS_READ_TIMEOUT ) { break; }
     }
-	_lock = false;
+	//_lock = false;
 	_latitude = GPS.location.lat();
 	//_dt = millis() - _dt;
 	//_dl = = (_dv * _dt) / _radius * 180.0 / (double)3.1415926589;
@@ -205,7 +205,7 @@ boolean AndesiteOrbit::update(String file) {
     //     }
     //     header.close();
     // } 
-    
+    unsigned int stat = 0;
     // Check file size, compare with pos and header (header size = (5+7+1)+(2+1) = 16)
     File handle = SD.open(file.c_str(), O_READ);
     if ( !handle ) 
@@ -213,19 +213,19 @@ boolean AndesiteOrbit::update(String file) {
     else {
         Serial.print("Info SIZE = ");
         Serial.println(handle.size());
-    }
+		if (handle.size() > 0){
+			stat = 1;
+		}
+	}
     
     handle.close();
     
     // Get data file header information
 	unsigned int orb  = readHeader(file, 0);
     unsigned long pos = readHeader(file, 1);
-    unsigned int stat = readHeader(file, 2);
+    //unsigned int stat = readHeader(file, 2);
     
-    Serial.print("Info Orb = ");
-    Serial.println(orb);
-    Serial.print("Info Pos = ");
-    Serial.println(pos);
+
     Serial.print("Info Stat = ");
     Serial.println(stat);
     Serial.println("Done.");
@@ -233,6 +233,12 @@ boolean AndesiteOrbit::update(String file) {
 	// Setup header variables for next orbit
     if ( stat ) {
         ++_orbit;
+		if (_orbit > 999){
+			Serial.print("Orbit number is at its max value: ");
+			Serial.println(_orbit);
+			digitalWrite(RF_SHDN_PIN, HIGH);
+			while(1){}
+		}
         _position = 0;
         _status = 0;
         return true;
@@ -266,17 +272,6 @@ boolean AndesiteOrbit::waitOrbitFinish() {
 	}
 	
 	Serial.println("Done.");
-	
-	// Orbit number peaked and is too big, do nothing
-    Serial.print("Max int: ");
-    unsigned int maxi = (1 << (8*sizeof(int)-1) );
-    Serial.println(maxi);
-    
-    if ( _orbit >= maxi ) {
-        Serial.print("Orbit number is at its max value: ");
-        Serial.println(_orbit);
-        while ( _orbit >= maxi ) {}
-    }
     
     return true;
 }
