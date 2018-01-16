@@ -84,6 +84,7 @@ boolean AndesiteFile::init() {
     AndesiteFile::set();
     _failure = 0;
 	Serial.print("Setting starting orbit value...");
+	_handle = SD.open(_file.c_str(), O_CREAT | O_WRITE);
 	while ( !_handle && _failure < FILE_FAIL_COUNT) { 
 		// Open up orbit info file
 		_handle = SD.open(_file.c_str(), O_CREAT | O_WRITE);
@@ -111,95 +112,63 @@ boolean AndesiteFile::init() {
 boolean AndesiteFile::send() {
     _file_open_bool = 0;
     _message_size = 0;
-
+	ifstream sdin;
     // Open SD card file for reading
-    ifstream sdin(_file.c_str());
-    _file_position = _Orbit.getPosition();
-    //Serial.print(":: File size = ");
-    //Serial.println(_handle.size());
-    Serial.println(":: Reading and sending file...");
-    Serial.print(":: Seeking to position '");
-    Serial.println(_file_position);
+	sdin = ifstream(_file.c_str());
+	_file_position = _Orbit.getPosition();
+	//Serial.print(":: File size = ");
+	//Serial.println(_handle.size());
+	Serial.println(":: Reading and sending file...");
+	Serial.print(":: Seeking to position '");
+	Serial.println(_file_position);
 
-    sdin.seekg(_file_position);
+	sdin.seekg(_file_position);
+		
 
         // Loop through every char in the file (check if reached end of file, 
     //     update some global variable to true/false, print data on orbit 
     //     to file regarding where file reading ended)
 
-    while (sdin.getline(_transmit_message, RF22_MESH_MAX_MESSAGE_LEN) || sdin.gcount()) {
+    while (sdin.getline(_transmit_message, RF22_MAX_MESSAGE_LEN) || sdin.gcount()) {
         _file_open_bool = 1;
-        _message_size = sdin.gcount();
+        //_message_size = sdin.gcount();
         if (sdin.fail()) {
             sdin.clear(sdin.rdstate() & ~ios_base::failbit);
             //Serial.println("extracted partial message!");
         } 
-        //Serial.print(" (");
-        //Serial.print(_message_size);
-        //Serial.print(" chars): ");
-        //Serial.println(_transmit_message);
-        
-        //IMPLEMENT PARITY CHECK OF DATA RETRIEVED FROM FILE
-        _int_parity = 0;
-    	_str_parity = "";
-    	String strMessage = (String)_transmit_message;
-    	//Serial.println((String)_transmit_message);
-    	int letter; 
-
-      	//convert each ascii letter into 8-bit binary version
-      	for (int ii = 0; ii < strMessage.length(); ++ii) 
-      	{
-      	  	letter = (int)strMessage[ii];
-      	  	while(letter > 1){
-      	    	if(letter%2 != 0){
-      	    		_int_parity++;
-      	    	}
-      	    	letter = letter/2;
-      	  	}
-  	    }
-  	    
-  	  	//pad parity with zeros so that the size of data written is const. (Max parity value ~= 400)
-   		if (_int_parity < 10)
-			_str_parity = "00" + (String)_int_parity;
-	   	else if (_int_parity < 100) 
-  			_str_parity = "0" + (String)_int_parity;
-    	else 
-  			_str_parity = (String)_int_parity;
-
-  		_int_parity = 0;
-  		Serial.println(strMessage.substring(strMessage.length() - 3));
-
-   		if (_str_parity == strMessage.substring(strMessage.length() - 3)) {
-			Serial.println("Error, parity bit does not match");
-    	   // strMessage = strMessage.substring(0,strMessage.length()-3);
-    	    //_transmit_message[RF22_MESH_MAX_MESSAGE_LEN-1] = 0;
-    	}
-    	else {
-			Serial.println(strMessage.substring(strMessage.length() - 3));
-			//Serial.println("-- Message is clean");
-        	//strMessage = strMessage.substring(0,strMessage.length()-3);
-        	//_transmit_message[RF22_MESH_MAX_MESSAGE_LEN-1] = 1;
-    	}
-    	Serial.println(strMessage);
     
 //TRASNMIT MESSAGE WITHOUT PARITY
-
         // Send file line to server 
-        Serial.print(F("Sending data -- "));
-        Serial.print(_transmit_message);
-        Serial.print(" ");
-        Serial.print(_message_size+1);
-        Serial.print(" | ");
-        Serial.println(_Orbit.getLatitude());
-        _Radio.send((uint8_t*)_transmit_message, _message_size, ACDH_MULE_ADDR);
-
+		digitalWrite(RF_CS_PIN, LOW);
+		digitalWrite(SD_CS_PIN, HIGH);
+        String _message_string = (String)WSN_ID + (String)_Orbit._orbit + (String)_transmit_message;
+		char* _message = _message_string.c_str();
+        uint8_t length = sdin.gcount() + 4;
+        length = sizeof(uint8_t)*length;
+		Serial.print(F("Sending data -- "));
+		Serial.println(_message);
+		Serial.print("*****Setting Chip Selects LOW*****");
+		//digitalWrite(RF_SHDN_PIN, LOW);
+		digitalWrite(RF_CS_PIN, LOW);
+		digitalWrite(ADS_CS_PIN, HIGH);
+		digitalWrite(SD_CS_PIN, HIGH);
+		digitalWrite(GPS_ENABLE, HIGH);
+		//uint8_t dat[] = "Hello World";
+		//uint8_t dat[] = "0000: Hello World. HELLO WORLD. HELLO WORLD!";
+		//RF22.sendtoWait(dat, sizeof(dat), ACDH_MULE_ADDR);
+		//_Radio.sendCommand(data, sizeof(data), ACDH_MULE_ADDR);
+		//delay(5);
+		RF22.sendtoWait((uint8_t*)_message,length, ACDH_MULE_ADDR);
         //update file position
+		digitalWrite(RF_CS_PIN, HIGH);
+		digitalWrite(SD_CS_PIN, LOW);
         _file_position = sdin.tellg();
         _Orbit.setPosition(_file_position);
         _Orbit.writeHeader(_handle);
         sdin.seekg(_file_position);
-            
+            /*
         // Update orbit values
+		if
         _Orbit.setLatitude();
         if ( _Orbit.getLatitude() >= _Orbit.getModeSwitchLatitude() ) {
             Serial.println(":: NOT done sending file.");
@@ -207,6 +176,7 @@ boolean AndesiteFile::send() {
             AndesiteFile::done();
             return false;
         }
+		*/
     } 
 
 	

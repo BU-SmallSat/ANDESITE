@@ -46,7 +46,7 @@ int AndesiteRadio::init() {
 	
 	// Set transmission power
 	RF22.setTxPower(RF22_TXPOW_20DBM);
-    
+    RF22.setTimeout(50);
 	return 0;
 }
 
@@ -64,7 +64,11 @@ int AndesiteRadio::send(uint8_t *message, uint8_t len, uint8_t addr) {
     // Set radio timeout and retries for sending a simple message
     //RF22.setTimeout(_send_timeout);
     //RF22.setRetries(_send_retries);
-    
+    String str_mes((const char*)message);
+    Serial.print("sending string: ");
+    Serial.print(str_mes);
+	Serial.print(" | ");
+    Serial.println(len);
     // Send message
     if ( RF22.sendtoWait(message, len, addr) != RF22_ROUTER_ERROR_NONE ){
         digitalWrite(RF_CS_PIN, HIGH);
@@ -110,6 +114,7 @@ int AndesiteRadio::sendCommand(uint8_t message[], uint8_t len, uint8_t addr) {
 
 // Acknowledgement message from the send address
 int AndesiteRadio::listen() {
+	uint16_t timeout = 10;
     digitalWrite(RF_CS_PIN, LOW);
     digitalWrite(ADS_CS_PIN, HIGH);
     digitalWrite(SD_CS_PIN, HIGH);
@@ -130,7 +135,7 @@ int AndesiteRadio::listen() {
     ******/
 
     // Wait for a message addressed to the server from the client
-    if ( !RF22.recvfromAck(buf, &len, &from) ){ 
+    if ( !RF22.recvfromAckTimeout(buf, &len, timeout, &from) ){ 
         //Serial.println("listen failed");
 		digitalWrite(RF_CS_PIN, HIGH);
         return from;

@@ -3,6 +3,7 @@
 // Define addressed datagram
 // 
 // Part of the Arduino RF22 library for operating with HopeRF RF22 compatible transceivers 
+
 // (see http://www.hoperf.com)
 // RF22Datagram will be received only by the addressed node or all nodes within range if the 
 // to address is RF22_BROADCAST_ADDRESS
@@ -116,12 +117,18 @@ void RF22Mesh::peekAtMessage(RoutedMessage* message, uint8_t messageLen)
 // This is called when a message is to be delivered to the next hop
 uint8_t RF22Mesh::route(RoutedMessage* message, uint8_t messageLen)
 {
+	Serial.println("Trying to deliver message to next route");
     uint8_t from = headerFrom(); // Might get clobbered during call to superclass route()
     uint8_t ret = RF22Router::route(message, messageLen);
     if (   ret == RF22_ROUTER_ERROR_NO_ROUTE
 	|| ret == RF22_ROUTER_ERROR_UNABLE_TO_DELIVER)
     {
+		
 	// Cant deliver to the next hop. Delete the route
+	//these printlns! are from me!
+	if (ret == RF22_ROUTER_ERROR_UNABLE_TO_DELIVER) Serial.println("Message delivery fail");
+	else Serial.println("No route to send message ");
+	
 	deleteRouteTo(message->header.dest);
 	if (message->header.source != _thisAddress)
 	{

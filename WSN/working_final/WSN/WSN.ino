@@ -70,7 +70,7 @@ ISR(TIMER1_COMPA_vect) {
 	WSN._science_mode_state = 1;
 
 	
-	if(count == 3001){
+	if(count == 30){
 		WSN._science_mode_state = 3;
 		count = 0;
 	}
@@ -114,8 +114,8 @@ void setup() {
 	//TCCR1B = THIRTY_HZ_TCCRIB; // 16MHZ with 64 prescalar
 	//OCR1A = (THIRTY_HZ_OCRIA);  //30Hz
 	
-	TCCR1B = FIFTY_HZ_TCCRIB; // 16MHZ with 8 prescalar
-	OCR1A = (FIFTY_HZ_OCRIA);  //50Hz
+	TCCR1B = THIRTY_HZ_TCCRIB; // 16MHZ with 8 prescalar
+	OCR1A = (THIRTY_HZ_OCRIA);  //30Hz
 	TIMSK1 &= !(1 << OCIE1A);
 	
 	//wdt_reset();
@@ -146,7 +146,7 @@ void loop() {
 	// Enter Science Mode
 	if ( WSN.isScienceMode() ) {
 		//wdt_reset();
-		WSN.scienceMode();
+		WSN.scienceMode(false);
 		//wdt_reset();
 	}
 	//WSN.healthBeacon();

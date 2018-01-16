@@ -41,18 +41,24 @@ void RF22ReliableDatagram::setRetries(uint8_t retries)
 ////////////////////////////////////////////////////////////////////
 boolean RF22ReliableDatagram::sendtoWait(uint8_t* buf, uint8_t len, uint8_t address)
 {
+	Serial.print("Before Send function - ");
+	Serial.print("timeout:");
+	Serial.print(_timeout);
+	Serial.print(", message_length:");
+	Serial.print(len);
     // Assemble the message
     uint8_t thisSequenceNumber = ++_lastSequenceNumber;
     uint8_t retries = 0;
-	
 	while (retries++ <= _retries)
     {
+    uint16_t timeout = _timeout + (_timeout * random(0, 256) / 256);
 	setHeaderId(thisSequenceNumber);
 	setHeaderFlags(0);
 	sendto(buf, len, address);
-	waitPacketSent();
-	
+	//Serial.println("Before wait for Acknowledgement");
+	waitPacketSent(timeout); //this value was changed by none other than Nehemiah. blame him if this breaks.
 	// Never wait for ACKS to broadcasts:
+	//Serial.println("After wait timeout");
 	if (address == RF22_BROADCAST_ADDRESS)
 	    return true;
 
@@ -63,9 +69,9 @@ boolean RF22ReliableDatagram::sendtoWait(uint8_t* buf, uint8_t len, uint8_t addr
 	// Compute a new timeout, random between _timeout and _timeout*2
 	// This is to prevent collisions on every retransmit
 	// if 2 nodes try to transmit at the same time
-	uint16_t timeout = _timeout + (_timeout * random(0, 256) / 256);
+	
         while ((millis() - thisSendTime) < timeout)
-	{
+	{;
 	    if (available())
 	    {
 		clearRxBuf(); // Not using recv, so clear it ourselves

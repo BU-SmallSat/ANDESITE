@@ -31,7 +31,7 @@
 // //////////////////////////////////
 
 // Collect and store magnetometer data
-void AndesiteCollect::mag(unsigned long timer_diff) {
+String AndesiteCollect::mag(unsigned long timer_diff) {
     //Serial.println("collecting mag");
     String data;    
 	long X_raw = _ADC.READ_DATA(MUX_CH1_X);
@@ -43,7 +43,7 @@ void AndesiteCollect::mag(unsigned long timer_diff) {
 	float voltageZ = ((5.0/8388608.0)*Z_raw)/64;
 					
 	data = "M"+String(voltageX,6)+","+String(voltageY,6)+","+String(voltageZ,6)+ ","+String(timer_diff,6);
-	Serial.println(data);
+	//Serial.println(data);
 	//_handle.println(data); //didnt include parity
     
 	/*File _handle = SD.open(_File._file.c_str(), O_CREAT | O_APPEND | O_WRITE);
@@ -56,23 +56,24 @@ void AndesiteCollect::mag(unsigned long timer_diff) {
 	 _handle.println(data); //didnt include parity
 	 _handle.close();
     data = "";*/
+	return data;
 }
 
-void AndesiteCollect::temp() {
-    String data;    
+String AndesiteCollect::temp() {
+    String data; 
+    Serial.println("CollectingTemp");   
 	data= "T"+String(sensors.getTempC(Temp1))+",";
 	data+= String(sensors.getTempC(Temp2))+",";
 	data+= String(sensors.getTempC(Temp3))+",";
 	data+= String(sensors.getTempC(Temp4));
     //data = "T100.00";
-	Serial.println(data);
-    //_File.store(data);
-    data = "";
+	//Serial.println(data);
+    return data;
 }
 
 
 // Collect and store gyroscope data
-void AndesiteCollect::gyro() {
+String AndesiteCollect::gyro() {
     //DOF.readGyro();
     //Serial.println("collecting gyro");
     String data;
@@ -90,15 +91,15 @@ void AndesiteCollect::gyro() {
     data += temp;
 	*/
 	data = "G400,500,600";
-	Serial.println(data);
-    //_File.store(data);
-    data = "";
+	//Serial.println(data);
+    //_handle.println(data);
+    return data;
 }
 
 
 
 // Collect and store GPS data
-void AndesiteCollect::gps() {
+String AndesiteCollect::gps() {
     String data = "L";
 	unsigned long timer_start = millis();
 	while(1){
@@ -107,13 +108,13 @@ void AndesiteCollect::gps() {
 				data = "*" + String(GPS.location.lat());
 				Serial.println(data);
 				//_File.store(data);
-				return;
+				return data;
 		}
 		if ( (millis() - timer_start) >= GPS_SCIENCE_TIMEOUT ) { break; }
 	}
 	//data = "L100,200,300";
 	data = GPS.location.lat();
-	Serial.println(data);
-	//_File.store(data);
-    return;
+	//Serial.println(data);
+	//_handle.println(data);
+    return data;
 }
