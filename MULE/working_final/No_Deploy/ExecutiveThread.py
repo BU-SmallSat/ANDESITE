@@ -11,9 +11,9 @@ from GlobalstarThread import GlobalstarThread
 from RFM22BThread import RFM22BThread
 
 '''*******************GLOBAL STATIC DEFINES************************'''
-FIFTEEN_MINUTES = 120 #900
-THIRTY_MINTUES = 240 #1800
-TWO_ORBIT = 120 #10800
+FIFTEEN_MINUTES = 900
+THIRTY_MINTUES = 1800
+TWO_ORBIT = 10800
 '''****************************************************************'''
 
 '''*******************GLOBAL SYSTEM DEFINES************************'''
