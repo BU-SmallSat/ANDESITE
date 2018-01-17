@@ -8,9 +8,11 @@ import os
 HealthBeaconFile = "/home/debian/Maria/healthFiles/healthBeacon.txt"
 
 # health status file
-GlobalstarHealthFile = "/home/debian/Maria/healthFiles/Globalstarhealth.txt"
-dataFileList = "/home/debian/Maria/fileList"
+HealthFile = "/home/debian/Maria/healthFiles/EPShealth.txt"
 WSNdataFile = "/home/debian/Maria/dataFiles/data"
+dataFileList = "/home/debian/Maria/groundFiles/filesList.txt"
+
+
 '''
 //*****************************//
 //*******GROUND COMMANDS*******//
@@ -30,13 +32,14 @@ EN_WSN_RADIO_CMD = "Enable RFM22B Radio"
 LIST_FILES_CMD = "List Orbit Files" #respond with most recent 10 data files with naming convention including orbit number and node number
 
 
-
-
+dataFiles = "/home/debian/Maria/dataFiles/"
+healthFiles = "/home/debian/Maria/healthFiles/"
+groundFiles = "/home/debian/Maria/groundFiles/"
 
 
 class GlobalstarThread(WorkerThread):
 
-    def __init__(self, executive_queue, listSemaphore, downlinkSemaphore,EPSsemaphore):
+    def __init__(self, executive_queue,downlinkSemaphore,EPSsemaphore):
         super(GlobalstarThread, self).__init__("Globalstar Thread")
         self.inputQueue = Queue.Queue()
         self.executiveQueue = executive_queue
@@ -50,7 +53,6 @@ class GlobalstarThread(WorkerThread):
         self.contactTime = 0  # last contact time (seconds since last reset, 4 bytes)
         self.attemptTime = 0  # last attempt time (seconds since last reset, 4 bytes)
         self.opCodes = 0  # count of failed op codes (4 bytes)
-        self.listSemaphore = listSemaphore
         self.downlinkSemaphore = downlinkSemaphore
         self.epsSemaphore = EPSsemaphore
         self.fileRequest = ""
@@ -77,49 +79,81 @@ class GlobalstarThread(WorkerThread):
         self.executiveQueue.put("EC:GlobalstarDisabled")
         # send downlink to ground "Hello Andesite"
 
-    def downlinkFileList(self):
-        print('******DOWNLINKING LIST OF FILES******')
-        self.listSemaphore.acquire(blocking=True)
-        with open(dataFileList) as fileList:
-            for line in fileList:
-                print(line)
-            fileList.close()
-        print("*************************************")
-        self.listSemaphore.release()
-
     def processResponse(self, string):
         if string == "CE:EnableGlobalstar":
             self.GlobalstarEnable()
         elif string == "CE:DisableGlobalstar":
             self.GlobalstarDisable()
         elif string == "CE:HelloBU":
+            self.composeDownlink("helloWorld.txt",groundFiles)
             print("DOWNLINKING HELLO BU MESSAGE")
         elif string == "CE:HealthPoll":
+            self.downlinkHealthFile()
             print("DOWNLINKING HEALTH POLL TO GROUND")
-        elif string == "CR:downlinkRequestedFile":
-            self.downlinkDataFile()
-        elif string == "CR:requestedDownlinkRefused":
-            self.downlinkFileFailure()
-        elif string == "CR:listFiles":
-            self.downlinkFileList()
-        elif "ER:Done:" in string:
+        elif "CR:Done:" in string:
             print("READY FOR DOWNLINK")
             pass
         elif string == "CR:WSNcontact":
+            self.composeDownlink("WSNcontact.txt",groundFiles)
             print("DOWNLINKING WSN CONTACT SUCCESS")
+        elif string == "CP:DeployerOn":
+            self.composeDownlink("DeployerOn.txt",groundFiles)
+        elif string == "CP:DeployerNotOn":
+            self.composeDownlink("DeployerFail.txt", groundFiles)
+        elif string == "CP:DeployerOff":
+            self.composeDownlink("DeployerOff.txt", groundFiles)
+        elif string == "CP:DeployerNotOff":
+            self.composeDownlink("DeployerFail.txt", groundFiles)
+        elif string == "CD:SerialDisconnected" :
+            self.composeDownlink("DeployerCommFail.txt",groundFiles)
+        elif string == "CD:SerialConnected":
+            self.composeDownlink("DeployerCommSuccess.txt",groundFiles)
+
+    def downlinkFileList(self):
+        print('******DOWNLINKING LIST OF FILES******')
+        try:
+            files = os.listdir(dataFiles)
+            with open(dataFileList, 'w') as fileList:
+                for line in files:
+                    fileList.write(line)
+                    fileList.write("\n")
+                fileList.close()
+            print("*************************************")
+            self.composeDownlink("filesList.txt",groundFiles)
+        except:
+            self.composeDownlink("FileNotFound.txt", groundFiles)
 
     def downlinkDataFile(self):
         print('******DOWNLINKING DATA FILES******')
-        self.downlinkSemaphore.acquire(blocking=True)
-        with open(self.fileRequest) as file:
-            for line in fileList:
-                print(line)
-            fileList.close()
-        print("*************************************")
-        self.downlinkSemaphore.release()
+        try:
+            self.downlinkSemaphore.acquire(blocking=False)
+            with open(self.fileRequest) as file:
+                for line in fileList:
+                    print(line)
+                fileList.close()
+            print("*************************************")
+            self.composeDownlink(self.fileRequest,dataFiles)
+            self.downlinkSemaphore.release()
+        except:
+            self.downlinkSemaphore.release()
+            self.composeDownlink("SendFileFail.txt", groundFiles)
+            print("FAILURE TO DOWNLINK DATA FILE - IN USE BY RFM22B THREAD")
 
-    def downlinkFileFailure(self):
-        print("FAILURE TO DOWNLINK DATA FILE - IN USE BY RFM22B THREAD")
+    def downlinkHealthFile(self):
+        print('******DOWNLINKING HEALTH FILES******')
+        try:
+            self.epsSemaphore.acquire(blocking=False)
+            with open(HealthFile) as file:
+                for line in fileList:
+                    print(line)
+                fileList.close()
+            print("*************************************")
+            self.composeDownlink("EPShealth.txt", healthFiles)
+            self.epsSemaphore.release()
+        except:
+            self.epsSemaphore.release()
+            self.composeDownlink("SendFileFail.txt", groundFiles)
+            print("FAILURE TO DOWNLINK DATA FILE - IN USE BY EPS THREAD")
 
     def healthTest(self):
         [rssi, connected] = self.globalStar.poll_health(2, .1)
@@ -132,19 +166,38 @@ class GlobalstarThread(WorkerThread):
             self.executiveQueue.put("EC:gStarFail")
 
     def routeUplink(self, message):
-        if "RC:pull" in message:
-            self.fileRequest = WSNdataFile + message[8:9] + "Orb" + message[10:13] + ".txt"
+        if "CG:pullFile" in message:
+            self.fileRequest = WSNdataFile + message[11:12] + "Orb" + message[13:16] + ".txt"
             if os.path.isfile(self.fileRequest):
-                print("sending message to executive queue: " + message)
-                self.executiveQueue.put(message)
+                self.downlinkDataFile()
             else:
                 print("FILE REQUESTED FROM GROUND DOESNT EXITS::"),
                 print(self.fileRequest)
+                self.composeDownlink("FileNotFound.txt", groundFiles)
+        elif "CG:remove" in message:
+            file = WSNdataFile + message[9:10] + "Orb" + message[11:14] + ".txt"
+            if os.path.isfile(file):
+                try:
+                    os.remove(file)
+                except:
+                    self.composeDownlink("DeleteFileFail.txt", groundFiles)
+            else:
+                print("FILE REQUESTED FROM GROUND DOESNT EXITS::"),
+                print(file)
+                self.composeDownlink("FileNotFound.txt", groundFiles)
+        elif string == "CG:pullHealth":
+            self.downlinkHealthFile()
+        elif string == "CG:HelloAndesite":
+            print("CONTACT WITH GROUND STATION")
+        elif string == "CG:listFiles":
+            self.downlinkFileList()
+        elif string == "CG:clearQueue":
+            self.globalStar.clear_downlink_files(10,.1)
         else:
             print("sending message to executive queue: "+message)
             self.executiveQueue.put(message)
 
-    def composeDownlink(self, file):
+    def composeDownlink(self, file,path):
         '''
         # chunk the file into pieces small enough to send over globalstar radio
         # compress the files
@@ -154,9 +207,8 @@ class GlobalstarThread(WorkerThread):
             response = GlobalstarSerial.send(file)
         #retry scheme if the message is not successfully sent?
         '''
-        pass
+        self.globalStar.sendFile(file, path, 30, .1)
 
-    def readSMS(self):
         pass
 
     def init(self):
@@ -172,6 +224,8 @@ class GlobalstarThread(WorkerThread):
                 self.processResponse(executiveResponse)
             except Queue.Empty:
                 queueEmpty = True
-        self.readSMS()
+        resp = self.globalStar.SMS_pull_poll(10, .1)
+        if resp != "":
+            parseCommand(resp)
         # read something from the globalstar queue and route it to the executive queue
         #self.routeUplink()

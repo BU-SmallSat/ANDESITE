@@ -34,14 +34,19 @@ class ADCThread(WorkerThread):
         #self.mpu9250 = MPU9250()
 
     def processResponse(self, string):
-        if string == "AC:restartiMTQ":
-            self.restartiMTQ()
-        elif string == "AE:readMagData":
+        if string == "AG:restartiMTQ":
+            self.MTQ.software_reset()
+        elif string == "AG:readMagData":
             self.readMagData()
-        elif string == "AE:TwoOrbitBDOT":
-            self.TwoOrbitBDOT()
+        elif string == "AG:twoOrbitBDOT":
+            print("TWO ORBIT BDOT CONTROLLER")
+            self.MTQ.TwoOrbitBDOT()
         elif string == "AE:DisableBDOT":
             self.disableBDOT()
+        elif "AG:timeBDOT" in string:
+            minutes = int(string[12:])
+            self.MTQ.timeBDOT(minutes)
+
 
     def disableBDOT(self):
         #read iMTQ and verify that it is not in the
@@ -84,12 +89,6 @@ class ADCThread(WorkerThread):
     def iMTQselfTest(self):
         self.MTQ.self_test(ALL_AXES)
 
-    def restartiMTQ(self):
-        self.MTQ.software_reset()
-
-    def TwoOrbitBDOT(self):
-        print("TWO ORBIT BDOT CONTROLLER")
-        self.MTQ.TwoOrbitBDOT()
 
     def init(self):
         self.interval = 5 # frequency of the most frequently sampled ADC hardware (

@@ -51,7 +51,7 @@ class DeploymentThread(WorkerThread):
     def processResponse(self, string):
         # if string == "DE:EjectNode":
         #     self.TestDeploy()
-        if string == "DE:CheckSerial":
+        if string == "DG:checkSerialComm":
             self.Check_Serial()
         if string == "DE:lowPowerMode":
             self.lowPowerMode()
@@ -157,7 +157,7 @@ class DeploymentThread(WorkerThread):
 
         # print('I AM Check_Serial AND I GET' + str(res) + '\n\n\n\n\n\n\n')
         if res.find("privyet") == -1:
-            self.executiveQueue.put("ED:SerialDisconnected")
+            self.executiveQueue.put("CD:SerialDisconnected")
         else:
-            self.executiveQueue.put("ED:SerialConnected")
+            self.executiveQueue.put("CD:SerialConnected")
         # return res

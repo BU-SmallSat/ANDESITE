@@ -364,6 +364,14 @@ class magnetorquer_driver :
         self.setup_ADCS_param()
         self.start_bdot([0x27, 0x10])
 
+    def timeBDOT(self,mins):
+        self.setup_ADCS_param()
+        sec = min * 60
+        high, low = divmod(sec, 0x100)
+        high_hex = hex(high)
+        low_hex = hex(low)
+        self.start_bdot([high_hex,low_hex])
+
     def pointing_mode(self):
         self.start_dipole([0x00, 0x00], [0x03, 0xE8], [0x00, 0x00], [0x27, 0x10])
 

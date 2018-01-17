@@ -16,6 +16,7 @@ THIRTY_MINTUES = 1800
 TWO_ORBIT = 10800
 '''****************************************************************'''
 
+
 '''*******************GLOBAL SYSTEM DEFINES************************'''
 GPSenabled=0
 GPSantennaEnabled = 0
@@ -271,46 +272,6 @@ def CommInterpreter(string):
     global GroundContact
     if string == "EC:lowPowerMode":
         lowPowerMode()
-    elif string == "EC:EnableDeployer":
-        # wait for EPS thread to respond saying that threads are working
-        DeployerCheck = False
-        while DeployerCheck is False:
-            try:
-                threadResponse = inputQueue.get(False)
-                print(threadResponse)
-                processMessage(threadResponse)
-            except Queue.Empty:
-                pass
-        if DeployerEnabled is True:
-            processMessage("DE:CheckSerial")
-            while DeployerConnected is False:
-                try:
-                    threadResponse = inputQueue.get(False)
-                    processMessage(threadResponse)
-                except Queue.Empty:
-                    pass
-        else:
-            #downlink response saying Deployer is Disabled
-            processMessage("CE:DeployerDisabled")
-    elif "EC:deployPair" in string:
-        if DeployerEnabled is True:
-            # check that bdot is not enabled
-            processMessage("AE:DisableBDOT")
-            # wait for response from ADC thread
-            BDOTcheck = False
-            while BDOTcheck is False:
-                try:
-                    threadResponse = inputQueue.get(False)
-                    processMessage(threadResponse)
-                except Queue.Empty:
-                    pass
-            # tell deployer thread to deploy pair of nodes
-            reply = "DE:Deploy" + string[-1:]
-            print(reply)
-            processMessage(reply)
-        else:
-            #downlink response saying Deployer is Disabled
-            processMessage("CE:DeployerDisabled")
     elif string == "EC:GlobalstarEnabled":
         GlobalstarEnabled = True
     elif string == "EC:GlobalstarDisabled":
@@ -321,6 +282,28 @@ def CommInterpreter(string):
     elif string == "EC:HealthPoll":
         healthPoll()
 
+def GroundInterpreter(string):
+    global BDOTcheck
+    if "EG:deployPair" in string:
+        # check that bdot is not on
+        processMessage("AE:DisableBDOT")
+        # wait for response from ADC thread
+        BDOTcheck = False
+        while BDOTcheck is False:
+            try:
+                threadResponse = inputQueue.get(False)
+                processMessage(threadResponse)
+            except Queue.Empty:
+                pass
+        # tell deployer thread to deploy pair of nodes
+        reply = "DE:Deploy" + string[-1:]
+        print(reply)
+        processMessage(reply)
+    elif string == "EG:endOfLife":
+        #turn off globalstar
+        #turn off rfm22b
+        #turn off bdot
+        pass
 
 def DeployerInterpreter(string):
     global DeployerConnected
@@ -387,7 +370,6 @@ def processMessage(string):
 start_time = time.time()
 
 EPSSemaphore = BoundedSemaphore(1)
-ListSemaphore = BoundedSemaphore(1)
 DownlinkSemaphore = BoundedSemaphore(1)
 
 # setup threads and thread communication
@@ -395,8 +377,8 @@ inputQueue = Queue.Queue()  # E
 
 Deployer = DeploymentThread(inputQueue)  # D
 Power = EPSThread(inputQueue, EPSSemaphore)  # P
-Comm = GlobalstarThread(inputQueue, ListSemaphore, DownlinkSemaphore,EPSSemaphore)  # C
-RFM22B = RFM22BThread(inputQueue, ListSemaphore, DownlinkSemaphore)  # R
+Comm = GlobalstarThread(inputQueue, DownlinkSemaphore,EPSSemaphore)  # C
+RFM22B = RFM22BThread(inputQueue, DownlinkSemaphore)  # R
 ADC = ADCThread(inputQueue)  # A
 
 # logging setup
@@ -407,7 +389,7 @@ logger = logging.getLogger("main")
 routeMessage = {'A': ADC.inputQueue, 'C': Comm.inputQueue, 'D': Deployer.inputQueue,
                 'P': Power.inputQueue, 'R': RFM22B.inputQueue}
 interpretMessage = {'A': ADCInterpreter, 'C': CommInterpreter, 'D': DeployerInterpreter,
-                    'P': PowerInterpreter, 'R': RFM22BInterpreter}
+                    'P': PowerInterpreter, 'R': RFM22BInterpreter, 'G':GroundInterpreter}
 ADC.resume()
 Comm.resume()
 Deployer.resume()

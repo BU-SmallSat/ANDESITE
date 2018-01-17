@@ -66,11 +66,11 @@ class GlobalStarSerial:
         self.__serial.write(ackResponse)
 
 
-    def sendFile(self, fileName, timeOut, readInterval):
+    def sendFile(self, fileName, path, timeOut, readInterval):
         # receive message in string format
         # need to add length checking and splicing for files that are too long
         NAMELEN = str(len(fileName)).zfill(3)
-        path = dataFiles + fileName
+        fullPath = path + fileName
         with open(path, 'r') as myfile:
             message = myfile.read().rstrip('\n')
         MSGLEN = str(len(message)).zfill(6)

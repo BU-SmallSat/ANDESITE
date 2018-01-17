@@ -21,7 +21,7 @@ dataFilesDir = "/home/debian/Maria/dataFiles"
 dataFileList = "/home/debian/Maria/fileList"
 
 class RFM22BThread(WorkerThread):
-    def __init__(self, executive_queue, listSemaphore, downlinkSemaphore):
+    def __init__(self, executive_queue, downlinkSemaphore):
         super(RFM22BThread, self).__init__("RFM22B Thread")
         self.inputQueue = Queue.Queue()
         self.executiveQueue = executive_queue
@@ -30,7 +30,6 @@ class RFM22BThread(WorkerThread):
         self.ser.flush()
         self.orbitFiles = [0,0,0,0,0,0,0,0]
         self.WSNcontact = 0
-        self.listSemaphore = listSemaphore
         self.downlinkSemaphore = downlinkSemaphore
         # time.sleep(.2)
 
@@ -38,19 +37,6 @@ class RFM22BThread(WorkerThread):
         # can't turn off the arduino, but turn off the rf radio
         # this function should turn off all unnecessary hardware and functions for low power mode
         print("RF22B thread entering safe mode")
-
-    def listFiles(self):
-        print("CREATING LIST OF FILES")
-        self.listSemaphore.acquire(blocking=True)
-        files = [f for f in os.listdir(dataFilesDir) if os.path.isfile(os.path.join(DataFilesDir, f))]
-        print(files)
-        with open(dataFileList, "w") as fileList:
-            for f in files:
-                fileList.write(f)
-            fileList.close()
-        self.listSemaphore.release()
-        print("RELEASING LIST OF FILES TO GLOBALSTAR THREAD")
-        self.executiveQueue.put("CR:listFiles")
 
     def processResponse(self, string):
         global radioOn
@@ -62,18 +48,12 @@ class RFM22BThread(WorkerThread):
         elif string == "RC:requestNetwork":
             # send current network array to ground
             return 0
-        elif string == "RC:radioInit":
+        elif string == "RG:enableRFM22B":
             print("***initializing radio***")
             self.radioInit()
             return 0
         elif string == "RD:updateNetwork":
             self.updateNetwork()
-            return 0
-        elif string == "RC:restartRF22":
-            self.restartRF22()
-            return 0
-        elif string == "RC:listFiles":
-            self.listFiles()
             return 0
         elif "RC:radioNetwork:" in string:
             # how to relay this information
@@ -85,13 +65,6 @@ class RFM22BThread(WorkerThread):
         elif string == "newNode:":
             self.newTextFile()
             return 1
-        elif "RC:pull" in string:
-            if self.currentFiles[int(string[8:9])] is not int(string[10:13]):
-                self.executiveQueue.put("CR:downlinkRequestedFile")
-                self.downlinkSemaphore.release()
-            else:
-                self.downlinkSemaphore.acquire(blocking=True)
-                self.executiveQueue.put("CR:requestedDownlinkRefused")
         elif "updatedNetwork:" in string:
             print("rf network has been updated: "+string[:-2])
             networkString = string[15:-2]
@@ -265,6 +238,7 @@ class RFM22BThread(WorkerThread):
                 else:
                     RFM22BDataFile = RFM22BDataWSNerror
                 try:
+                    self.downlinkSemaphore.acquire(blocking=False)
                     with open(RFM22BDataFile, "a") as dataFile:
                         # print("writing to datafile: "+message)
                         # print("to datafile: " + RFM22BDataFile)
@@ -272,7 +246,9 @@ class RFM22BThread(WorkerThread):
                         dataFile.write(str(message[4:-2].decode('UTF-8')))
                         dataFile.write("\n")
                         dataFile.close()
+                    self.downlinkSemaphore.release()
                 except:
+                    self.downlinkSemaphore.acquire(blocking=False)
                     try:
                         with open(RFM22BDataFile, "a") as dataFile:
                             # print("writing to datafile: "+message)
@@ -281,7 +257,9 @@ class RFM22BThread(WorkerThread):
                             dataFile.write(str(message[4:-3].decode('UTF-8')))
                             dataFile.write("\n")
                             dataFile.close()
+                        self.downlinkSemaphore.release()
                     except:
+                        self.downlinkSemaphore.release()
                         print("ERROR WITH PERMISSIONS::"+message)
             elif message[1] == ':':
                 print("WSN"+message)
