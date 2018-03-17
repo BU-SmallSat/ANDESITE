@@ -57,7 +57,7 @@
 #define WREG_GPIODAT	 B01001110  //Set high or low (default is low)
 
 // Register Values
-//  Register Map table [Page 55]
+// Register Map table [Page 55]
 #define MUX0  0x00
 #define VBIAS  0x01
 #define MUX1  0x02

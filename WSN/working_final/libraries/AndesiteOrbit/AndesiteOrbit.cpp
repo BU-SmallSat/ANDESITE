@@ -17,10 +17,6 @@
 
 // Includes
 #include "AndesiteOrbit.h"
-#include "AndesiteData.h"
-#include "AndesiteRadio.h"
-#include "libandesite.h"
-
 
 
 // ////////////////////////////////
@@ -60,9 +56,6 @@ boolean AndesiteOrbit::setLatitude() {
         
 		while ( Serial1.available() > 0 ) {
 			char c = Serial1.read();
-            //Serial.print("newChar: ");
-            //Serial.println(c);
-            // Determine latitude and latitude increment
 			if ( c > -1 ) {
 				if ( GPS.encode(c) ) {
 					_latitude = GPS.location.lat();
@@ -72,24 +65,12 @@ boolean AndesiteOrbit::setLatitude() {
                     return _lock;
 				}
 			}
-			
-			//if ( (millis() - timer_start) >= timeout ) { break; }
         }
         
 		if ( (millis() - timer_start) >= GPS_READ_TIMEOUT ) { break; }
     }
-	//_lock = false;
+
 	_latitude = GPS.location.lat();
-	//_dt = millis() - _dt;
-	//_dl = = (_dv * _dt) / _radius * 180.0 / (double)3.1415926589;
-    /*
-    // Determine latitude increment
-    _dt = millis() - _dt;
-    // Change this for testing, make it so that it's dependent on orbit time
-    _dl = (_dv * _dt) / _radius * 180.0 / (double)3.1415926589; 
-    _latitude += _dl;
-    */
-	
 	return false;
 }
 
@@ -152,7 +133,7 @@ boolean AndesiteOrbit::writeHeader(File handle) {
     Serial.println(_status);
     
 	if ( !handle ) {
-        Serial.println("Orbit WRITE was unsuccesful!");
+        Serial.println("Orbit WRITE was unsuccessful!");
         return false;
     }
     
@@ -171,40 +152,6 @@ boolean AndesiteOrbit::writeHeader(File handle) {
 
 // Update orbit file containing value of current orbit
 boolean AndesiteOrbit::update(String file) {
-    
-    // PUT FUNCTION TO OPEN AND CHECK FAILURE IN ANDESITE_FILE
-    // Open up orbit info file (check for file open fails globally)
-    // File handle;
-    // if ( _update_fail > 5 ) 
-    //     handle = SD.open(file.c_str(), O_CREAT | O_TRUNC | O_WRITE);
-    // else
-    //     handle = SD.open(file.c_str(), O_CREAT | O_WRITE); // This should be read?
-    
-    // // Check status of opened file
-	// if ( !handle ) {
-    //     Serial.println(":: Unable to update file.");
-        
-    //     // Stop trying this orbit and go to next orbit
-    //     if ( _update_fail > 10 )
-    //         ++_orbit;
-        
-    //     // Opening file has failed, keep track of this        
-    //     ++_update_fail;
-    //     handle.close();
-        
-    //     return 0;
-    // } else {
-        
-    //     // Opening file has failed many times, write fresh data to file and be done with it
-    //     if ( _update_fail ) {
-    //         if ( _update_fail > 5 )
-    //             writeHeader(handle);
-    //         _update_fail = 0;
-    //         header.close();
-    //         return 2;
-    //     }
-    //     header.close();
-    // } 
     unsigned int stat = 0;
     // Check file size, compare with pos and header (header size = (5+7+1)+(2+1) = 16)
     File handle = SD.open(file.c_str(), O_READ);
@@ -281,7 +228,6 @@ boolean AndesiteOrbit::waitOrbitFinish() {
 // Wait for Science mode to finish
 boolean AndesiteOrbit::waitScienceFinish() {
     Serial.println(":: Waiting for Science Mode to finish...");
-    //acdh_led_set(1);
     unsigned long timer_start = millis();
     
     // Wait for Science mode to finish
@@ -295,14 +241,6 @@ boolean AndesiteOrbit::waitScienceFinish() {
 	}
 	
 	Serial.println("Done.");
-	/*
-	// Orbit number peaked and is too big, do nothing
-    if ( _orbit >= 999 ) {
-        Serial.print("Orbit number is at its max value: ");
-        Serial.println(_orbit);
-        while ( _orbit >= 999 ) {}
-    }
-    */
     return true;
 }
 
@@ -323,7 +261,7 @@ boolean AndesiteOrbit::waitTransferStartCmd(unsigned long _transfer_start) {
 				Serial.println("Send Fail.");
 			}
 			else{
-				Serial.println("::Received acknowledgement from Mule");
+				Serial.println("::Received acknowledgment from Mule");
 				return true;
 			}
 		}

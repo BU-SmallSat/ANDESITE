@@ -19,6 +19,13 @@
 
 // Includes
 #include "Arduino.h"
+#include "AndesiteData.h"
+#include "AndesiteCollect.h"
+#include "AndesiteRadio.h"
+#include "AndesiteOrbit.h"
+#include "AndesiteFile.h"
+#include "libandesite.h"
+#include "ADS1248.h"
 #include <SPI.h>
 #include <DallasTemperature.h>
 

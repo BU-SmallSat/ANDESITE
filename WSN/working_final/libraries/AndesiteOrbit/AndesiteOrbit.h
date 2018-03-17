@@ -21,14 +21,14 @@
 // ========
 
 #include <SdFat.h>
-
-
+#include "AndesiteData.h"
+#include "AndesiteRadio.h"
+#include "libandesite.h"
 
 // =======
 // Classes
 // =======
 
-// I think everything can be static but i'm not sure
 class AndesiteOrbit {
 public:
     AndesiteOrbit();
@@ -48,7 +48,7 @@ public:
     // Perform reads/writes to the header of the data file
     unsigned long       readHeader(String file, int field); 
     boolean             writeHeader(File handle); 
-    boolean             update(String file); // Updates orbit/pos/stat
+    boolean             update(String file); // Updates orbit/position/stat
     
     // Wait for different modes in the orbit to finish
     boolean             waitOrbitFinish();

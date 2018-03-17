@@ -19,7 +19,9 @@
 #ifndef ANDESITECOLLECT_H
 #define ANDESITECOLLECT_H
 
+#include "AndesiteData.h"
 #include "AndesiteFile.h"
+#include "ADS1248.h"
 #include <SPI.h>
 #include <DallasTemperature.h>
 

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ANDESITE-MULE.iml" filepath="$PROJECT_DIR$/.idea/ANDESITE-MULE.iml" />
+      <module fileurl="file:$PROJECT_DIR$/../../../../../../../..//$PROJECT_DIR$/.idea/ANDESITE.iml" filepath="$PROJECT_DIR$/.idea/ANDESITE.iml" />
+      <module fileurl="file:$PROJECT_DIR$/../../../../../../../..////engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/ANDESITE/.idea/ANDESITE.iml" filepath="engnas.ad.bu.edu/..////engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/ANDESITE/.idea/ANDESITE.iml" />
+      <module fileurl="file:$PROJECT_DIR$/../../../../../../../..////engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/ANDESITE/.idea/ANDESITE-MULE.iml" filepath="engnas.ad.bu.edu/..////engnas.ad.bu.edu/Projects/eng_proj_busat/ANDESITE/01-00_C&amp;DH/Project Member Folders/Maria/ANDESITE/.idea/ANDESITE-MULE.iml" />
     </modules>
   </component>
 </project>

@@ -27,8 +27,7 @@
 //GPS Variables
 #define GPS_READ_TIMEOUT			1000
 #define GPS_SCIENCE_TIMEOUT			5
-//#define GPS_INIT_TIMEOUT			300000
-#define GPS_INIT_TIMEOUT			120000
+#define GPS_INIT_TIMEOUT			300000
 #define GPS_ENABLE					11
 
 #define CALIBRATION_TEMP_TIMING		30
@@ -37,12 +36,8 @@
 //No Lock GPS Timeout Variables
 #define SCIENCE_MODE_TIMEOUT		1200000
 #define TRANSFER_MODE_TIMEOUT		4200000
-#define CALIBRATION_TIMEOUT			900000
-//#define SCIENCE_MODE_TIMEOUT		300000
-//#define TRANSFER_MODE_TIMEOUT		600000
-//#define CALIBRATION_TIMEOUT			120000
+#define CALIBRATION_TIMEOUT			600000
 #define MULE_LISTEN_TIMEOUT			500
-
 
 //Data sample rate
 #define SIXTY_HZ_OCRIA					33332
@@ -123,8 +118,6 @@
 // Public functions
 // ================
 
-// LED setup
-//void acdh_init_led();
 
 // Compression/decompression
 int acdh_strlen(uint8_t *str);
@@ -138,9 +131,6 @@ unsigned int acdh_adc_readData(int ChipSelect, int SyncPin, int ResetPin);
 // Digital potentiometer control
 void acdh_digipot_setup(byte Address);
 void acdh_digipot_gainset(byte Address, int Gain);
-
-// Setup visual aid LEDs
-//void acdh_led_set(int mode);
 
 
 #endif

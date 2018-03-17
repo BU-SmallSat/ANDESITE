@@ -46,11 +46,11 @@ C:\Users\mlkro\AppData\Local\Temp\VMBuilds\WSN\mega_atmega2560\Debug\WSN.cpp.o: 
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Stream.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\SFE_LSM9DS0/SFE_LSM9DS0.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\AndesiteCollect/AndesiteCollect.h \
+ C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\AndesiteFile/AndesiteFile.h \
+ C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\RF22/RF22Router.h \
+ C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\RF22/RF22Mesh.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\AndesiteData/AndesiteData.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\AndesiteOrbit/AndesiteOrbit.h \
- C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\AndesiteFile/AndesiteFile.h \
- C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\RF22/RF22Mesh.h \
- C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\RF22/RF22Router.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\AndesiteRadio/AndesiteRadio.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\libandesite/libandesite.h \
  C:\Users\mlkro\OneDrive\Documents\Arduino\libraries\ADS1248/ADS1248.h

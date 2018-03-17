@@ -57,30 +57,6 @@ const byte CommandTapB = B00010010;  //just change wipper B
 const byte CommandTapAB = B0000011;  //change both wipper A and B
 
 
-
-
-
-// ////////////////////////////////
-// ///// MULE/WSN BOARD SETUP /////
-// ////////////////////////////////
-/*
-// Setup the LEDs on the board
-void acdh_init_led() {
-    pinMode(12,OUTPUT);
-    pinMode(13,OUTPUT);
-    pinMode(77,OUTPUT);
-    pinMode(78,OUTPUT);
-    pinMode(79,OUTPUT);
-	
-    digitalWrite(12,LOW);
-    digitalWrite(13,LOW);
-    digitalWrite(77,LOW);
-    digitalWrite(78,LOW);
-    digitalWrite(79,LOW);
-}
-*/
-
-
 // //////////////////////////////////////////////
 // ///// DATA COMPRESSION AND DECOMPRESSION /////
 // //////////////////////////////////////////////
@@ -247,9 +223,6 @@ void acdh_str_decompress(char *str, uint8_t *hex, int n) {
 // //////////////////////////////////////
 
 void acdh_adc_setup(){
-    //ACDH_ADC_XSS_PIN, ACDH_ADC_SYNC_PIN, ACDH_ADC_RESET_PIN)
-    //local variables
-    // SPI.end();
   
     byte temp=0;
     const int sck = 52;
@@ -400,7 +373,7 @@ void acdh_adc_setup(){
         SPI.transfer(C2Filter100);
     }
   
-    //deselect the chip
+    //de-select the chip
     digitalWrite(ACDH_ADC_XSS_PIN, HIGH); 
     digitalWrite(ACDH_ADC_YSS_PIN, HIGH);
     digitalWrite(ACDH_ADC_ZSS_PIN, HIGH);
@@ -418,7 +391,7 @@ unsigned int acdh_adc_readData(int ChipSelect, int SyncPin, int ResetPin){
     unsigned int result=0;
     byte byte0=0, byte1=0, byte2=0;
 
-    //select the approripate ADC
+    //select the appropriate ADC
     digitalWrite(ChipSelect,LOW);
     
     SPI.transfer(DataByte0);    //Call the register that we want to read and store data
@@ -428,7 +401,7 @@ unsigned int acdh_adc_readData(int ChipSelect, int SyncPin, int ResetPin){
     SPI.transfer(DataByte2); 
     byte2 = SPI.transfer(0x00);
   
-    //shift the data appropirately and combine the values
+    //shift the data appropriately and combine the values
     //the | is an or bitwise operator. so all values are stored
     //within result
     result = byte0 << 16 | byte1 << 8 | byte2 ; 
@@ -519,51 +492,3 @@ void acdh_digipot_gainset(byte Address, int Gain){
     }
     Wire.endTransmission();
 }
-
-
-
-// //////////////////////
-// ///// BOARD LEDs /////
-// //////////////////////
-/*
-// Turn on LEDs for the different mission modes
-void acdh_led_set(int mode){
-    
-    // Led for general Waiting
-    if ( mode == 1 ) {
-        digitalWrite(12, LOW);
-        digitalWrite(13, LOW);
-        digitalWrite(77, LOW);
-        digitalWrite(78, HIGH);
-        digitalWrite(79, LOW);
-    }
-	
-    // Led for Science Mode
-    if ( mode == 2 ) {
-        digitalWrite(12, LOW);
-        digitalWrite(13, LOW);
-        digitalWrite(77, HIGH);
-        digitalWrite(78, LOW);
-        digitalWrite(79, LOW);
-    }
-    
-    // Led for waiting to send transmission 
-    if ( mode == 3 ) {
-        digitalWrite(12, LOW);
-        digitalWrite(13, HIGH);
-        digitalWrite(77, HIGH);
-        digitalWrite(78, LOW);
-        digitalWrite(79, LOW);
-    }
-	
-    // Led for Transmission Mode
-    if ( mode == 4 ) {
-        digitalWrite(12, LOW);
-        digitalWrite(13, HIGH);
-        digitalWrite(77, LOW);
-        digitalWrite(78, LOW);
-        digitalWrite(79, LOW);
-    }
-}
-*/
-

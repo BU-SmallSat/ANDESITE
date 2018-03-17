@@ -124,6 +124,7 @@ class magnetorquer_driver :
     """A NEW VERSION OF THE FUNCTION CREATED IN FEBRUARY"""
     def start_dipole(self, x_axis, y_axis, z_axis, duration):
         #todo: CHECK THE PROPER BYTE ORDER!!!
+        #ACCRODING TO THE IMTQ DATASHEET, ALL PARAMETERS ARE LITTLE-ENDIAN
         # current in 10-4 A is converted into bytes just by integer division
         # TIME IN MILLISECONDS is also converted into bytes just by integer division
         # pad axis and duration to be 2 bytes each

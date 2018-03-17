@@ -26,7 +26,8 @@ DallasTemperature sensors(&oneWire);
 DeviceAddress Temp1,Temp2,Temp3,Temp4;
 //**********************************************//
 //************MODIFY FOR FLIGHT NODES***********//
-RF22ReliableDatagram RF22(ACDH_WSN1_ADDR);
+int wsn_num = ACDH_WSN2_ADDR;
+RF22ReliableDatagram RF22(wsn_num);
 //**********************************************//
 //**********************************************//
 
@@ -63,14 +64,10 @@ int count = 0;
 unsigned long lastInt = millis();
 unsigned long now = millis();
 ISR(TIMER1_COMPA_vect) {
-	//lastInt = now;
-	//now = millis();
-	//Serial.println(now-lastInt);
-	//Serial.println(WSN._science_mode_state);
 	WSN._science_mode_state = 1;
 
 	
-	if(count == 30){
+	if(count == WSN._temp_timing){
 		WSN._science_mode_state = 3;
 		count = 0;
 	}
@@ -103,40 +100,18 @@ void setupWatchdog(){
 void setup() {
 	// Set baud rate
 	Serial.begin(ACDH_SERIAL_BAUD);
-	
-	//Setup WDT
-	//setupWatchdog();
-	
-	//set up interrupts for data sampling
-	//noInterrupts();
+
 	TCCR1A = 0x00; // normal operation page 148 (mode0);
 	TCNT1= 0x0000; // 16bit counter register
-	//TCCR1B = THIRTY_HZ_TCCRIB; // 16MHZ with 64 prescalar
-	//OCR1A = (THIRTY_HZ_OCRIA);  //30Hz
 	
 	TCCR1B = THIRTY_HZ_TCCRIB; // 16MHZ with 8 prescalar
 	OCR1A = (THIRTY_HZ_OCRIA);  //30Hz
 	TIMSK1 &= !(1 << OCIE1A);
-	
-	//wdt_reset();
-	
 
-	//delay(500);
-	//interrupts();
-	// Setup the wireless sensor node
-//	if ( WSN.init() != 0 ) {
-//		Serial.println(":: WSN initialization failed, fix errors and try again");
-//		while (1) {}
-//	}
-//	else {
-//		Serial.println(":: WSN initialization succeeded");
-//		// while (1) {}
-//	}
+	Serial.print("WSN number is: ");
+	Serial.println(wsn_num);
 	WSN.init();
 	Serial.println("Done with main setup.");
-	
-	//wdt_reset();  //COMMENT OUT TO TEST WDT
-	//WSN.healthBeacon();
 }
 
 

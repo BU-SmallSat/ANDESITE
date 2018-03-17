@@ -242,6 +242,8 @@ int AndesiteMule::processMessage(String groundMessage){
     }
 	else if(groundMessage == "radioInit"){
 		Serial.print("radioInit");
-		//need to add radio shutdown manipulation
+	}
+	else if(groundMessage == "radioShutdown"){
+		digitalWrite(RF_SHDN_PIN, HIGH);
 	}
 }

@@ -16,15 +16,6 @@
 // ========
 
 #include "AndesiteFile.h"
-#include "libandesite.h"
-#include "AndesiteData.h"
-#include "AndesiteOrbit.h"
-#include "AndesiteRadio.h"
-#include "RF22Mesh.h" 
-//#include <bitset>
-//#include <string>
-
-
 
 // ///////////////////////////////
 // ///// ANDESITE FILE CLASS /////
@@ -36,7 +27,6 @@ AndesiteFile::AndesiteFile() {
     _file                   = "001.txt";
     _collected_data         = "";
     _writing_data           = "";
-    //_transmit_message       = "";
     _str_parity             = "";
     _int_parity             = 0;
     _file_open_bool         = 0;
@@ -48,9 +38,8 @@ AndesiteFile::AndesiteFile() {
     _failure                = 0;
     _data_limit             = 500;
     _header_size            = 20;
-    _unfinished_files_size  = 5; // If you change this, change array size in header too
+    _unfinished_files_size  = 5; 
     
-    // C++ has issues with arrays in constructor, this should make things better
     _unfinished_files_arr[0]= 1;
     _unfinished_files_arr[1]= 0;
     _unfinished_files_arr[2]= 0;
@@ -61,11 +50,8 @@ AndesiteFile::AndesiteFile() {
 
 
 // Initialize the orbit file, starting the data file on the correct orbit, regardless
-//   of system poweroff
-// Tested on 5/14/15: Works fine when on. If you turn off and turn back on, it fails 
-//                    on "Setting starting orbit value"
+//   of system power off
 boolean AndesiteFile::init() {
-    // _num_files = getNumberOfFiles();
     setUnfinishedFiles();
     
     // Put last orbit in first element
@@ -116,25 +102,16 @@ boolean AndesiteFile::send() {
     // Open SD card file for reading
 	sdin = ifstream(_file.c_str());
 	_file_position = _Orbit.getPosition();
-	//Serial.print(":: File size = ");
-	//Serial.println(_handle.size());
 	Serial.println(":: Reading and sending file...");
 	Serial.print(":: Seeking to position '");
 	Serial.println(_file_position);
 
 	sdin.seekg(_file_position);
-		
-
-        // Loop through every char in the file (check if reached end of file, 
-    //     update some global variable to true/false, print data on orbit 
-    //     to file regarding where file reading ended)
 
     while (sdin.getline(_transmit_message, RF22_MAX_MESSAGE_LEN) || sdin.gcount()) {
         _file_open_bool = 1;
-        //_message_size = sdin.gcount();
         if (sdin.fail()) {
             sdin.clear(sdin.rdstate() & ~ios_base::failbit);
-            //Serial.println("extracted partial message!");
         } 
     
 //TRASNMIT MESSAGE WITHOUT PARITY
@@ -148,16 +125,11 @@ boolean AndesiteFile::send() {
 		Serial.print(F("Sending data -- "));
 		Serial.println(_message);
 		Serial.print("*****Setting Chip Selects LOW*****");
-		//digitalWrite(RF_SHDN_PIN, LOW);
 		digitalWrite(RF_CS_PIN, LOW);
 		digitalWrite(ADS_CS_PIN, HIGH);
 		digitalWrite(SD_CS_PIN, HIGH);
 		digitalWrite(GPS_ENABLE, HIGH);
-		//uint8_t dat[] = "Hello World";
-		//uint8_t dat[] = "0000: Hello World. HELLO WORLD. HELLO WORLD!";
-		//RF22.sendtoWait(dat, sizeof(dat), ACDH_MULE_ADDR);
-		//_Radio.sendCommand(data, sizeof(data), ACDH_MULE_ADDR);
-		//delay(5);
+
 		RF22.sendtoWait((uint8_t*)_message,length, ACDH_MULE_ADDR);
         //update file position
 		digitalWrite(RF_CS_PIN, HIGH);
@@ -166,17 +138,6 @@ boolean AndesiteFile::send() {
         _Orbit.setPosition(_file_position);
         _Orbit.writeHeader(_handle);
         sdin.seekg(_file_position);
-            /*
-        // Update orbit values
-		if
-        _Orbit.setLatitude();
-        if ( _Orbit.getLatitude() >= _Orbit.getModeSwitchLatitude() ) {
-            Serial.println(":: NOT done sending file.");
-            _handle.close();
-            AndesiteFile::done();
-            return false;
-        }
-		*/
     } 
 
 	
@@ -207,8 +168,6 @@ boolean AndesiteFile::send() {
 // Tell Mule that file sending is done
 void AndesiteFile::done() {
     _Radio.sendCommand(&_Radio._cmd_done, sizeof(uint8_t), ACDH_MULE_ADDR);
-    // Write header in here?
-    // _Orbit.writeHeader(_handle)?
 }
 
 
@@ -257,9 +216,6 @@ void AndesiteFile::write(bool done) {
         _int_parity = 0;
         _str_parity = ""; 
 
-        //Serial.print("writing: ");
-        //Serial.println(_writing_data);
-
 	   //convert each ascii letter into 8-bit binary version
 	   for (int ii = 0; ii < _writing_data.length(); ++ii) 
 	   {
@@ -303,22 +259,6 @@ boolean AndesiteFile::status() {
         return false;
 }
 
-/*
-
-void AndesiteFile::writeMagTest(String str){
-    //digitalWrite(13, HIGH);
-    //delay(20);
-    File dataFile = SD.open("magData.txt", FILE_WRITE);
-    if(SD.exists("magData.txt")){
-        //digitalWrite(13, HIGH);
-        //delay(20);
-        dataFile.println(str);
-        dataFile.close();
-        //Serial.println(data);
-    }
-}
-
-*/
 // //////////////////////////
 // ///// DATA FILE NAME /////
 // //////////////////////////
@@ -396,7 +336,7 @@ String AndesiteFile::strOrbitFile(unsigned int orb) {
 // ///// DATA FILE ATTRIBUTES /////
 // ////////////////////////////////
 
-// Search throught the SD card root directory and count the number of files 
+// Search through the SD card root directory and count the number of files 
 //   (where files equates to orbits)
 void AndesiteFile::setUnfinishedFiles() {
     int orb = 1;
@@ -425,32 +365,6 @@ void AndesiteFile::setUnfinishedFiles() {
         }
         ++i; 
     }
-
- 
-        // if ( (_Orbit.readHeader(_file, 2) == 0) && (entry.size() >= _header_size) ) {
-        //     Serial.print(entry.name());
-        //     Serial.print(" | Count = ");
-        //     Serial.println(count);
-        //     // Hopefully extension (.txt) does not mess up conversion
-        //     // Count can go over unfinished size, fix this
-        //     int index = _unfinished_size - count;
-        //     int orb   = String(entry.name()).toInt(); 
-            
-        //     if ( _unfinished_arr[index] != 0 ) {
-        //         int j;
-        //         Serial.println("Moving around array elements...");
-        //         for ( j = 0; j < (count-1); ++j ) {
-        //             _unfinished_arr[j] = _unfinished_arr[j+1];
-        //             Serial.println(_unfinished_arr[j]);
-        //         }
-        //     }
-            
-        //     _unfinished_arr[index] = orb;
-        //     Serial.println(_unfinished_arr[index]);
-        //     Serial.println("Done.");
-        //     if ( count < _unfinished_size )
-        //         ++count;
-        // }
 }
 
 

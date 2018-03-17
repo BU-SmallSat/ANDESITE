@@ -246,6 +246,7 @@ def lowPowerMode():
 
 
 def healthPoll():
+    '''
     EPSlock = False
     ADClock = False
     while EPSlock is False and ADClock is False:
@@ -254,6 +255,7 @@ def healthPoll():
             processMessage(threadResponse)
         except Queue.Empty:
             pass
+    '''
     processMessage("CE:HealthPoll")
 
 
@@ -300,9 +302,9 @@ def GroundInterpreter(string):
         print(reply)
         processMessage(reply)
     elif string == "EG:endOfLife":
-        GPIO.output("P9_15", GPIO.LOW);
-        #turn off rfm22b
-        #turn off bdot
+        GPIO.output("P9_15", GPIO.LOW)
+        processMessage("AE:DisableBDOT")
+        processMessage("RE:radioShutdown")
         pass
 
 def DeployerInterpreter(string):

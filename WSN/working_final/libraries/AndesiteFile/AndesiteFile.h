@@ -25,6 +25,12 @@
 #include <RF22Router.h>
 #include <RF22Mesh.h>
 #include <RF22.h>
+#include "libandesite.h"
+#include "AndesiteData.h"
+#include "AndesiteOrbit.h"
+#include "AndesiteRadio.h"
+#include "RF22Mesh.h"
+
 // =======
 // Classes
 // =======
@@ -39,7 +45,7 @@ public:
     // Send the data file to the Mule
     boolean       send();
     
-    // Send a done message to the Mule, inicating done sending file
+    // Send a done message to the Mule, indicating done sending file
     void          done();
     
     // Append the specified data to the string that will eventually be written to the file
@@ -63,8 +69,6 @@ public:
     // Return the size of the data file
     unsigned long size();
     
-    // Return the orbit as an actual value (not a string) (I think I can do this with just
-    //   _file.toInt() but I'm not sure
     unsigned int  orbit();
 
     
@@ -76,7 +80,7 @@ private:
     // Converts an orbit number to a file name
     String strOrbitFile(unsigned int orb);
     
-    // Search throught the SD card root directory and count the number of files 
+    // Search through the SD card root directory and count the number of files 
     //   (where files equates to orbits)
     unsigned int getNumberOfFiles();
     

@@ -29,8 +29,7 @@ AndesiteRadio::AndesiteRadio() {
 int AndesiteRadio::init() {
     
     // Initialize RF22
-    //     Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
-    // Try reboot here?
+    // Defaults after init are 434.0MHz, 0.05MHz AFC pull-in, modulation FSK_Rb2_4Fd36
     delay(500);
     if ( !RF22.init() ) {
         Serial.println("::RF22failed");
@@ -61,9 +60,6 @@ int AndesiteRadio::send(uint8_t *message, uint8_t len, uint8_t addr) {
     digitalWrite(RF_CS_PIN, LOW);
     digitalWrite(ADS_CS_PIN, HIGH);
     digitalWrite(SD_CS_PIN, HIGH);
-    // Set radio timeout and retries for sending a simple message
-    //RF22.setTimeout(_send_timeout);
-    //RF22.setRetries(_send_retries);
     String str_mes((const char*)message);
     Serial.print("sending string: ");
     Serial.print(str_mes);
@@ -87,18 +83,7 @@ int AndesiteRadio::sendCommand(uint8_t message[], uint8_t len, uint8_t addr) {
     digitalWrite(RF_CS_PIN, LOW);
     digitalWrite(ADS_CS_PIN, HIGH);
     digitalWrite(SD_CS_PIN, HIGH);
-	
-    // Set radio timeout and retries for sending a simple message
-    //RF22.setTimeout(_cmd_timeout);
-    //RF22.setRetries(_cmd_retries);
-    //Serial.print("Message to be sent - ");
-    //Serial.print(len);
-    //Serial.print(" chars long: ");
-    /*for(int i=0;i<len;i++){
-        Serial.print(message[i]);
-    }*/
-    //Serial.print("\n");
-	// Send message 
+
     if ( RF22.sendtoWait(message, len, addr) != RF22_ROUTER_ERROR_NONE ){
         digitalWrite(RF_CS_PIN, HIGH);
 		return 0;
@@ -112,13 +97,13 @@ int AndesiteRadio::sendCommand(uint8_t message[], uint8_t len, uint8_t addr) {
 
 
 
-// Acknowledgement message from the send address
+// Acknowledgment message from the send address
 int AndesiteRadio::listen() {
 	uint16_t timeout = 10;
     digitalWrite(RF_CS_PIN, LOW);
     digitalWrite(ADS_CS_PIN, HIGH);
     digitalWrite(SD_CS_PIN, HIGH);
-    // Acknowledgement message attributes
+    // Acknowledgment message attributes
     uint8_t buf[RF22_MESH_MAX_MESSAGE_LEN] = {0};
     //_message = {0};  
     uint8_t len =RF22_MESH_MAX_MESSAGE_LEN;
@@ -128,11 +113,6 @@ int AndesiteRadio::listen() {
     int i;
     for ( i = 0; i < RF22_MESH_MAX_MESSAGE_LEN; i++ )
         buf[i] = 0;
-    
-    /*****
-    IMPROTANT:: need to find a way to know if it was successful or not 
-    so were not re-reading old messages 
-    ******/
 
     // Wait for a message addressed to the server from the client
     if ( !RF22.recvfromAckTimeout(buf, &len, timeout, &from) ){ 
@@ -143,13 +123,6 @@ int AndesiteRadio::listen() {
     //Serial.println("LISTEN FUNCTION:: successful recvfromAck");
     _message = (const char*)buf;
     _message_len = len;
-    /*
-	// Start key received
-	if ( buf[0] == _cmd_start ) {
-		Serial.print("Start key received. ");
-		return from;
-	}
-	*/
 
     // EOF key received
     if ( _message[0] == _cmd_done ) {
@@ -158,34 +131,10 @@ int AndesiteRadio::listen() {
         return -_cmd_done;
 	}
 	
-    // Message received 
-    //Serial.print("Receiving data from WSN ");
-    //Serial.print(from-1);
-    //Serial.print(":");
-    //Serial.println(len);
-    //Serial.print();
-
-    //Serial.print("listen message contents: ");
     for (i= 0;i<_message_len-1;i++){
         Serial.print(_message[i]);
     }
     Serial.println(_message[_message_len-1]);
-	/*
-	const int n = acdh_strlen(buf);
-	const int sz = 2 * n;
-	char line[sz];
-	
-	// Decompress data
-	acdh_str_decompress(line, buf, n);
-    
-	// Print data char by char
-	int q = 0;
-	while ( (line[q] != 0) && (q < sz) ) {
-		Serial.print(line[q]);
-		++q;
-	}
-	Serial.print("\n");
-	*/
 	digitalWrite(RF_CS_PIN, HIGH);
     return from;
 }

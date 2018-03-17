@@ -42,7 +42,7 @@ class RFM22BThread(WorkerThread):
         global radioOn
         global radioSuccess
         global networkString
-        if string == "RE:safeMode":
+        if string == "RE:radioShutdown":
             self.radioShutdown()
             return 0
         elif string == "RC:requestNetwork":

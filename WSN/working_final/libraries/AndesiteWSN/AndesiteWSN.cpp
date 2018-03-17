@@ -11,22 +11,9 @@
 // 
 // **********************************************************************************
 
-
-// ========
-// Includes
-// ========
-
 // Includes
 #include "AndesiteWSN.h"
-#include "AndesiteData.h"
-#include "AndesiteCollect.h"
-#include "AndesiteRadio.h"
-#include "AndesiteOrbit.h"
-#include "AndesiteFile.h"
-#include "libandesite.h"
-#include "ADS1248.h"
-#include <SPI.h>
-#include <DallasTemperature.h>
+
 
 
 
@@ -58,7 +45,7 @@ int AndesiteWSN::init() {
 	pinMode(RF_SHDN_PIN, OUTPUT);	
 	pinMode(GPS_ENABLE, OUTPUT);
 	  
-	Serial.print("*****Setting Chip Selects LOW*****");
+	Serial.println("*****Setting Chip Selects LOW*****");
     digitalWrite(RF_SHDN_PIN, LOW);
 	digitalWrite(RF_CS_PIN, HIGH);
 	digitalWrite(ADS_CS_PIN, HIGH);
@@ -97,17 +84,6 @@ int AndesiteWSN::init() {
     }	
 	
 	//Setup science instruments
-	/*
-	Wire.begin();
-	uint16_t stat = DOF.begin();
-	while (stat != 0x49D4){
-		Serial.print("Status: ");
-		Serial.println(stat,HEX);
-		delay(50);
-		stat = DOF.begin();
-	}
-	Serial.println("Gyro Initialized");
-	*/
 	//setup GPS
 	Serial1.begin(ACDH_GPS_BAUD);
 	
@@ -117,20 +93,18 @@ int AndesiteWSN::init() {
 	
 	sensors.begin();
     if (!sensors.getAddress(Temp1, 0)) Serial.println("Unable to find address for Device 1");
+	Serial.println(unsigned(Temp1));
     if (!sensors.getAddress(Temp2, 1)) Serial.println("Unable to find address for Device 2");
-    if (!sensors.getAddress(Temp3, 2)) Serial.println("Unable to find address for Device 3");
-    if (!sensors.getAddress(Temp4, 3)) Serial.println("Unable to find address for Device 4");
+    Serial.println(unsigned(Temp2));
+	if (!sensors.getAddress(Temp3, 2)) Serial.println("Unable to find address for Device 3");
+    Serial.println(unsigned(Temp3));
+	if (!sensors.getAddress(Temp4, 3)) Serial.println("Unable to find address for Device 4");
+    Serial.println(unsigned(Temp4));
     
-    // Setup LEDs
-   // acdh_init_led();
-	
-    
-    // Set led for waiting
-    //acdh_led_set(1);
-	    // Check for simulated GPS string-in from the computer
+	// Check for simulated GPS string-in from the computer
 	unsigned long timer_start = millis();
 	if(!_orb_start){
-		Serial.print(":: Waiting for GPS string from computer...");
+		Serial.println(":: Waiting for GPS string from computer...");
 		while ( !_Orbit.setLatitude() ) {
 			if ( (millis() - timer_start) >= GPS_INIT_TIMEOUT ) { break; }
 		}
@@ -158,7 +132,6 @@ boolean AndesiteWSN::isScienceMode() {
     //set state to science mode
     state = 's';
 
-	// Print stuff
     Serial.print("\nOrbit #");
     Serial.println(_Orbit.getOrbit());
 	unsigned long timer_start = millis();
@@ -175,24 +148,7 @@ boolean AndesiteWSN::isScienceMode() {
 	
     // Check that file does not already have data in it (true if empty)
     bool file_check = true;
-        /*
-    if ( SD.exists(_File.name().c_str()) ) {
-        File handle = SD.open(_File.name().c_str(), O_READ);
-         
-        if ( !handle ) 
-            return true;
-        
-        file_check = !(handle.size() > 20);
-     /*   
-        Serial.print("File Size: ");
-        Serial.println(handle.size());
-        Serial.print("File Check Bool: ");
-        Serial.println(file_check);
-        Serial.print("Orb Check Bool: ");
-        Serial.println(orb_check);
-        handle.close();
-    }
-    */
+
     Serial.print("Le Both: ");
     Serial.println((orb_check && file_check));
     
@@ -208,18 +164,20 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
     ******************************************/
 
 	if(isCalibration){
-		_temp_timing = SCIENCE_TEMP_TIMING;
+		_temp_timing = CALIBRATION_TEMP_TIMING;
+		Serial.println("Calibration starts");
 	}
 	else{
-		_temp_timing = CALIBRATION_TEMP_TIMING;
+		_temp_timing = SCIENCE_TEMP_TIMING;
+		Serial.println("Science mode starts");
 	}
-	//digitalWrite(RF_SHDN_PIN, HIGH);
+
 	RF22.setTimeout(50);
     _ADC.initialize();
     Serial.println(":: Entering Science mode...");
 	File _handle;
 	String data;
-    //acdh_led_set(2);
+
     double timer_run			= micros();    
     unsigned long timer_now		= millis();
     unsigned long timer_start	= millis();
@@ -241,27 +199,12 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
 		_handle.close();
 		return;
 	}
-    // ADC counter
-    // uint8_t count_adc = 0;
+	else{
+		Serial.println("::File wr success");
+	}
 
     // Enter Science Mode when latitude is ABOVE a certain threshold	
     while ( !done) {
-		// // chip select and slave select
-        // if ( !count_adc ) { 
-        //     // acdh_adc_setup();
-        //     count_adc = 1;
-        // }
-        
-        /* 
-        // Enter low power mode when in Science Mode for 30 min
-        if ( (millis() - timer_start) >= _science ) {
-            Serial.println("Science Timeout.");
-            delay(2000);
-            _File.write();
-            _File.write("\n");
-            return 1;
-        }
-        */
 		
         switch(_science_mode_state){
             case 1:
@@ -284,8 +227,7 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
                 data = AndesiteCollect::mag(timer_diff);
                 ++count_mag; 
 
-                // Collect gyroscope and gps data
-                //data += AndesiteCollect::gyro();
+                // Collect gps data
 				if(_Orbit._lock){
 					data += AndesiteCollect::gps();
 				}
@@ -297,7 +239,6 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
 				timer_previous = timer_now;
 				timer_now		= millis();
 				timer_diff = timer_now-timer_previous;
-				Serial.println("TEMP");
 				//collect magnetometer data
 				data = AndesiteCollect::mag(timer_diff);
 				++count_mag;
@@ -309,12 +250,11 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
 				break;
 
             default:
-				//Serial.println("hello");
-                //Serial.println(_science_mode_state); 
                 //check latitude
 				if(isCalibration){
 					if ( (millis() - timer_start) >= CALIBRATION_TIMEOUT) {
 						done = true;
+						Serial.println("Calibration is done.");
 					}
 				}
 				else{
@@ -330,32 +270,17 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
 					else{
 						if ( (millis() - timer_start) >= SCIENCE_MODE_TIMEOUT) {
 							done = true;
+							Serial.println("Science mode is done");
 						}
 					}
 				}
 				_handle.close();
 				_handle = SD.open(_File._file.c_str(), O_CREAT | O_APPEND | O_WRITE);
-				/*
-				//check for file overfow 
-				if ( _File._ready_write_bool > 0 ) {
-					_File.write(done);
-
-				} 
-				*/
 				break;
         }
 	}
 	TIMSK1 = 0;
 	_handle.close();
-    // Close SD card file after finished gathering data
-    //Serial.println(":: Done with Science Mode.");
-    
-    //_File.store();
-	/*
-    if ( _File._ready_write_bool > 0 ){
-        _File.write(done);
-    }
-*/
     Serial.print("Science Mode: ");
 	timer_run = (micros() - timer_run) / 1e6;
     Serial.print(timer_run);
@@ -373,7 +298,7 @@ int AndesiteWSN::scienceMode(bool isCalibration) {
 	Serial.println(" Hz");
     Serial.print("Temp Sample Rate = ");
     Serial.print(Ht,3);
-    Serial.print(" Hz");
+    Serial.println(" Hz");
 	
     return 0;
 }
@@ -408,16 +333,7 @@ boolean AndesiteWSN::isTransferMode() {
         Serial.println(_File.size());
         return false;
     }
-    //digitalWrite(RF_SHDN_PIN, LOW);
-	// Initialize radio
-	/*if ( _Radio.init() != 0 ) {
-		Serial.println("ERROR: Radio setup failed.");
-		delay(10000);
-		resetFunc();
-	}*/
-	
-	//digitalWrite(LED_ONE_PIN, LOW);
-    //digitalWrite(LED_TWO_PIN, LOW);
+
 	if(_Orbit.waitTransferStartCmd(_transfer_start)){
 		return true;
 	} else{
@@ -456,7 +372,7 @@ int AndesiteWSN::transferMode() {
     return 0;
 }
 
-//In place of data transfer mode. Instead of going straight to Transfer Mode,
+//Instead of going straight to Transfer Mode,
 //listen for a message coming from the mule.
 bool AndesiteWSN::listenMuleMessage() {
 	digitalWrite(RF_SHDN_PIN, LOW);
@@ -513,25 +429,6 @@ bool AndesiteWSN::listenMuleMessage() {
 			else{
 				Serial.println("::Couldn't parse message received from Mule");
 			}
-			
-			/*
-			switch (_Radio._message[0]) {
-				case 'T': //switch to data transfer mode
-					transferMode();
-					break;
-				case 'L': //switch to Low Power Mode
-					lowPowerMode();
-					break;
-				case 'R': //Reset WSN components
-					//send line[1] to EPS to restart Mag, SD card, Power Com, 
-					//Gyro, GPS, or Temp sensor.
-					break;
-				case 'F': //Retransmit file
-					break;
-				default:
-					break;
-			}
-			*/
 		}
 		if(_Orbit._lock){
 			if ( !_Orbit.setLatitude() ) {
@@ -557,11 +454,6 @@ bool AndesiteWSN::listenMuleMessage() {
 void AndesiteWSN::healthBeacon() {
 	//state of instruments, state(Science/Transfer)
 	char _transmit_message[RF22_MESH_MAX_MESSAGE_LEN];
-
-	//global variable called state is either 's' or 't'
-
-
-	//_Radio.send((uint8_t*)_transmit_message, (_message_size + 1), ACDH_MULE_ADDR);
 }
 
 
